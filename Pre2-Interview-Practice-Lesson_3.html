@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice Lesson 3</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #eef2f3; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #ddd; }
+    .audio-btn { background: #6c5ce7; color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #4834d4; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid #3498db; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #e8f4fd; border: 1px solid #3498db; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    
+    @media print {
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; padding: 10mm !important; }
+        h2 { border-bottom: 2px solid black !important; font-size: 14pt !important; margin-top: 20px !important; text-align: left !important; page-break-before: auto; }
+        p, li { font-size: 10.5pt !important; margin: 5px 0 !important; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 12px; font-size: 12pt; }
+        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 10px 0; background: #f9f9f9; }
+        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 15px; }
+    }
+    #print-area { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice Lesson 3</h1>
+        <div class="sub-title">Topic: Digital Books in Libraries</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            Nowadays, many public libraries provide digital books to their members. People can borrow them on the Internet and access them on their smartphones or computers. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, how can people enjoy reading library books without leaving home?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, how can people enjoy reading library books without leaving home?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: By borrowing digital books on the Internet and accessing them on their smartphones or computers.</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-Digital-Books-In-Libraries/PictureA.jpg" alt="Picture A" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        </div>
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans A</button><br>女子/ノート</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2b')">Ans B</button><br>男子/返却</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2c')">Ans C</button><br>男性/新聞</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2d')">Ans D</button><br>女性/カート</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2e')">Ans E</button><br>女性/読み聞かせ</div>
+        </div>
+        <div id="ans2a" class="hint-area"><b>A:</b> A girl is writing something in her notebook.</div>
+        <div id="ans2b" class="hint-area"><b>B:</b> A boy is returning some books.</div>
+        <div id="ans2c" class="hint-area"><b>C:</b> A man is reading a newspaper.</div>
+        <div id="ans2d" class="hint-area"><b>D:</b> A woman is pushing a cart.</div>
+        <div id="ans2e" class="hint-area"><b>E:</b> A woman is reading a book to some children.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        <button class="audio-btn" onclick="speak('Now, look at the man in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-Digital-Books-In-Libraries/PictureB.jpg" alt="Picture B" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#3498db;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+        <div id="hint3" class="hint-area" style="text-align:center;"><strong>Keywords:</strong> read a book / children / noisy / cannot</div>
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1:</strong> The man cannot read his book because the children are too noisy.</p>
+            <p><strong>Pattern 2:</strong> The children are very noisy, so the man cannot concentrate on his book.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you think all textbooks will be replaced by e-books in the future?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <div id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22; margin:15px; line-height:1.6;">Do you think all textbooks will be replaced by e-books in the future?</div>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No</button>
+        </div>
+
+        <div id="ans4-y" class="hint-area">
+            <strong>Hint:</strong> light / save paper / watch videos<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
+            <div id="ex4-y" style="display:none" class="example-box">
+                1. Tablets are very light, so they are easy to carry to school.<br>
+                2. We can save a lot of paper, which is good for the environment.<br>
+                3. Digital textbooks can show videos, so they are very useful for studying.
+            </div>
+        </div>
+        <div id="ans4-n" class="hint-area">
+            <strong>Hint:</strong> tired eyes / distraction / expensive<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
+            <div id="ex4-n" style="display:none" class="example-box">
+                1. Looking at screens for a long time makes students' eyes tired.<br>
+                2. Students might play games on tablets instead of studying.<br>
+                3. Buying devices for every student is very expensive for schools.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you think it is a good idea that public libraries offer e-books for free?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you think it is a good idea that libraries offer e-books for free?</p>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No</button>
+        </div>
+
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> borrow anytime / save time / many books<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <div id="ex5-y" style="display:none" class="example-box">
+                1. People can borrow books anytime even if the library is closed.<br>
+                2. It saves time because they do not have to travel to the library.<br>
+                3. Libraries can offer many kinds of books without needing more shelves.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> visit library / community / paper texture<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <div id="ex5-n" style="display:none" class="example-box">
+                1. If people use e-books, they will stop visiting the library building.<br>
+                2. Libraries are important places for the community to meet.<br>
+                3. Many people still prefer the feeling of reading real paper books.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review (15 Questions)</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<div id="print-area">
+    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+    <p style="text-align:right;">Topic: <b>Digital Books in Libraries</b></p>
+
+    <div class="print-section">
+        <h2>No. 1 Reading & Question</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"According to the passage, how can people enjoy reading library books without leaving home?"</p>
+        <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them on the Internet and access them on their smartphones or computers. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
+        <span class="print-label">Answer:</span>
+        <p>By borrowing digital books on the Internet and accessing them on their smartphones or computers.</p>
+    </div>
+    </div>
+
+<script>
+    let step = 1;
+
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        setTimeout(() => {
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = "en-US";
+            uttr.rate = 0.85;
+            window.speechSynthesis.speak(uttr);
+        }, 50);
+    }
+
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { 
+            document.getElementById('nextBtn').style.visibility = 'hidden'; 
+            startQuiz(); 
+        } else { 
+            document.getElementById('nextBtn').style.visibility = 'visible'; 
+        }
+        window.speechSynthesis.cancel();
+    }
+
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function showFeedback(id) {
+        const currentSection = document.getElementById(`step${step}`);
+        currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    const quizData = [
+        { q: "「ノートに書く」", a: "write in a notebook", options: ["write in a notebook", "read a notebook", "buy a notebook", "lose a notebook"] },
+        { q: "「本を返却する」", a: "return books", options: ["return books", "borrow books", "buy books", "sell books"] },
+        { q: "「新聞を読む」", a: "read a newspaper", options: ["read a newspaper", "write a newspaper", "make a newspaper", "carry a newspaper"] },
+        { q: "「カートを押す」", a: "push a cart", options: ["push a cart", "pull a cart", "break a cart", "sit on a cart"] },
+        { q: "「〜に読み聞かせる」", a: "read to", options: ["read to", "read with", "read about", "read from"] },
+        { q: "「集中する」", a: "concentrate", options: ["concentrate", "continue", "celebrate", "congratulate"] },
+        { q: "「うるさい」", a: "noisy", options: ["noisy", "quiet", "dark", "heavy"] },
+        { q: "「公共図書館」", a: "public library", options: ["public library", "private library", "school library", "digital library"] },
+        { q: "「〜にとって代わる」", a: "replace", options: ["replace", "repeat", "repair", "return"] },
+        { q: "「電子書籍」", a: "e-book", options: ["e-book", "e-mail", "e-money", "e-sports"] },
+        { q: "「〜を提供する」", a: "provide", options: ["provide", "protect", "prevent", "prepare"] },
+        { q: "「無料の」", a: "free", options: ["free", "expensive", "rare", "cheap"] },
+        { q: "「便利な」", a: "convenient", options: ["convenient", "difficult", "dangerous", "different"] },
+        { q: "「持ち運びやすい」", a: "easy to carry", options: ["easy to carry", "easy to read", "easy to find", "easy to buy"] },
+        { q: "「機会・チャンス」", a: "opportunity", options: ["opportunity", "opinion", "operation", "opposite"] }
+    ];
+
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { document.getElementById('quiz-feedback').innerText = ""; currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
