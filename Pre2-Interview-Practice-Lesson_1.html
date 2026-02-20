@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice Lesson 1</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #eef2f3; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #ddd; }
+    .audio-btn { background: #6c5ce7; color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #4834d4; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid #3498db; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #e8f4fd; border: 1px solid #3498db; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    
+    @media print {
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; padding: 10mm !important; }
+        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 12px !important; text-align: left !important; }
+        p, li { font-size: 10pt !important; margin: 3px 0 !important; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; }
+        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; }
+    }
+    #print-area { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice Lesson 1</h1>
+        <div class="sub-title">Topic: AI at School</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            Today, many students use AI <strong>when they study</strong>. <strong>Students can ask AI many questions, and by doing so they can save a lot of time because they can get answers quickly.</strong> Also, AI can help them learn new things in a fun way. In this way, more students are becoming interested in using technology for their studies.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, how can students save a lot of time?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, how can students save a lot of time?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: By asking AI many questions.</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-AI-at-School/Picture_A.jpg" alt="Picture A" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        </div>
+
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="toggleDisplay('ans2a')">Ans A</button><br>女性/PC</div>
+            <div><button class="btn btn-small" onclick="toggleDisplay('ans2b')">Ans B</button><br>男子/ゴミ</div>
+            <div><button class="btn btn-small" onclick="toggleDisplay('ans2c')">Ans C</button><br>男性/入室</div>
+            <div><button class="btn btn-small" onclick="toggleDisplay('ans2d')">Ans D</button><br>女子/黒板</div>
+            <div><button class="btn btn-small" onclick="toggleDisplay('ans2e')">Ans E</button><br>男性/貼る</div>
+        </div>
+
+        <div id="ans2a" class="hint-area"><b>A (女性/PC):</b> A woman is using a computer.</div>
+        <div id="ans2b" class="hint-area"><b>B (男子/ゴミ):</b> A boy is putting some trash into the garbage can.</div>
+        <div id="ans2c" class="hint-area"><b>C (男性/入室):</b> A man is entering the classroom.</div>
+        <div id="ans2d" class="hint-area"><b>D (女子/黒板):</b> A girl is erasing the blackboard.</div>
+        <div id="ans2e" class="hint-area"><b>E (男性/貼る):</b> A man is putting a poster on the wall.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        
+        <button class="audio-btn" onclick="speak('Now, look at the man in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-AI-at-School/picB-man-boxes.jpg" alt="Picture B" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#3498db;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+
+        <div id="hint3" class="hint-area" style="text-align:center;">
+            <strong>Keywords:</strong> carry / many boxes / open / door
+        </div>
+
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1 (Because):</strong><br>
+            He cannot open the door because he is carrying many boxes.</p>
+            <hr style="border: 0; border-top: 1px solid #ccc;">
+            <p><strong>Pattern 2 (So):</strong><br>
+            He is carrying many boxes, so he cannot open the door.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you think more schools will use AI for English lessons in the future?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <p id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you think more schools will use AI for English lessons in the future?</p>
+        <button class="btn" style="background:#2c3e50" onclick="toggleDisplay('btns-4')">Yes / No ボタンを表示</button>
+        <div id="btns-4" style="display:none; text-align:center;"><button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes, I do.</button> <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No, I don't.</button></div>
+        <div id="ans4-y" class="hint-area">
+            <strong>Hint:</strong> convenient / ask questions / save time / smart assistant<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
+            <div id="ex4-y" style="display:none" class="example-box">
+                1. I think AI is very convenient for students when they have questions.<br>
+                2. AI gives answers very quickly, so students don't have to wait.<br>
+                3. Teachers can save a lot of time because AI is like a smart assistant for them.
+            </div>
+        </div>
+       <div id="ans4-n" class="hint-area">
+            <strong>Hint:</strong> talking with teachers / more important / face-to-face / human connection<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
+            <div id="ex4-n" style="display:none" class="example-box">
+                1. I think talking with teachers face-to-face is more important for students.<br>
+                2. AI sometimes gives wrong information, so it is safer to learn from teachers.<br>
+                3. Teachers can understand students' feelings better than AI can.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('These days, many people use AI to translate languages. Do you want to use AI when you travel to foreign countries?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you want to use AI when you travel to foreign countries?</p>
+        <button class="btn" style="background:#2c3e50" onclick="toggleDisplay('btns-5')">Yes / No ボタンを表示</button>
+        <div id="btns-5" style="display:none; text-align:center;"><button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes, I do.</button> <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No, I don't.</button></div>
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> easy to talk / local people / understand signs<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <div id="ex5-y" style="display:none" class="example-box">
+                1. Because it is easy to talk to local people using AI devices.<br>
+                2. AI can help me understand foreign signs and menus quickly.<br>
+                3. I think it is very useful because I don't have to carry a heavy dictionary.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> study harder / my own words / make friends<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <div id="ex5-n" style="display:none" class="example-box">
+                1. Because I want to speak with my own words to make friends.<br>
+                2. I want to study English harder by myself without using AI.<br>
+                3. Talking without AI is more exciting and fun when I travel.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review (15 Questions)</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<div id="print-area">
+    <h2>英検準2級 Interview Practice Lesson 1 (Instructor's Sheet)</h2>
+    <div class="print-section">
+        <span class="print-label">No. 1 Passage & Question</span>
+        <div class="passage-print">Today, many students use AI <b>when they study</b>. <b>Students can ask AI many questions, and by doing so they can save a lot of time because they can get answers quickly.</b> Also, AI can help them learn new things in a fun way. In this way, more students are becoming interested in using technology for their studies.</div>
+        <p><b>Question:</b> According to the passage, how can students save a lot of time?</p>
+        <p><b>Answer:</b> By asking AI many questions (to get answers quickly).</p>
+    </div>
+    <div class="print-section">
+        <span class="print-label">No. 2 Picture A (Actions)</span>
+        <p><b>Instruction:</b> Now, please look at the people in Picture A. Tell me as much as you can about what they are doing.</p>
+        <p><b>Answers:</b> A: A woman is using a computer. / B: A boy is putting some trash into the garbage can. / C: A man is entering the classroom. / D: A girl is erasing the blackboard. / E: A man is putting a poster on the wall.</p>
+    </div>
+    <div class="print-section">
+        <span class="print-label">No. 3 Picture B (Situation)</span>
+        <p><b>Instruction:</b> Now, look at the man in Picture B. Please describe the situation.</p>
+        <p><b>Answers:</b> (Because) He cannot open the door because he is carrying many boxes. / (So) He is carrying many boxes, so he cannot open the door.</p>
+    </div>
+    <div class="print-section">
+        <span class="print-label">No. 4 Personal Opinion (General)</span>
+        <p><b>Question:</b> Do you think more schools will use AI for English lessons in the future?</p>
+        <p><b>Yes Examples:</b> 1. It is very convenient for students. / 2. Teachers can save a lot of time. / 3. It is a fun way to learn new things.</p>
+        <p><b>No Examples:</b> 1. Talking with teachers is more important. / 2. AI sometimes makes mistakes. / 3. Better to learn from teachers directly.</p>
+    </div>
+    <div class="print-section">
+        <span class="print-label">No. 5 Personal Opinion (Personal)</span>
+        <p><b>Question:</b> Do you want to use AI when you travel to foreign countries?</p>
+        <p><b>Yes Examples:</b> 1. Easy to talk to local people. / 2. Help understand signs and menus. / 3. Useful without a heavy dictionary.</p>
+        <p><b>No Examples:</b> 1. Want to speak with my own words. / 2. Want to study harder by myself. / 3. Talking without AI is more exciting.</p>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+    }
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    function showFeedback(id) {
+        document.querySelectorAll('.section.active .hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        const uttr = new SpeechSynthesisUtterance(text);
+        uttr.lang = "en-US"; uttr.rate = 0.85;
+        window.speechSynthesis.speak(uttr);
+    }
+    const quizData = [
+        { q: "「素早く答えを得る」", a: "get answers quickly", options: ["get answers quickly", "ask questions fast", "know the truth", "answer the phone"] },
+        { q: "「ゴミをゴミ箱に捨てる」", a: "put trash into the garbage can", options: ["put trash into the garbage can", "clean the room", "carry a bag", "make a mess"] },
+        { q: "「〜に興味を持つ」", a: "become interested in", options: ["become interested in", "be good at", "look forward to", "take care of"] },
+        { q: "「時間を節約する」", a: "save time", options: ["save time", "spend time", "waste time", "watch time"] },
+        { q: "「黒板を消す」", a: "erase the blackboard", options: ["erase the blackboard", "write on the board", "clean the window", "open the board"] },
+        { q: "「ポスターを壁に貼る」", a: "put a poster on the wall", options: ["put a poster on the wall", "make a poster", "draw on the wall", "remove a poster"] },
+        { q: "「教室に入る」", a: "enter the classroom", options: ["enter the classroom", "leave the room", "stay home", "go outside"] },
+        { q: "「コンピュータを使う」", a: "use a computer", options: ["use a computer", "fix a computer", "buy a tablet", "watch TV"] },
+        { q: "「多くの箱を運ぶ」", a: "carry many boxes", options: ["carry many boxes", "open a box", "make a box", "find a box"] },
+        { q: "「間違いをする」", a: "make mistakes", options: ["make mistakes", "do homework", "take a rest", "get angry"] },
+        { q: "「便利な」", a: "convenient", options: ["convenient", "difficult", "expensive", "dangerous"] },
+        { q: "「楽しい方法で」", a: "in a fun way", options: ["in a fun way", "for a long time", "with a robot", "by myself"] },
+        { q: "「外国へ旅行する」", a: "travel to foreign countries", options: ["travel to foreign countries", "study abroad", "live in a city", "speak English"] },
+        { q: "「地元の人々」", a: "local people", options: ["local people", "foreigners", "famous people", "teachers"] },
+        { q: "「自分自身の言葉」", a: "my own words", options: ["my own words", "AI's voice", "new languages", "dictionary"] }
+    ];
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
