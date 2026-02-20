@@ -129,9 +129,9 @@
 
     <div id="step5" class="section">
         <h2>No. 5: Your Opinion</h2>
-        <button class="audio-btn" onclick="speak('Do you think it is a good idea that public libraries offer e-books for free?')">🔊 質問を聞く</button>
+        <button class="audio-btn" onclick="speak('Do you think it is a good idea that public libraries offer e-books?')">🔊 質問を聞く</button>
         <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
-        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you think it is a good idea that libraries offer e-books for free?</p>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you think it is a good idea that libraries offer e-books?</p>
         
         <div style="text-align:center;">
             <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes</button> 
@@ -148,11 +148,11 @@
             </div>
         </div>
         <div id="ans5-n" class="hint-area">
-            <strong>Hint:</strong> visit library / community / paper texture
+            <strong>Hint:</strong> visit library / digital devices / paper books
             <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
             <div id="ex5-n" style="display:none" class="example-box">
                 1. If people use e-books, they will stop visiting the library building.<br>
-                2. Libraries are important places for the community to meet.<br>
+                2. Some people, especially elderly people, do not know how to use digital devices.<br>
                 3. Many people still prefer the feeling of reading real paper books.
             </div>
         </div>
@@ -180,8 +180,7 @@
     <div class="print-section">
         <h2>No. 1 Reading & Question</h2>
         <span class="print-label">Instruction:</span>
-        <p>"Please read the passage silently for 20 seconds. ... Now, please read it aloud."<br>
-           "According to the passage, how can people enjoy reading library books without leaving home?"</p>
+        <p>"According to the passage, how can people enjoy reading library books without leaving home?"</p>
         <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without going to the library. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
         <span class="print-label">Answer:</span>
         <p>By borrowing digital books from the library on the Internet and accessing them on their smartphones or computers.</p>
@@ -190,13 +189,10 @@
     <div class="print-section">
         <h2>No. 2 Picture A (Actions)</h2>
         <span class="print-label">Instruction:</span>
-        <p>"Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing."</p>
-        <span class="print-label">Sample Answers:</span>
+        <p>"Tell me as much as you can about what the people are doing."</p>
         <div class="ans-block">
-            <p><b>A:</b> A girl is writing something in her notebook.</p>
-            <p><b>B:</b> A boy is returning some books.</p>
-            <p><b>C:</b> A man is reading a newspaper.</p>
-            <p><b>D:</b> A woman is pushing a cart.</p>
+            <p><b>A:</b> A girl is writing something in her notebook. / <b>B:</b> A boy is returning some books.</p>
+            <p><b>C:</b> A man is reading a newspaper. / <b>D:</b> A woman is pushing a cart.</p>
             <p><b>E:</b> A woman is reading a book to some children.</p>
         </div>
     </div>
@@ -205,7 +201,6 @@
         <h2>No. 3 Picture B (Situation)</h2>
         <span class="print-label">Instruction:</span>
         <p>"Now, look at the man in Picture B. Please describe the situation."</p>
-        <span class="print-label">Sample Answers:</span>
         <div class="ans-block">
             <p>• The man cannot read his book because the children are too noisy.</p>
             <p>• The children are very noisy, so the man cannot concentrate on his book.</p>
@@ -216,73 +211,51 @@
         <h2>No. 4 Your Opinion</h2>
         <span class="print-label">Question:</span>
         <p>"Do you think all textbooks will be replaced by e-books in the future?"</p>
-        <span class="print-label">Sample Answers (Yes):</span>
         <div class="ans-block">
-            <p>• Tablets are very light, so they are easy to carry to school.</p>
-            <p>• We can save a lot of paper, which is good for the environment.</p>
-        </div>
-        <span class="print-label">Sample Answers (No):</span>
-        <div class="ans-block">
-            <p>• Looking at screens for a long time makes students' eyes tired.</p>
-            <p>• Students might play games on tablets instead of studying.</p>
+            <p><b>(Yes):</b> Tablets are very light, so they are easy to carry to school. / We can save a lot of paper.</p>
+            <p><b>(No):</b> Looking at screens for a long time makes students' eyes tired. / Students might play games.</p>
         </div>
     </div>
 
     <div class="print-section">
         <h2>No. 5 Your Opinion</h2>
         <span class="print-label">Question:</span>
-        <p>"Do you think it is a good idea that public libraries offer e-books for free?"</p>
-        <span class="print-label">Sample Answers (Yes):</span>
+        <p>"Do you think it is a good idea that public libraries offer e-books?"</p>
         <div class="ans-block">
-            <p>• People can borrow books anytime even if the library is closed.</p>
-            <p>• It saves time because they do not have to travel to the library.</p>
-        </div>
-        <span class="print-label">Sample Answers (No):</span>
-        <div class="ans-block">
-            <p>• If people use e-books, they will stop visiting the library building.</p>
-            <p>• Libraries are important places for the community to meet.</p>
+            <p><b>(Yes):</b> People can borrow books anytime even if the library is closed. / It saves time.</p>
+            <p><b>(No):</b> If people use e-books, they will stop visiting the library building. / <b>Some people, especially elderly people, do not know how to use digital devices.</b> / Many people still prefer paper books.</p>
         </div>
     </div>
 </div>
 
 <script>
     let step = 1;
-
     function speak(text) {
         window.speechSynthesis.cancel();
         setTimeout(() => {
             const uttr = new SpeechSynthesisUtterance(text);
-            uttr.lang = "en-US";
-            uttr.rate = 0.85;
+            uttr.lang = "en-US"; uttr.rate = 0.85;
             window.speechSynthesis.speak(uttr);
         }, 50);
     }
-
     function moveStep(n) {
         document.getElementById(`step${step}`).classList.remove('active');
         step += n;
         document.getElementById(`step${step}`).classList.add('active');
         document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
-        if(step === 6) { 
-            document.getElementById('nextBtn').style.visibility = 'hidden'; 
-            startQuiz(); 
-        } else { 
-            document.getElementById('nextBtn').style.visibility = 'visible'; 
-        }
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+        else { document.getElementById('nextBtn').style.visibility = 'visible'; }
         window.speechSynthesis.cancel();
     }
-
     function toggleDisplay(id) {
         const el = document.getElementById(id);
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
-
     function showFeedback(id) {
         const currentSection = document.getElementById(`step${step}`);
         currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
         document.getElementById(id).style.display = 'block';
     }
-
     const quizData = [
         { q: "「ノートに書く」", a: "write in a notebook", options: ["write in a notebook", "read a notebook", "buy a notebook", "lose a notebook"] },
         { q: "「本を返却する」", a: "return books", options: ["return books", "borrow books", "buy books", "sell books"] },
@@ -300,7 +273,6 @@
         { q: "「持ち運びやすい」", a: "easy to carry", options: ["easy to carry", "easy to read", "easy to find", "easy to buy"] },
         { q: "「機会・チャンス」", a: "opportunity", options: ["opportunity", "opinion", "operation", "opposite"] }
     ];
-
     let currentIdx = 0; let score = 0;
     function startQuiz() {
         if(currentIdx >= quizData.length) {
