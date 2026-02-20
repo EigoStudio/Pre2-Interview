@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice Lesson 2</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #eef2f3; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #ddd; }
+    .audio-btn { background: #6c5ce7; color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #4834d4; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid #3498db; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #e8f4fd; border: 1px solid #3498db; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    
+    /* 印刷用スタイル */
+    @media print {
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; padding: 10mm !important; }
+        h2 { border-bottom: 2px solid black !important; font-size: 14pt !important; margin-top: 20px !important; text-align: left !important; page-break-before: auto; }
+        p, li { font-size: 10.5pt !important; margin: 5px 0 !important; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 12px; font-size: 12pt; }
+        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 10px 0; background: #f9f9f9; }
+        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 15px; }
+    }
+    #print-area { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice Lesson 2</h1>
+        <div class="sub-title">Topic: Eco-Friendly School Life</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            Now, many schools in Japan use tablets in class. By using tablets, students can read textbooks and do homework without using much paper. <strong>This helps schools reduce waste and protect forests.</strong> In the future, more schools will use digital tools to be eco-friendly.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, why is using tablets good for the environment?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, why is using tablets good for the environment?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: Because it helps schools reduce waste and protect forests.</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-eco-friendly-school-life/PictureA.jpg" alt="Picture A" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        </div>
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans A</button><br>女子/分別</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2b')">Ans B</button><br>男子/植える</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2c')">Ans C</button><br>女性/拾う</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2d')">Ans D</button><br>男性/作成</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2e')">Ans E</button><br>男子/掃除</div>
+        </div>
+        <div id="ans2a" class="hint-area"><b>A:</b> A girl is separating the trash.</div>
+        <div id="ans2b" class="hint-area"><b>B:</b> A boy is planting some flowers.</div>
+        <div id="ans2c" class="hint-area"><b>C:</b> A woman is picking up some cans.</div>
+        <div id="ans2d" class="hint-area"><b>D:</b> A man is making a poster.</div>
+        <div id="ans2e" class="hint-area"><b>E:</b> A boy is sweeping the ground.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        <button class="audio-btn" onclick="speak('Now, look at the woman in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="images-eco-friendly-school-life/PictureB.jpg" alt="Picture B" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#3498db;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+        <div id="hint3" class="hint-area" style="text-align:center;"><strong>Keywords:</strong> carry / big box / heavy / cannot</div>
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1:</strong> The woman cannot carry the box because it is too heavy.</p>
+            <p><strong>Pattern 2:</strong> The box is very heavy, so the woman cannot carry it.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('These days, some schools have events like eco-bag making or flea markets. Do you think these events are good for students?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <div id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22; margin:15px; line-height:1.6;">These days, some schools have events like eco-bag making or flea markets. <br> Do you think these events are good for students?</div>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes, I do.</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No, I don't.</button>
+        </div>
+
+        <div id="ans4-y" class="hint-area">
+            <strong>Hint:</strong> learn importance / reuse / fun to make<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
+            <div id="ex4-y" style="display:none" class="example-box">
+                1. I think students can learn the importance of reusing things.<br>
+                2. Making their own bags is fun, so students will enjoy the event.<br>
+                3. These events are a good way to think about the environment.
+            </div>
+        </div>
+        <div id="ans4-n" class="hint-area">
+            <strong>Hint:</strong> busy with study / no time / difficult<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
+            <div id="ex4-n" style="display:none" class="example-box">
+                1. I think students are very busy with their studies every day.<br>
+                2. It is difficult for them to find time for such events.<br>
+                3. Some students are not interested in making things.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you often buy second-hand things like books or clothes?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you often buy second-hand things?</p>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes, I do.</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No, I don't.</button>
+        </div>
+
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> save money / environment / reduce waste<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <div id="ex5-y" style="display:none" class="example-box">
+                1. I can save a lot of money by buying used things.<br>
+                2. It is good for the environment because we can reduce waste.<br>
+                3. I often find rare books at second-hand stores.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> prefer new / cleaner / easier to use<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <div id="ex5-n" style="display:none" class="example-box">
+                1. I prefer new things because they are cleaner.<br>
+                2. Sometimes used clothes have some problems or damage.<br>
+                3. I like buying things at big department stores.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review (15 Questions)</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<div id="print-area">
+    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+    <p style="text-align:right;">Topic: <b>Eco-Friendly School Life</b></p>
+
+    <div class="print-section">
+        <h2>No. 1 Reading & Question</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Please read the passage silently for 20 seconds. ... Now, please read it aloud."<br>
+           "According to the passage, why is using tablets good for the environment?"</p>
+        <div class="passage-print">Now, many schools in Japan use tablets in class. By using tablets, students can read textbooks and do homework without using much paper. <b>This helps schools reduce waste and protect forests.</b> In the future, more schools will use digital tools to be eco-friendly.</div>
+        <span class="print-label">Answer:</span>
+        <p>Because it helps schools reduce waste and protect forests.</p>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 2 Picture A (Actions)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing."</p>
+        <span class="print-label">Sample Answers:</span>
+        <div class="ans-block">
+            <p><b>A:</b> A girl is separating the trash.</p>
+            <p><b>B:</b> A boy is planting some flowers.</p>
+            <p><b>C:</b> A woman is picking up some cans.</p>
+            <p><b>D:</b> A man is making a poster.</p>
+            <p><b>E:</b> A boy is sweeping the ground.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 3 Picture B (Situation)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Now, look at the woman in Picture B. Please describe the situation."</p>
+        <span class="print-label">Sample Answers:</span>
+        <div class="ans-block">
+            <p>• The woman cannot carry the box because it is too heavy.</p>
+            <p>• The box is very heavy, so the woman cannot carry it.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 4 Your Opinion</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"These days, some schools have events like eco-bag making or flea markets. Do you think these events are good for students?"</p>
+        <span class="print-label">Sample Answers (Yes):</span>
+        <div class="ans-block">
+            <p>1. I think students can learn the importance of reusing things.</p>
+            <p>2. Making their own bags is fun, so students will enjoy the event.</p>
+            <p>3. These events are a good way to think about the environment.</p>
+        </div>
+        <span class="print-label">Sample Answers (No):</span>
+        <div class="ans-block">
+            <p>1. I think students are very busy with their studies every day.</p>
+            <p>2. It is difficult for them to find time for such events.</p>
+            <p>3. Some students are not interested in making things.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 5 Your Opinion</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Do you often buy second-hand things like books or clothes?"</p>
+        <span class="print-label">Sample Answers (Yes):</span>
+        <div class="ans-block">
+            <p>1. I can save a lot of money by buying used things.</p>
+            <p>2. It is good for the environment because we can reduce waste.</p>
+            <p>3. I often find rare books at second-hand stores.</p>
+        </div>
+        <span class="print-label">Sample Answers (No):</span>
+        <div class="ans-block">
+            <p>1. I prefer new things because they are cleaner.</p>
+            <p>2. Sometimes used clothes have some problems or damage.</p>
+            <p>3. I like buying things at big department stores.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+        else { document.getElementById('nextBtn').style.visibility = 'visible'; }
+    }
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    function showFeedback(id) {
+        const currentSection = document.getElementById(`step${step}`);
+        currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        const uttr = new SpeechSynthesisUtterance(text);
+        uttr.lang = "en-US"; uttr.rate = 0.85;
+        window.speechSynthesis.speak(uttr);
+    }
+
+    const quizData = [
+        { q: "「森林を保護する」", a: "protect forests", options: ["protect forests", "cut forests", "sell forests", "make forests"] },
+        { q: "「ゴミを減らす」", a: "reduce waste", options: ["reduce waste", "make waste", "keep waste", "buy waste"] },
+        { q: "「分別する」", a: "separate", options: ["separate", "throw", "find", "make"] },
+        { q: "「掃く」", a: "sweep", options: ["sweep", "wash", "sit", "plant"] },
+        { q: "「お金を節約する」", a: "save money", options: ["save money", "spend money", "lose money", "use money"] },
+        { q: "「環境に優しい」", a: "eco-friendly", options: ["eco-friendly", "eco-bag", "eco-bad", "eco-hard"] },
+        { q: "「ポスターを作る」", a: "make a poster", options: ["make a poster", "read a poster", "buy a poster", "eat a poster"] },
+        { q: "「花を植える」", a: "plant flowers", options: ["plant flowers", "pick flowers", "watch flowers", "wash flowers"] },
+        { q: "「拾い上げる」", a: "pick up", options: ["pick up", "put up", "look up", "clean up"] },
+        { q: "「重い」", a: "heavy", options: ["heavy", "light", "small", "old"] },
+        { q: "「重要性」", a: "importance", options: ["importance", "difficult", "interest", "future"] },
+        { q: "「〜の代わりに」", a: "instead of", options: ["instead of", "because", "during", "between"] },
+        { q: "「運ぶ」", a: "carry", options: ["carry", "open", "make", "break"] },
+        { q: "「より清潔な」", a: "cleaner", options: ["cleaner", "older", "dirtier", "darker"] },
+        { q: "「中古の」", a: "second-hand", options: ["second-hand", "new", "expensive", "digital"] }
+    ];
+
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { document.getElementById('quiz-feedback').innerText = ""; currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
