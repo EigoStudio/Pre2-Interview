@@ -8,9 +8,8 @@
     
     <style>
         body {
-            /* 全体にKosugi Maruを適用 */
             font-family: 'Kosugi Maru', sans-serif;
-            background-color: #f0f8ff; /* 少し青みがかった優しい背景色 */
+            background-color: #f0f8ff;
             color: #333;
             text-align: center;
             padding: 20px;
@@ -19,34 +18,37 @@
         h1 {
             color: #2c3e50;
             margin-bottom: 30px;
-            font-size: 28px;
-            /* タイトルに少し影をつけて目立たせる */
+            font-size: 24px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         ul {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-            max-width: 1000px;
+            /* スマホで1列、PCで並ぶように調整 */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
             margin: 0 auto;
         }
         li a {
-            display: block;
-            padding: 15px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px; /* ボタンの高さを揃える */
+            padding: 15px;
             background-color: #ffffff;
-            border: 3px solid #ffcc00; /* 元気な黄色い枠線 */
-            border-radius: 15px; /* 角をさらに丸く */
+            border: 3px solid #ffcc00;
+            border-radius: 15px;
             text-decoration: none;
-            color: #d35400; /* オレンジ系の文字色 */
+            color: #d35400;
             font-weight: bold;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 0 #e6b800; /* ボタンっぽく立体的な影 */
+            box-shadow: 0 4px 0 #e6b800;
+            line-height: 1.4;
         }
-        /* マウスを乗せた時やタップした時 */
         li a:hover {
-            transform: translateY(2px); /* 少し沈む動き */
+            transform: translateY(2px);
             box-shadow: 0 2px 0 #e6b800;
             background-color: #fffdf0;
         }
@@ -54,13 +56,16 @@
 </head>
 <body>
 
-    <h1>英検準2級 面接対策 練習問題</h1>
+    <h1>英検®準2級 面接対策メニュー</h1>
+    
     <ul>
-<li><a href="Pre2-Interview-Practice-Lesson_1.html">面接対策<br>練習問題<br>
-AI at School
-</a></li>
+        <li>
+            <a href="Pre2-Interview-Practice-Lesson_1.html">
+                Lesson 1<br>AI at School
+            </a>
+        </li>
 
-          </ul>
+        </ul>
 
 </body>
 </html>
