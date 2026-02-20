@@ -29,12 +29,12 @@
         body { background: white !important; padding: 0 !important; }
         .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
         header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
-        #print-area { display: block !important; color: black !important; padding: 10mm !important; }
-        h2 { border-bottom: 2px solid black !important; font-size: 14pt !important; margin-top: 20px !important; text-align: left !important; page-break-before: auto; }
-        p, li { font-size: 10.5pt !important; margin: 5px 0 !important; }
-        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 12px; font-size: 12pt; }
-        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 10px 0; background: #f9f9f9; }
-        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 15px; }
+        #print-area { display: block !important; color: black !important; padding: 5mm !important; }
+        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 15px !important; text-align: left !important; page-break-before: auto; }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; font-size: 11pt; }
+        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; background: #f9f9f9; }
+        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 10px; }
     }
     #print-area { display: none; }
 </style>
@@ -50,13 +50,13 @@
     <div id="step1" class="section active">
         <h2>No. 1: Reading & Question</h2>
         <div class="passage-box">
-            Nowadays, many public libraries provide digital books to their members. People can borrow them on the Internet and access them on their smartphones or computers. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.
+            Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.
         </div>
         <button class="audio-btn" onclick="speak('According to the passage, how can people enjoy reading library books without leaving home?')">🔊 Question No.1 を聞く</button>
         <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
         <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, how can people enjoy reading library books without leaving home?</div>
         <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
-        <div id="ans1" class="hint-area"><strong>Answer: By borrowing digital books on the Internet and accessing them on their smartphones or computers.</strong></div>
+        <div id="ans1" class="hint-area"><strong>Answer: By borrowing digital books from the library on the Internet and accessing them on their smartphones or computers.</strong></div>
     </div>
 
     <div id="step2" class="section">
@@ -139,7 +139,7 @@
         </div>
 
         <div id="ans5-y" class="hint-area">
-            <strong>Hint:</strong> borrow anytime / save time / many books<br>
+            <strong>Hint:</strong> borrow anytime / save time / many books
             <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
             <div id="ex5-y" style="display:none" class="example-box">
                 1. People can borrow books anytime even if the library is closed.<br>
@@ -148,7 +148,7 @@
             </div>
         </div>
         <div id="ans5-n" class="hint-area">
-            <strong>Hint:</strong> visit library / community / paper texture<br>
+            <strong>Hint:</strong> visit library / community / paper texture
             <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
             <div id="ex5-n" style="display:none" class="example-box">
                 1. If people use e-books, they will stop visiting the library building.<br>
@@ -180,12 +180,70 @@
     <div class="print-section">
         <h2>No. 1 Reading & Question</h2>
         <span class="print-label">Instruction:</span>
-        <p>"According to the passage, how can people enjoy reading library books without leaving home?"</p>
-        <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them on the Internet and access them on their smartphones or computers. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
+        <p>"Please read the passage silently for 20 seconds. ... Now, please read it aloud."<br>
+           "According to the passage, how can people enjoy reading library books without leaving home?"</p>
+        <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without going to the library. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
         <span class="print-label">Answer:</span>
-        <p>By borrowing digital books on the Internet and accessing them on their smartphones or computers.</p>
+        <p>By borrowing digital books from the library on the Internet and accessing them on their smartphones or computers.</p>
     </div>
+
+    <div class="print-section">
+        <h2>No. 2 Picture A (Actions)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing."</p>
+        <span class="print-label">Sample Answers:</span>
+        <div class="ans-block">
+            <p><b>A:</b> A girl is writing something in her notebook.</p>
+            <p><b>B:</b> A boy is returning some books.</p>
+            <p><b>C:</b> A man is reading a newspaper.</p>
+            <p><b>D:</b> A woman is pushing a cart.</p>
+            <p><b>E:</b> A woman is reading a book to some children.</p>
+        </div>
     </div>
+
+    <div class="print-section">
+        <h2>No. 3 Picture B (Situation)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Now, look at the man in Picture B. Please describe the situation."</p>
+        <span class="print-label">Sample Answers:</span>
+        <div class="ans-block">
+            <p>• The man cannot read his book because the children are too noisy.</p>
+            <p>• The children are very noisy, so the man cannot concentrate on his book.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 4 Your Opinion</h2>
+        <span class="print-label">Question:</span>
+        <p>"Do you think all textbooks will be replaced by e-books in the future?"</p>
+        <span class="print-label">Sample Answers (Yes):</span>
+        <div class="ans-block">
+            <p>• Tablets are very light, so they are easy to carry to school.</p>
+            <p>• We can save a lot of paper, which is good for the environment.</p>
+        </div>
+        <span class="print-label">Sample Answers (No):</span>
+        <div class="ans-block">
+            <p>• Looking at screens for a long time makes students' eyes tired.</p>
+            <p>• Students might play games on tablets instead of studying.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 5 Your Opinion</h2>
+        <span class="print-label">Question:</span>
+        <p>"Do you think it is a good idea that public libraries offer e-books for free?"</p>
+        <span class="print-label">Sample Answers (Yes):</span>
+        <div class="ans-block">
+            <p>• People can borrow books anytime even if the library is closed.</p>
+            <p>• It saves time because they do not have to travel to the library.</p>
+        </div>
+        <span class="print-label">Sample Answers (No):</span>
+        <div class="ans-block">
+            <p>• If people use e-books, they will stop visiting the library building.</p>
+            <p>• Libraries are important places for the community to meet.</p>
+        </div>
+    </div>
+</div>
 
 <script>
     let step = 1;
