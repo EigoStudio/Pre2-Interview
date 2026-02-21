@@ -25,6 +25,12 @@
     .option-btn { padding: 10px; background: #e8f4fd; border: 1px solid #3498db; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
     .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
     
+    /* 画像サイズ調整用の追加スタイル */
+    .img-frame { margin: 20px 0; text-align: center; }
+    .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
+    .img-a { max-width: 70%; } /* Picture A は 70% 程度に */
+    .img-b { max-width: 40%; } /* Picture B は半分以下の 40% に */
+
     @media print {
         body { background: white !important; padding: 0 !important; }
         .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
@@ -62,8 +68,8 @@
     <div id="step2" class="section">
         <h2>No. 2: Picture A (Actions)</h2>
         <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
-        <div style="text-align:center; margin: 20px 0;">
-            <img src="images-Digital-Books-In-Libraries/PictureA.jpg" alt="Picture A" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        <div class="img-frame">
+            <img src="images-Digital-Books-In-Libraries/PictureA.jpg" alt="Picture A" class="quiz-img img-a">
         </div>
         <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
             <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans A</button><br>女子/ノート</div>
@@ -82,8 +88,8 @@
     <div id="step3" class="section">
         <h2>No. 3: Picture B (Situation)</h2>
         <button class="audio-btn" onclick="speak('Now, look at the man in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
-        <div style="text-align:center; margin: 20px 0;">
-            <img src="images-Digital-Books-In-Libraries/PictureB.jpg" alt="Picture B" style="max-width:100%; height:auto; border: 2px solid #ccc; border-radius: 10px;">
+        <div class="img-frame">
+            <img src="images-Digital-Books-In-Libraries/PictureB.jpg" alt="Picture B" class="quiz-img img-b">
         </div>
         <div style="display: flex; justify-content: center; gap: 20px;">
             <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
