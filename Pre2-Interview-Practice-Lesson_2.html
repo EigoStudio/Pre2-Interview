@@ -56,13 +56,12 @@
     <div id="step1" class="section active">
         <h2>No. 1: Reading & Question</h2>
         <div class="passage-box">
-            Now, many schools in Japan use tablets in class. By using tablets, students can read textbooks and do homework without using much paper. <strong>This helps schools reduce waste and protect forests.</strong> In the future, more schools will use digital tools to be eco-friendly.
-        </div>
-        <button class="audio-btn" onclick="speak('According to the passage, why is using tablets good for the environment?')">🔊 Question No.1 を聞く</button>
+            Now, many schools in Japan use tablets in class. These tablets allow students to read textbooks and do homework without using any paper. Students can save a lot of paper by using digital tools, so they think tablets are very good for the environment. In the future, technology will be more important for eco-friendly school life.        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, why do students think tablets are very good for the environment?')">🔊 Question No.1 を聞く</button>
         <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
-        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, why is using tablets good for the environment?</div>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, why do students think tablets are very good for the environment?</div>
         <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
-        <div id="ans1" class="hint-area"><strong>Answer: Because it helps schools reduce waste and protect forests.</strong></div>
+        <div id="ans1" class="hint-area"><strong>Answer: Because they can save a lot of paper by using digital tools.</strong></div>
     </div>
 
     <div id="step2" class="section">
@@ -187,7 +186,7 @@
         <h2>No. 1 Reading & Question</h2>
         <span class="print-label">Instruction:</span>
         <p>"Please read the passage silently for 20 seconds. ... Now, please read it aloud."<br>
-           "According to the passage, why is using tablets good for the environment?"</p>
+           "According to the passage, why do students think tablets are very good for the environment?"</p>
         <div class="passage-print">Now, many schools in Japan use tablets in class. By using tablets, students can read textbooks and do homework without using much paper. <b>This helps schools reduce waste and protect forests.</b> In the future, more schools will use digital tools to be eco-friendly.</div>
         <span class="print-label">Answer:</span>
         <p>Because it helps schools reduce waste and protect forests.</p>
@@ -274,10 +273,11 @@
         { q: "「花を植える」", a: "plant flowers", options: ["plant flowers", "pick flowers", "watch flowers", "wash flowers"] },
         { q: "「拾い上げる」", a: "pick up", options: ["pick up", "put up", "look up", "clean up"] },
         { q: "「重い」", a: "heavy", options: ["heavy", "light", "small", "old"] },
-        { q: "「重要性」", a: "importance", options: ["importance", "difficult", "interest", "future"] },
-        { q: "「〜の代わりに」", a: "instead of", options: ["instead of", "because", "during", "between"] },
-        { q: "「運ぶ」", a: "carry", options: ["carry", "open", "make", "break"] },
-        { q: "「より清潔な」", a: "cleaner", options: ["cleaner", "older", "dirtier", "darker"] },
+        // --- ここから No.1 修正連動 ---
+        { q: "「〜を可能にする」", a: "allow", options: ["allow", "stop", "keep", "forget"] },
+        { q: "「紙を節約する」", a: "save paper", options: ["save paper", "make paper", "buy paper", "throw paper"] },
+        { q: "「デジタルツール」", a: "digital tools", options: ["digital tools", "paper books", "old systems", "handwriting"] },
+        { q: "「だから、それで（理由）」", a: "so", options: ["so", "but", "if", "or"] },
         { q: "「中古の」", a: "second-hand", options: ["second-hand", "new", "expensive", "digital"] }
     ];
     let currentIdx = 0; let score = 0;
