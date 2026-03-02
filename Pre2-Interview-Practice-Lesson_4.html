@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>英検準2級 Interview Practice - Volunteer Work</title>
 <style>
+    /* --- ブラウザ用スタイル（Lesson 4 継承） --- */
     :root { --primary: #2c3e50; --accent: #27ae60; --bg: #f4f7f6; --card: #ffffff; }
     body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
     .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -28,6 +29,20 @@
     .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
     .img-a { max-width: 70%; }
     .img-b { max-width: 45%; }
+
+    /* --- 印刷用スタイル（Lesson 3 仕様を適用） --- */
+    @media print {
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; padding: 5mm !important; }
+        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 15px !important; text-align: left !important; page-break-before: auto; }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; font-size: 11pt; }
+        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; background: #f9f9f9; }
+        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 10px; }
+    }
+    #print-area { display: none; }
 </style>
 </head>
 <body>
@@ -154,6 +169,63 @@
     </div>
 </div>
 
+<div id="print-area">
+    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+    <p style="text-align:right;">Topic: <b>Volunteer Work</b></p>
+
+    <div class="print-section">
+        <h2>No. 1 Reading & Question</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"According to the passage, how can people make their towns better places to live?"</p>
+        <div class="passage-print">Nowadays, many people participate in volunteer work to help their communities. Some people join activities such as cleaning local parks or helping elderly people. By doing so, they can make their towns better places to live. In the future, it is expected that more people will spend their free time on volunteer activities.</div>
+        <span class="print-label">Answer:</span>
+        <p>By joining activities such as cleaning local parks or helping elderly people.</p>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 2 Picture A (Actions)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Tell me as much as you can about what the people are doing."</p>
+        <div class="ans-block">
+            <p><b>1:</b> A man is wiping his face.</p>
+            <p><b>2:</b> A woman is putting a box into a car.</p>
+            <p><b>3:</b> A girl is walking her dog.</p>
+            <p><b>4:</b> A boy is waving his hand.</p>
+            <p><b>5:</b> A woman is waiting for the elevator.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 3 Picture B (Situation)</h2>
+        <span class="print-label">Instruction:</span>
+        <p>"Now, look at the boy in Picture B. Please describe the situation."</p>
+        <div class="ans-block">
+            <p>• The boy cannot play soccer because it is raining.</p>
+            <p>• It is raining, so the boy feels disappointed.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 4 Your Opinion</h2>
+        <span class="print-label">Question:</span>
+        <p>"Do you think it is a good idea for students to do volunteer work?"</p>
+        <div class="ans-block">
+            <p><b>(Yes):</b> Students can learn about their community through these activities. / Helping people is a good way to make friends and learn teamwork.</p>
+            <p><b>(No):</b> Students are very busy with their school work and club activities. / They should spend more time studying for their exams.</p>
+        </div>
+    </div>
+
+    <div class="print-section">
+        <h2>No. 5 Your Opinion</h2>
+        <span class="print-label">Question:</span>
+        <p>"Would you like to participate in any volunteer activities in your town?"</p>
+        <div class="ans-block">
+            <p><b>(Yes):</b> I would like to help clean the local park to keep my town beautiful. / It is a good opportunity to talk with various people in my community.</p>
+            <p><b>(No):</b> I am very busy with my studies and school club, so I don't have enough time. / I prefer to spend my free time on my hobbies at home.</p>
+        </div>
+    </div>
+</div>
+
 <script>
     let step = 1;
     function speak(text) {
@@ -198,7 +270,7 @@
         { q: "「美しい」", a: "beautiful", options: ["beautiful", "useful", "careful", "wonderful"] },
         { q: "「将来」", a: "in the future", options: ["in the future", "in the past", "recently", "suddenly"] },
         { q: "「自由な時間」", a: "free time", options: ["free time", "busy time", "school time", "test time"] },
-        { q: "「様々な」", a: "various", options: ["various", "very", "valuable", "visible"] }
+        { q: "「様々な」", a: "various", options: ["various", "very", "valuable", "various"] }
     ];
 
     let currentIdx = 0; let score = 0;
