@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice - Volunteer Work</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #27ae60; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #eef3ef; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #ddd; }
+    .audio-btn { background: #27ae60; color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #1e8449; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid #27ae60; }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #e8fdf0; border: 1px solid #27ae60; border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    .img-frame { margin: 20px 0; text-align: center; }
+    .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 45%; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice</h1>
+        <div class="sub-title">Topic: Volunteer Work</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            Nowadays, many people participate in volunteer work to help their communities. Some people join activities such as cleaning local parks or helping elderly people. <b>By doing so,</b> they can make their towns better places to live. In the future, it is expected that more people will spend their free time on volunteer activities.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, how can people make their towns better places to live?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, how can people make their towns better places to live?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: By joining activities such as cleaning local parks or helping elderly people.</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Volunteer-Work/PictureA.jpg" alt="Picture A" class="quiz-img img-a">
+        </div>
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans 1</button><br>顔を拭く</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2b')">Ans 2</button><br>車に積む</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2c')">Ans 3</button><br>犬の散歩</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2d')">Ans 4</button><br>手を振る</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2e')">Ans 5</button><br>待つ</div>
+        </div>
+        <div id="ans2a" class="hint-area"><b>1:</b> A man is wiping his face.</div>
+        <div id="ans2b" class="hint-area"><b>2:</b> A woman is putting a box into a car.</div>
+        <div id="ans2c" class="hint-area"><b>3:</b> A girl is walking her dog.</div>
+        <div id="ans2d" class="hint-area"><b>4:</b> A boy is waving his hand.</div>
+        <div id="ans2e" class="hint-area"><b>5:</b> A woman is waiting for the elevator.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        <button class="audio-btn" onclick="speak('Now, look at the boy in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Volunteer-Work/PictureB.jpg" alt="Picture B" class="quiz-img img-b">
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#3498db;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+        <div id="hint3" class="hint-area" style="text-align:center;"><strong>Keywords:</strong> soccer / rain / cannot play / disappointed</div>
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1:</strong> The boy cannot play soccer because it is raining.</p>
+            <p><strong>Pattern 2:</strong> It is raining, so the boy feels disappointed.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you think it is a good idea for students to do volunteer work?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <div id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22; margin:15px; line-height:1.6;">Do you think it is a good idea for students to do volunteer work?</div>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No</button>
+        </div>
+
+        <div id="ans4-y" class="hint-area">
+            <div class="example-box">
+                1. Students can learn about their community through these activities.<br>
+                2. Helping people is a good way to make friends and learn teamwork.
+            </div>
+        </div>
+        <div id="ans4-n" class="hint-area">
+            <div class="example-box">
+                1. Students are very busy with their school work and club activities.<br>
+                2. They should spend more time studying for their exams.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Would you like to participate in any volunteer activities in your town?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Would you like to participate in any volunteer activities in your town?</p>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes (I would)</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No (I wouldn't)</button>
+        </div>
+
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> keep town clean / help elderly / gain experience
+            <div class="example-box">
+                1. I would like to help clean the local park to keep my town beautiful.<br>
+                2. It is a good opportunity to talk with various people in my community.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> busy with study / other plans / no interest
+            <div class="example-box">
+                1. I am very busy with my studies and school club, so I don't have enough time.<br>
+                2. I prefer to spend my free time on my hobbies at home.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        setTimeout(() => {
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = "en-US"; uttr.rate = 0.85;
+            window.speechSynthesis.speak(uttr);
+        }, 50);
+    }
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+        else { document.getElementById('nextBtn').style.visibility = 'visible'; }
+        window.speechSynthesis.cancel();
+    }
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    function showFeedback(id) {
+        const currentSection = document.getElementById(`step${step}`);
+        currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    const quizData = [
+        { q: "「顔を拭く」", a: "wipe one's face", options: ["wipe one's face", "wash one's face", "touch one's face", "paint one's face"] },
+        { q: "「車に積む」", a: "put into a car", options: ["put into a car", "take out of a car", "wash a car", "fix a car"] },
+        { q: "「犬の散歩をする」", a: "walk a dog", options: ["walk a dog", "run a dog", "feed a dog", "buy a dog"] },
+        { q: "「手を振る」", a: "wave one's hand", options: ["wave one's hand", "raise one's hand", "clap one's hands", "shake one's hand"] },
+        { q: "「〜を待つ」", a: "wait for", options: ["wait for", "look for", "call for", "care for"] },
+        { q: "「地域社会」", a: "community", options: ["community", "company", "college", "country"] },
+        { q: "「〜に参加する」", a: "participate in", options: ["participate in", "depend on", "believe in", "look at"] },
+        { q: "「高齢者」", a: "elderly people", options: ["elderly people", "young people", "students", "children"] },
+        { q: "「機会・チャンス」", a: "opportunity", options: ["opportunity", "opinion", "operation", "opposite"] },
+        { q: "「がっかりする」", a: "disappointed", options: ["disappointed", "excited", "interested", "surprised"] },
+        { q: "「〜を掃除する」", a: "clean", options: ["clean", "clear", "close", "climb"] },
+        { q: "「美しい」", a: "beautiful", options: ["beautiful", "useful", "careful", "wonderful"] },
+        { q: "「将来」", a: "in the future", options: ["in the future", "in the past", "recently", "suddenly"] },
+        { q: "「自由な時間」", a: "free time", options: ["free time", "busy time", "school time", "test time"] },
+        { q: "「様々な」", a: "various", options: ["various", "very", "valuable", "visible"] }
+    ];
+
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { document.getElementById('quiz-feedback').innerText = ""; currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
