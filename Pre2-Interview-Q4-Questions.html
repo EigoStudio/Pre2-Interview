@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検 面接大問4 対策マスター（シンプル版）</title>
+    <link href="https://fonts.googleapis.com/css2?family=Andika&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --main-text: #2c3e50;
+            --box-bg: #ffffff;
+            --accent-blue: #2980b9;
+            --btn-yes: #2ecc71;
+            --btn-no: #e74c3c;
+            --btn-hover-yes: #27ae60;
+            --btn-hover-no: #c0392b;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Andika', 'Kosugi Maru', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--box-bg);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 4px solid #dee2e6;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--accent-blue);
+            padding-bottom: 12px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .icon-btn {
+            background: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            background: #e9ecef;
+        }
+
+        .question-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1a252f;
+            line-height: 1.5;
+            margin: 25px 0;
+            min-height: 80px;
+            display: none;
+            padding: 15px;
+            background: #fdfefe;
+            border-radius: 12px;
+            border: 1px solid #f1f2f6;
+        }
+
+        .stance-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .stance-btn {
+            border: none;
+            border-radius: 16px;
+            padding: 15px 45px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 200px;
+        }
+
+        .btn-y { background-color: var(--btn-yes); }
+        .btn-y:hover { background-color: var(--btn-hover-yes); transform: translateY(-2px); }
+        .btn-n { background-color: var(--btn-no); }
+        .btn-n:hover { background-color: var(--btn-hover-no); transform: translateY(-2px); }
+
+        .interviewer-follow {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin: 25px 0;
+            min-height: 40px;
+            display: none;
+            font-style: italic;
+        }
+
+        .model-answers-section {
+            display: none;
+            text-align: left;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px double var(--border-color);
+        }
+
+        .model-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .answer-block {
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            border-radius: 14px;
+        }
+
+        .yes-block {
+            background-color: #e8f8f5;
+            border-left: 6px solid var(--btn-yes);
+        }
+
+        .no-block {
+            background-color: #fdebd0;
+            border-left: 6px solid var(--btn-no);
+        }
+
+        .block-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-item {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.08);
+        }
+        .answer-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .jp-sub {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
+        .nav-btn {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 45px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover { background-color: #2c3e50; }
+
+        .result-screen {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1>英検®準2級 面接第4問特訓（やさしい解答版）</h1>
+        <div class="progress" id="progress">Question 1 / --</div>
+        
+        <div class="action-buttons">
+            <button class="icon-btn" onclick="speakQuestion()" title="質問を聴く">🔊</button>
+            <button class="icon-btn" onclick="toggleQuestionText()" title="質問を見る">👁️</button>
+        </div>
+
+        <div class="question-text" id="question-display">---</div>
+
+        <div class="stance-container" id="stance-area">
+            <button class="stance-btn btn-y" onclick="selectStance('yes')">Yes, I do.</button>
+            <button class="stance-btn btn-n" onclick="selectStance('no')">No, I don't.</button>
+        </div>
+
+        <div class="interviewer-follow" id="follow-text">---</div>
+
+        <button class="nav-btn" id="next-stage-btn" style="display: none;" onclick="showModelAnswers()">NEXT (模範解答を見る) ➔</button>
+
+        <div class="model-answers-section" id="answers-section">
+            <div class="model-title">💡 マネしやすい！3級レベルのシンプル解答集</div>
+            
+            <div class="answer-block yes-block">
+                <div class="block-header" style="color:#27ae60;">🟢 Yes と答えた場合の理由案 (3パターン)</div>
+                <div id="yes-answers-list"></div>
+            </div>
+
+            <div class="answer-block no-block">
+                <div class="block-header" style="color:#c0392b;">🔴 No と答えた場合の理由案 (3パターン)</div>
+                <div id="no-answers-list"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="nextQuestion()">次の質問へ進む ➔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <div class="model-title" style="font-size: 32px;">🎉 特訓完了！ 🎉</div>
+        <p style="font-size: 20px; line-height: 1.6;">短い文章でもハッキリ答えられれば大丈夫！<br>このシンプルフレーズを何度も口に出して覚えましょう！</p>
+        <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="resetQuiz()">もう一度最初から解く</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    {
+        q: "Do you think people should spend more time in nature?",
+        yes: [
+            { en: "Because nature is very beautiful. It makes people feel happy.", jp: "自然はとても美しいからです。それは人々を幸せな気持ちにします。" },
+            { en: "Because they can do outdoor sports. It is good for their health.", jp: "外でスポーツができるからです。それは健康に良いです。" },
+            { en: "Because children like to play outside. They can see many animals there.", jp: "子どもたちは外で遊ぶのが好きだからです。そこでたくさんの動物を見ることができます。" }
+        ],
+        no: [
+            { en: "Because many people like staying home. They enjoy playing video games inside.", jp: "多くの人は家にいるのが好きだからです。室内でテレビゲームを楽しみます。" },
+            { en: "Because going to nature takes a lot of time. People are very busy every day.", jp: "自然に行くのは多くの時間がかかるからです。人々は毎日とても忙しいです。" },
+            { en: "Because there are many beautiful parks in cities. People can enjoy them easily.", jp: "街の中に美しい公園がたくさんあるからです。人々はそれを簡単に楽しむことができます。" }
+        ]
+    },
+    {
+        q: "Do you think it is a good idea to get up early and get some exercise before breakfast?",
+        yes: [
+            { en: "Because morning exercise makes our body run well. We can focus on our study all day.", jp: "朝の運動は体の調子を良くするからです。一日中勉強に集中できます。" },
+            { en: "Because it is a good habit. People can live a healthy life.", jp: "それは良い習慣だからです。人々は健康的な生活を送ることができます。" },
+            { en: "Because the air is very clean in the morning. Running feels very good.", jp: "朝は空気がとてもきれいだからです。走るととても気持ちが良いです。" }
+        ],
+        no: [
+            { en: "Because many people are tired in the morning. They want to sleep more.", jp: "多くの人は朝、疲れているからです。彼らはもっと寝たいと思っています。" },
+            { en: "Because exercising before eating is not good. Some people may feel sick.", jp: "食べる前に運動するのは良くないからです。気分が悪くなる人もいるかもしれません。" },
+            { en: "Because people can exercise in the evening. It is safer after school or work.", jp: "人々は夕方に運動できるからです。放課後や仕事後のほうが安全です。" }
+        ]
+    },
+    {
+        q: "Do you think it is a good idea for people to live in the same house for a long time?",
+        yes: [
+            { en: "Because moving to a new house costs a lot of money. They can save money.", jp: "新しい家に引っ越すのはたくさんのお金がかかるからです。お金を節約できます。" },
+            { en: "Because they can make many good friends near their house.", jp: "家の近くでたくさんの良い友達を作ることができるからです。" },
+            { en: "Because living in a familiar place is very safe and comfortable.", jp: "住み慣れた場所に住むのはとても安全で快適だからです。" }
+        ],
+        no: [
+            { en: "Because living in new places is very exciting. They can try a new lifestyle.", jp: "新しい場所に住むのはとてもワクワクするからです。新しいライフスタイルを試せます。" },
+            { en: "Because people sometimes change their jobs. It is better to live near their workplace.", jp: "人々は時々仕事を変えるからです。職場の近くに住むほうが良いです。" },
+            { en: "Because when the family gets big, they need a larger house.", jp: "家族が大きくなったとき、もっと広い家が必要になるからです。" }
+        ]
+    },
+    {
+        q: "Do you think studying alone is better than studying in groups?",
+        yes: [
+            { en: "Because they can focus on their own study. Talking with friends can distract them.", jp: "自分の勉強に集中できるからです。友達と話すと気が散ることがあります。" },
+            { en: "Because they can study at their own pace. They do not have to wait for others.", jp: "自分のペースで勉強できるからです。他の人を待つ必要がありません。" },
+            { en: "Because it is easy to make a plan. They can study anytime they want.", jp: "計画を立てるのが簡単だからです。好きなときにいつでも勉強できます。" }
+        ],
+        no: [
+            { en: "Because they can ask questions to their friends when they don't understand.", jp: "分からないときに友達に質問することができるからです。" },
+            { en: "Because teaching each other is very good. They can understand the lesson deeply.", jp: "お互いに教え合うのはとても良いことだからです。授業を深く理解できます。" },
+            { en: "Because studying with friends is fun. They can study harder together.", jp: "友達と勉強するのは楽しいからです。一緒に頑張って勉強できます。" }
+        ]
+    },
+    {
+        q: "Do you think fathers will play more active roles in raising children in the future?",
+        yes: [
+            { en: "Because many companies tell male workers to take holidays for childcare.", jp: "多くの企業が男性社員に育児のための休みを取るよう言っているからです。" },
+            { en: "Because sharing house chores is very popular now. Fathers want to help mothers.", jp: "いまや家事を分担することはとても一般的だからです。父親は母親を助けたいと思っています。" },
+            { en: "Because fathers love their children. They want to spend more time with them.", jp: "父親は子どもを愛しているからです。子どもと一緒にもっと時間を過ごしたいと思っています。" }
+        ],
+        no: [
+            { en: "Because many fathers are very busy with their work. They have no time.", jp: "多くの父親は仕事でとても忙しいからです。彼らには時間がありません。" },
+            { en: "Because childcare is still a mother's job in some traditional families.", jp: "一部の伝統的な家族では、育児はまだ母親の仕事だからです。" },
+            { en: "Because some fathers do not know how to take care of small babies.", jp: "小さな赤ちゃんの世話の仕方を知らない父親もいるからです。" }
+        ]
+    },
+    {
+        q: "Do you think more people will drive electric cars in the future?",
+        yes: [
+            { en: "Because electric cars do not use gasoline. They are very clean and good for the earth.", jp: "電気自動車はガソリンを使わないからです。とてもクリーンで地球に良いです。" },
+            { en: "Because governments give money to people who buy electric cars.", jp: "政府が電気自動車を買う人にお金を（補助金として）出しているからです。" },
+            { en: "Because electric cars will become cheaper. More people can buy them easily.", jp: "電気自動車はもっと安くなるからです。より多くの人が簡単に買えるようになります。" }
+        ],
+        no: [
+            { en: "Because electric cars are still very expensive. Regular cars are cheaper.", jp: "電気自動車はまだとても高いからです。普通の車のほうが安いです。" },
+            { en: "Because there are not many places to charge the cars in the countryside.", jp: "田舎には車を充電する場所があまり多くないからです。" },
+            { en: "Because charging the battery takes a long time. Gas is much faster.", jp: "バッテリーの充電には長い時間がかかるからです。ガソリンのほうがずっと早いです。" }
+        ]
+    },
+    {
+        q: "Do you think watching movies in English is a good way to learn English?",
+        yes: [
+            { en: "Because we can listen to real English words. It is good for our listening skills.", jp: "本物の英語の言葉を聴くことができるからです。リスニング力に良いです。" },
+            { en: "Because watching movies is very fun. Students can enjoy studying English.", jp: "映画を見るのはとても楽しいからです。学生は英語の勉強を楽しめます。" },
+            { en: "Because we can see the actors' gestures. It helps us understand the story easily.", jp: "俳優のジェスチャーを見ることができるからです。ストーリーを簡単に理解する助けになります。" }
+        ],
+        no: [
+            { en: "Because the actors speak English too fast. Beginners cannot understand them.", jp: "俳優は英語を話すのが早すぎるからです。初心者には理解できません。" },
+            { en: "Because movies use many difficult words. They are not useful for school tests.", jp: "映画にはたくさんの難しい言葉が使われているからです。学校のテストには役立ちません。" },
+            { en: "Because just watching is not enough. We must study grammar and vocabulary too.", jp: "ただ見ているだけでは不十分だからです。文法や単語も勉強しなければいけません。" }
+        ]
+    },
+    {
+        q: "Do you think traveling is a good way to relax?",
+        yes: [
+            { en: "Because we can see beautiful new places. We can forget about our stressful life.", jp: "美しい新しい場所を見ることができるからです。ストレスの多い生活を忘れることができます。" },
+            { en: "Because we can eat delicious local food. It makes us very happy.", jp: "美味しい地元の料理を食べられるからです。とても幸せな気持ちになります。" },
+            { en: "Because we can talk a lot with our family or friends during the trip.", jp: "旅行中に家族や友達とたくさん話すことができるからです。" }
+        ],
+        no: [
+            { en: "Because moving around crowded tourist places makes people very tired.", jp: "混雑した観光地を移動するのは人々をとても疲れさせるからです。" },
+            { en: "Because traveling costs a lot of money. Staying home is much cheaper.", jp: "旅行にはたくさんのお金がかかるからです。家にいるほうがずっと安いです。" },
+            { en: "Because staying at home is the best way to rest on holidays.", jp: "休日に休むには、家にいるのが一番の方法だからです。" }
+        ]
+    },
+    {
+        q: "Do you think more people will read digital books in the future?",
+        yes: [
+            { en: "Because digital books are very light. We can carry many books on one smartphone.", jp: "電子書籍はとても軽いからです。スマホ1台で多くの本を持ち運べます。" },
+            { en: "Because we can buy books anytime on the internet. We do not have to go to bookstores.", jp: "ネットでいつでも本を買えるからです。本屋に行く必要がありません。" },
+            { en: "Because digital books do not use paper. It is good for saving trees.", jp: "電子書籍は紙を使わないからです。木を守るのに良いです。" }
+        ],
+        no: [
+            { en: "Because looking at a screen for a long time makes our eyes very tired.", jp: "長い間画面を見ていると、目がとても疲れるからです。" },
+            { en: "Because many people like the feeling of real paper books.", jp: "多くの人は実際の紙の本の感覚が好きだからです。" },
+            { en: "Because paper books do not need batteries. We can read them anywhere.", jp: "紙の本はバッテリーが必要ないからです。どこでも読めます。" }
+        ]
+    },
+    {
+        q: "Do you think it is a good idea for students to work part-time?",
+        yes: [
+            { en: "Because they can get their own money. They can buy things they want.", jp: "自分のお金をもらえるからです。欲しいものが買えます。" },
+            { en: "Because they can learn how to work. It is a good experience for the future.", jp: "働く方法を学ぶことができるからです。将来への良い経験になります。" },
+            { en: "Because they can meet many different people outside of school.", jp: "学校の外で多くのさまざまな人に出会うことができるからです。" }
+        ],
+        no: [
+            { en: "Because they will have less time to study. School homework is more important.", jp: "勉強する時間が減ってしまうからです。学校の宿題のほうが大切です。" },
+            { en: "Because working after school makes students too tired to focus on classes.", jp: "放課後に働くことは学生を疲れさせ、授業に集中できなくなるからです。" },
+            { en: "Because they should spend their free time on club activities or with friends.", jp: "代わりに、自由な時間を部活動や友達と過ごすことに使うべきだからです。" }
+        ]
+    }
+];
+
+let shuffledQuiz = [];
+let currentIdx = 0;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initQuiz() {
+    shuffledQuiz = shuffleArray([...quizData]);
+    currentIdx = 0;
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("progress").innerText = `Question ${currentIdx + 1} / ${shuffledQuiz.length}`;
+    
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.innerText = data.q;
+    qDisplay.style.display = "none";
+
+    document.getElementById("stance-area").style.display = "flex";
+    
+    const followText = document.getElementById("follow-text");
+    followText.innerText = "";
+    followText.style.display = "none";
+
+    document.getElementById("next-stage-btn").style.display = "none";
+    document.getElementById("answers-section").style.display = "none";
+}
+
+function speakQuestion() {
+    const text = shuffledQuiz[currentIdx].q;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85; // さらに少しゆっくりにして聞き取りやすく
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("お使いのブラウザは音声読み上げに対応していません。");
+    }
+}
+
+function toggleQuestionText() {
+    const qDisplay = document.getElementById("question-display");
+    if (qDisplay.style.display === "none") {
+        qDisplay.style.display = "block";
+    } else {
+        qDisplay.style.display = "none";
+    }
+}
+
+function selectStance(choice) {
+    const followText = document.getElementById("follow-text");
+    followText.style.display = "block";
+    
+    if (choice === 'yes') {
+        followText.innerText = "🗣️ \"Please, tell me why.\"";
+    } else {
+        followText.innerText = "🗣️ \"Why not? / Why do you think so?\"";
+    }
+
+    document.getElementById("stance-area").style.display = "none";
+    document.getElementById("next-stage-btn").style.display = "inline-block";
+}
+
+function showModelAnswers() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("next-stage-btn").style.display = "none";
+    
+    const yesList = document.getElementById("yes-answers-list");
+    const noList = document.getElementById("no-answers-list");
+    
+    yesList.innerHTML = "";
+    noList.innerHTML = "";
+
+    data.yes.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `<strong>🟢 Pattern ${index + 1}:</strong> <br>${item.en}<div class="jp-sub">${item.jp}</div>`;
+        yesList.appendChild(div);
+    });
+
+    data.no.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `<strong>🔴 Pattern ${index + 1}:</strong> <br>${item.en}<div class="jp-sub">${item.jp}</div>`;
+        noList.appendChild(div);
+    });
+
+    document.getElementById("answers-section").style.display = "block";
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < shuffledQuiz.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quiz-screen").style.display = "block";
+    document.getElementById("result-screen").style.display = "none";
+    initQuiz();
+}
+
+initQuiz();
+</script>
+
+</body>
+</html>

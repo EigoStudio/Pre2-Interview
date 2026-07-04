@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パッと描写！状況説明アクションテスト</title>
+    <link href="https://fonts.googleapis.com/css2?family=Andika&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f7f9fa;
+            --main-text: #2b2b2b;
+            --box-bg: #ffffff;
+            --btn-blue: #dee8f2;
+            --btn-hover: #c5d6e8;
+            --accent-color: #1f4e79;
+        }
+
+        body {
+            font-family: 'Andika', 'Kosugi Maru', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 750px;
+            width: 100%;
+            background: var(--box-bg);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+            border: 4px solid #d9e1f2;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px dashed #b4c6e7;
+            padding-bottom: 12px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-bottom: 10px;
+        }
+
+        .ja-text {
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.6;
+            margin: 30px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .answer-box {
+            font-size: 26px;
+            font-weight: 700;
+            color: #d66011;
+            margin: 30px 0;
+            min-height: 50px;
+            visibility: hidden;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+
+        .btn-container {
+            margin-top: 30px;
+        }
+
+        .btn {
+            background-color: var(--btn-blue);
+            border: 2px solid #b4c6e7;
+            border-radius: 14px;
+            padding: 14px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+
+        .next-btn {
+            background-color: #ffe599;
+            border: 2px solid #ffd966;
+            color: #7f6000;
+            display: none;
+            margin: 0 auto;
+        }
+
+        .next-btn:hover {
+            background-color: #ffd966;
+        }
+
+        .result-screen {
+            display: none;
+        }
+
+        .result-title {
+            font-size: 32px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1>パッと英語で言えるかな？状況描写テスト</h1>
+        <div class="progress" id="progress">1 / --</div>
+        
+        <div class="ja-text" id="question-ja">---</div>
+
+        <div class="answer-box" id="answer-en">---</div>
+
+        <div class="btn-container">
+            <button class="btn" id="check-button" onclick="showAnswer()">CHECK</button>
+            <button class="btn next-btn" id="next-button" onclick="nextQuestion()">NEXT ➔</button>
+        </div>
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <div class="result-title">🎉 おつかれさまでした！ 🎉</div>
+        <div class="ja-text" style="font-size: 20px;">すべての問題のチェックが完了しました！<br>何度も繰り返して口に馴染ませましょう！</div>
+        <button class="btn" style="background-color:#fff2cc; border-color:#ffd966; color:#7f6000;" onclick="resetQuiz()">もう一度テストする</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+    { ja: "女性が机の上に花瓶を置いている。", en: "A woman is putting a vase on a desk." },
+    { ja: "女の子が髪をとかしている。", en: "A girl is brushing her hair." },
+    { ja: "男性がコンピューターを使っている。", en: "A man is using a computer." },
+    { ja: "2人の男性が握手をしている。", en: "Two men are shaking hands." },
+    { ja: "男性がメガネを拭（ふ）いている。", en: "A man is cleaning his glasses." },
+    { ja: "その男性は中にバッグを置き忘れたので、彼はタクシーを追いかけている。", en: "The man is chasing the taxi because he left his bag in there." },
+    { ja: "女性がそこに何かを置き忘れた（残した）。【過去形】", en: "A woman left something there." },
+    { ja: "2人の女性がエレベーターを待っている。", en: "Two women are waiting for the elevator." },
+    { ja: "女性がセーターを選んでいる。", en: "A woman is choosing a sweater." },
+    { ja: "男の子がジャケットを羽織っている。", en: "A boy is putting on a jacket." },
+    { ja: "女性が箱を包装している（ラッピングしている）。", en: "A woman is wrapping a box." },
+    { ja: "男性が紙に何かを書いている。", en: "A man is writing something on paper." },
+    { ja: "女の子は〜したいと思っている。", en: "A girl wants to 〜." },
+    { ja: "男性がお箸（はし）を使っている。", en: "A man is using chopsticks." },
+    { ja: "その女性はお箸を使いたかったが、ウェイターは彼女にフォークを持ってきた。【過去形】", en: "The woman wanted to use chopsticks, but the waiter brought her a fork." },
+    { ja: "女の子が音楽を聴いている。", en: "A girl is listening to music." },
+    { ja: "男性が車から降りている。", en: "A man is getting out of the car." },
+    { ja: "女性が旗を振っている。", en: "A woman is waving a flag." },
+    { ja: "男性が鳥たちにエサをあげている。", en: "A man is feeding some birds." },
+    { ja: "女性がスーツケースを運んでいる。", en: "A woman is carrying a suitcase." },
+    { ja: "3人の子どもたちがエレベーターに乗っている。", en: "Three children are taking the elevator." },
+    { ja: "エレベーターが混みすぎているので、その女性は乗ることができない。", en: "The woman can't take the elevator because it's too crowded." },
+    { ja: "人が多すぎる。", en: "There are too many people." },
+    { ja: "女性が花に水をやっている。", en: "A woman is watering some flowers." },
+    { ja: "2人の男性がサンドイッチを食べている。", en: "Two men are eating some sandwiches." },
+    { ja: "男の子が本を読んでいる。", en: "A boy is reading a book." },
+    { ja: "女性がカップにコーヒーを注いでいる。", en: "A woman is pouring some coffee into a cup." },
+    { ja: "男性がトレイを返却している。", en: "A man is returning the tray." },
+    { ja: "その男の子が大声で話しているので、彼の母親は彼に静かに食べてほしいと思っている。", en: "The boy is talking loudly, so his mother wants him to eat quietly." },
+    { ja: "女性がゴミを捨てている。", en: "A woman is throwing away some trash." },
+    { ja: "男性がバスから降りている。", en: "A man is getting off the bus." },
+    { ja: "女性がバスの時刻表を確認している。", en: "A woman is checking the bus schedule." },
+    { ja: "男性がカートを押している。", en: "A man is pushing a cart." },
+    { ja: "2人の女性が車の中に買い物袋を入れている。", en: "Two women are putting some shopping bags into the car." },
+    { ja: "男性が自分の鍵を見つけられないでいる。", en: "A man can't find his key." },
+    { ja: "男性が自分の車に入れないでいる。", en: "A man can't get into his car." },
+    { ja: "女の子が犬を追いかけている。", en: "A girl is chasing the dog." },
+    { ja: "男性がケーキを切っている。", en: "A man is cutting a cake." },
+    { ja: "女の子がジュースを飲んでいる。", en: "A girl is drinking some juice." },
+    { ja: "男の子が絵を描いている。", en: "A boy is drawing a picture." },
+    { ja: "女の子がテレビゲームをしている。", en: "A girl is playing a video game." },
+    { ja: "男性が飲み物を買っている。", en: "A man is buying a drink." },
+    { ja: "その女の子はお金が足りないので、飲み物を買うことができない。", en: "The girl can't buy a drink because she doesn't have enough money." },
+    { ja: "女性が黒板を消している。", en: "A woman is erasing the blackboard." },
+    { ja: "男性がスクリーン（プロジェクターの幕など）を下ろしている。", en: "A man is rolling down the screen." },
+    { ja: "女性がカーテンを閉めている。", en: "A woman is closing the curtain." },
+    { ja: "3人の子どもたちがトランプをして遊んでいる。", en: "Three children are playing cards." },
+    { ja: "男性がテレビを消している。", en: "A man is turning off the TV." },
+    { ja: "男の子が大音量で音楽を流している。", en: "A boy is playing some loud music." },
+    { ja: "女の子が勉強できないでいる。", en: "A girl can't study." },
+    { ja: "男性が庭を掃（は）いている。", en: "A man is sweeping the yard." },
+    { ja: "女性が花を植えている。", en: "A woman is planting some flowers." },
+    { ja: "男性が壁にペンキを塗っている。", en: "A man is painting a wall." },
+    { ja: "女性が飲み物を出している（配っている）。", en: "A woman is serving some drinks." },
+    { ja: "男性がカーテンを開けている。", en: "A man is opening the curtain." },
+    { ja: "その犬小屋が古くなってきているので、その男性は新しいものを建てようと考えている。", en: "The doghouse is getting old, so the man is thinking of building a new one." },
+    { ja: "男の子がゴミを拾っている。", en: "A boy is picking up some trash." },
+    { ja: "男性がジョギングをしている。", en: "A man is jogging." },
+    { ja: "4人の子どもたちがサッカーをしている。", en: "Four children are playing soccer." },
+    { ja: "男性がフェンス（柵）を修理している。", en: "A man is fixing the fence." },
+    { ja: "女性が犬の散歩をしている。", en: "A woman is walking her dog." },
+    { ja: "その女の子はベンチの上でカメラを見つけたので、それを警察署に持っていくところだ。", en: "The girl found a camera on the bench, so she is going to take it to the police station." },
+    { ja: "2人の男の子が川で泳いでいる。", en: "Two boys are swimming in the river." },
+    { ja: "2人の女の子がお互いに手を振り返し合っている。", en: "Two girls are waving hands at each other." },
+    { ja: "女性がスープを作っている（料理している）。", en: "A woman is cooking some soup." },
+    { ja: "男性が箱から人参（にんじん）を取り出している。", en: "A man is taking a carrot out of the box." },
+    { ja: "女の子が食卓の準備（配膳）をしている。", en: "A girl is setting the table." },
+    { ja: "その女の子はタオルを持っていないので、濡れた手を乾かすことができない。", en: "The girl can't dry her wet hands because she doesn't have a towel." }
+];
+
+let shuffledQuiz = [];
+let currentIdx = 0;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initQuiz() {
+    shuffledQuiz = shuffleArray([...quizData]);
+    currentIdx = 0;
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("progress").innerText = `${currentIdx + 1} / ${shuffledQuiz.length}`;
+    document.getElementById("question-ja").innerHTML = data.ja;
+    
+    const answerBox = document.getElementById("answer-en");
+    answerBox.innerHTML = data.en;
+    answerBox.style.visibility = "hidden";
+
+    document.getElementById("check-button").style.display = "inline-block";
+    document.getElementById("next-button").style.display = "none";
+}
+
+function showAnswer() {
+    document.getElementById("answer-en").style.visibility = "visible";
+    document.getElementById("check-button").style.display = "none";
+    document.getElementById("next-button").style.display = "inline-block";
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < shuffledQuiz.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quiz-screen").style.display = "block";
+    document.getElementById("result-screen").style.display = "none";
+    initQuiz();
+}
+
+// クイズ初期化
+initQuiz();
+</script>
+
+</body>
+</html>
