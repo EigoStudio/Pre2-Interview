@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検準2級 面接対策 大問4 #2</title>
+<script src="auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Andika&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --main-text: #2c3e50;
+            --box-bg: #ffffff;
+            --accent-blue: #2980b9;
+            --btn-yes: #2ecc71;
+            --btn-no: #e74c3c;
+            --btn-hover-yes: #27ae60;
+            --btn-hover-no: #c0392b;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Andika', 'Kosugi Maru', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--box-bg);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 4px solid #dee2e6;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--accent-blue);
+            padding-bottom: 12px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .icon-btn {
+            background: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            background: #e9ecef;
+        }
+
+        .question-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a252f;
+            line-height: 1.5;
+            margin: 25px 0;
+            min-height: 80px;
+            display: none;
+            padding: 15px;
+            background: #fdfefe;
+            border-radius: 12px;
+            border: 1px solid #f1f2f6;
+        }
+
+        .stance-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stance-btn {
+            border: none;
+            border-radius: 16px;
+            padding: 15px 35px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-width: 180px;
+        }
+
+        .btn-y { background-color: var(--btn-yes); }
+        .btn-y:hover { background-color: var(--btn-hover-yes); transform: translateY(-2px); }
+        .btn-n { background-color: var(--btn-no); }
+        .btn-n:hover { background-color: var(--btn-hover-no); transform: translateY(-2px); }
+
+        .interviewer-follow {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin: 25px 0;
+            min-height: 40px;
+            display: none;
+            font-style: italic;
+        }
+
+        .model-answers-section {
+            display: none;
+            text-align: left;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px double var(--border-color);
+        }
+
+        .model-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .answer-block {
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            border-radius: 14px;
+        }
+
+        .yes-block {
+            background-color: #e8f8f5;
+            border-left: 6px solid var(--btn-yes);
+        }
+
+        .no-block {
+            background-color: #fdebd0;
+            border-left: 6px solid var(--btn-no);
+        }
+
+        .block-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-item {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.08);
+        }
+        .answer-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+
+        .jp-sub {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
+        .nav-btn {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 45px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover { background-color: #2c3e50; }
+
+        .result-screen {
+            display: none;
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        /* --------------------------------------------------
+           ワークシート・印刷用スタイル
+        -------------------------------------------------- */
+        @media print {
+            body {
+                background: none !important;
+                color: #000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-family: serif, 'Kosugi Maru', sans-serif;
+            }
+
+            .container, #quiz-screen, #result-screen {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+                width: 100%;
+                padding: 10mm;
+                box-sizing: border-box;
+            }
+
+            .print-title {
+                font-size: 18pt;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 2px solid #000;
+                padding-bottom: 8px;
+            }
+
+            .print-item {
+                margin-bottom: 25px;
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+                padding: 12px;
+                border-radius: 8px;
+            }
+
+            .worksheet-box {
+                margin: 10px 0;
+                padding: 8px;
+                border: 1px dashed #999;
+                background-color: #fafafa;
+                border-radius: 4px;
+            }
+
+            .worksheet-title {
+                font-size: 9.5pt;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 4px;
+            }
+
+            .write-line {
+                border-bottom: 1px solid #aaa;
+                height: 22px;
+                margin-bottom: 6px;
+            }
+
+            .print-q {
+                font-size: 12pt;
+                font-weight: bold;
+                margin-bottom: 8px;
+                border-bottom: 1px dotted #666;
+                padding-bottom: 4px;
+            }
+
+            .print-sec-title {
+                font-size: 10.5pt;
+                font-weight: bold;
+                margin-top: 6px;
+                margin-bottom: 4px;
+            }
+
+            .print-ans {
+                font-size: 10pt;
+                margin-left: 10px;
+                margin-bottom: 6px;
+                line-height: 1.4;
+            }
+
+            .print-jp {
+                font-size: 9pt;
+                color: #444;
+                margin-top: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1>英検準2級 面接対策 大問4 #2 (社会問題・意見編)</h1>
+        <div class="progress" id="progress">Question 1 / --</div>
+        
+        <div class="action-buttons">
+            <button class="icon-btn" onclick="speakQuestion()" title="質問を聴く">🔊</button>
+            <button class="icon-btn" onclick="toggleQuestionText()" title="質問を見る">👁️</button>
+        </div>
+
+        <div class="question-text" id="question-display">---</div>
+
+        <div class="stance-container" id="stance-area">
+            <button class="stance-btn btn-y" id="btn-agree" onclick="selectStance('yes')">Yes, I do.</button>
+            <button class="stance-btn btn-n" id="btn-disagree" onclick="selectStance('no')">No, I don't.</button>
+        </div>
+
+        <div class="interviewer-follow" id="follow-text">---</div>
+
+        <button class="nav-btn" id="next-stage-btn" style="display: none;" onclick="showModelAnswers()">NEXT (模範解答を見る) ➔</button>
+
+        <div class="model-answers-section" id="answers-section">
+            <div class="model-title">💡 模範解答 (Why / Why not への理由回答)</div>
+            
+            <div class="answer-block yes-block">
+                <div class="block-header" style="color:#27ae60;">🟢 賛成 (Yes / I agree) の解答例</div>
+                <div id="yes-answers-list"></div>
+            </div>
+
+            <div class="answer-block no-block">
+                <div class="block-header" style="color:#c0392b;">🔴 反対 (No / I disagree) の解答例</div>
+                <div id="no-answers-list"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="nextQuestion()">次の質問へ進む ➔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <div class="model-title" style="font-size: 32px;">🎉 特訓完了！ 🎉</div>
+        <p style="font-size: 20px; line-height: 1.6;">社会的なテーマに対して理由（2文程度）を<br>ハッキリ答える練習を何度も繰り返しましょう！</p>
+        <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="resetQuiz()">もう一度最初から解く</button>
+    </div>
+</div>
+
+<!-- ワークシート印刷用エリア -->
+<div class="print-only" id="print-area">
+    <div class="print-title">英検準2級 面接対策 大問4 #2 ワークシート</div>
+    <div id="print-content"></div>
+</div>
+
+<script>
+const quizData = [
+    {
+        category: "環境・リサイクル",
+        q: "These days, plastic shopping bags cost money at supermarkets. Do you think people should bring their own bags when they go shopping?",
+        yes: [
+            { basic: "Because bringing my own bag is good for the environment. It helps reduce plastic trash.", adv: "Because using eco-bags helps reduce plastic waste. It is a simple way to protect the Earth from pollution.", jp: "【基本】マイバッグを持参することは環境に良いからです。プラスチックごみを減らすのに役立ちます。【準2級】エコバッグを使うことはプラスチックごみを減らすのに役立つからです。汚染から地球を守るための簡単な方法です。" }
+        ],
+        no: [
+            { basic: "Because people often forget to bring their own bags. Buying plastic bags is very convenient.", adv: "Because carrying shopping bags all the time is difficult. Plastic bags are cheap and easy to use.", jp: "【基本】マイバッグを持っていくのをよく忘れるからです。レジ袋を買う方がとても便利です。【準2級】いつもショッピングバッグを持ち歩くのは難しいからです。レジ袋は安くて使いやすいです。" }
+        ]
+    },
+    {
+        category: "学校・教育（タブレット端末）",
+        q: "Many schools now use tablet computers in class. Do you think this is a good thing for students?",
+        yes: [
+            { basic: "Because studying with tablets is very fun. Students can easily search for information.", adv: "Because tablets make classes more interactive and interesting. Students can study efficiently using digital textbooks.", jp: "【基本】タブレットで勉強するのはとても楽しいからです。生徒は簡単に情報を検索できます。【準2級】タブレットは授業をより参加型で面白いものにしてくれるからです。生徒はデジタル教科書を使って効率的に勉強できます。" }
+        ],
+        no: [
+            { basic: "Because looking at computer screens for a long time makes students' eyes tired. They might play games during class.", adv: "Because students may get distracted by playing games or using social media instead of focusing on lessons.", jp: "【基本】長い時間画面を見ていると生徒の目が疲れるからです。授業中にゲームをしてしまうかもしれません。【準2級】授業に集中する代わりにゲームをしたりSNSを使ったりして気が散ってしまうかもしれないからです。" }
+        ]
+    },
+    {
+        category: "ライフスタイル（オンラインショッピング）",
+        q: "Today, more and more people buy clothes or food online. Do you think online shopping will become more popular in the future?",
+        yes: [
+            { basic: "Because online shopping is very convenient. People can buy things anytime without leaving home.", adv: "Because people can easily compare prices from different stores. It saves time and energy for busy people.", jp: "【基本】ネットショッピングはとても便利だからです。家を出ずにいつでも物が買えます。【準2級】異なるお店の価格を簡単に比較できるからです。忙しい人々にとって時間とエネルギーの節約になります。" }
+        ],
+        no: [
+            { basic: "Because many people want to see real items before buying them. Trying on clothes at real shops is better.", adv: "Because people cannot check the actual quality or size of products online. Shopping at real stores is safer.", jp: "【基本】多くの人は買う前に本物の商品を見たいからです。実際の店で衣服を試着する方が良いです。【準2級】ネットでは製品の実際の品質やサイズを確認できないからです。実店舗で買い物をした方が安全です。" }
+        ]
+    },
+    {
+        category: "健康（朝食）",
+        q: "Some people do not eat breakfast because they are busy in the morning. Do you think it is important for everyone to eat breakfast every day?",
+        yes: [
+            { basic: "Because eating breakfast gives us energy for the day. We can study or work much better.", adv: "Because breakfast provides essential nutrients for our brain and body. It helps students focus better in morning classes.", jp: "【基本】朝食を食べると一日のエネルギーが得られるからです。勉強や仕事をずっと良くこなせます。【準2級】朝食は脳と身体に必要な栄養素を補給してくれるからです。午前中の授業で生徒が集中するのに役立ちます。" }
+        ],
+        no: [
+            { basic: "Because many people are not hungry in the morning. Forcing them to eat can make them feel sick.", adv: "Because some people feel uncomfortable if they eat early in the morning. Resting a little longer is more important for them.", jp: "【基本】朝はあまりお腹が空いていない人が多いからです。無理に食べさせると気分が悪くなることがあります。【準2級】朝早くに食べると不快に感じる人もいるからです。彼らにとってはもう少し休むことの方が大切です。" }
+        ]
+    },
+    {
+        category: "テクノロジー（AI・ロボット）",
+        q: "These days, some hotels use robots to welcome guests instead of people. Do you think more hotels will use robots in the future?",
+        yes: [
+            { basic: "Because robots can work without resting. Hotels can save a lot of money and time.", adv: "Because technology is improving rapidly. Robots can handle simple tasks quickly and speak many foreign languages.", jp: "【基本】ロボットは休まず働くことができるからです。ホテルは多くのお金と時間を節約できます。【準2級】テクノロジーが急速に向上しているからです。ロボットは単純な業務を迅速にこなし、多くの外国語を話すことができます。" }
+        ],
+        no: [
+            { basic: "Because human staff are much kinder and friendlier. Guests prefer talking to real people.", adv: "Because warm hospitality from human staff is important for guests. Robots cannot deal with unexpected problems.", jp: "【基本】人間のおスタッフの方がずっと親切でフレンドリーだからです。宿泊客は本物の人間と話すのを好みます。【準2級】人間スタッフによる温かいおもてなしが宿泊客にとって重要だからです。ロボットは予期せぬトラブルに対応できません。" }
+        ]
+    }
+];
+
+let shuffledQuiz = [];
+let currentIdx = 0;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initQuiz() {
+    shuffledQuiz = shuffleArray([...quizData]);
+    currentIdx = 0;
+    loadQuestion();
+    renderPrintContent();
+}
+
+function renderPrintContent() {
+    const printContent = document.getElementById("print-content");
+    printContent.innerHTML = "";
+
+    quizData.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "print-item";
+
+        let html = `<div class="print-q">Q${index + 1}. [${item.category}] <br>${item.q}</div>`;
+
+        html += `
+        <div class="worksheet-box">
+            <div class="worksheet-title">✏️ My Answer (自分の意見を書いてみよう)</div>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+        </div>`;
+
+        html += `<div class="print-sec-title">【模範解答：Yes / I agree の理由】</div>`;
+        item.yes.forEach((ans) => {
+            html += `<div class="print-ans">
+                • <strong>Basic:</strong> ${ans.basic}<br>
+                • <strong>Advanced:</strong> ${ans.adv}
+                <div class="print-jp">${ans.jp}</div>
+            </div>`;
+        });
+
+        html += `<div class="print-sec-title">【模範解答：No / I disagree の理由】</div>`;
+        item.no.forEach((ans) => {
+            html += `<div class="print-ans">
+                • <strong>Basic:</strong> ${ans.basic}<br>
+                • <strong>Advanced:</strong> ${ans.adv}
+                <div class="print-jp">${ans.jp}</div>
+            </div>`;
+        });
+
+        itemDiv.innerHTML = html;
+        printContent.appendChild(itemDiv);
+    });
+}
+
+function loadQuestion() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("progress").innerText = `Question ${currentIdx + 1} / ${shuffledQuiz.length}`;
+    
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.innerText = data.q;
+    qDisplay.style.display = "none";
+
+    const stanceArea = document.getElementById("stance-area");
+    stanceArea.style.display = "flex";
+
+    if (data.q.includes("What do you think?")) {
+        document.getElementById("btn-agree").innerText = "I agree.";
+        document.getElementById("btn-disagree").innerText = "I disagree.";
+    } else {
+        document.getElementById("btn-agree").innerText = "Yes, I do.";
+        document.getElementById("btn-disagree").innerText = "No, I don't.";
+    }
+    
+    const followText = document.getElementById("follow-text");
+    followText.innerText = "";
+    followText.style.display = "none";
+
+    document.getElementById("next-stage-btn").style.display = "none";
+    document.getElementById("answers-section").style.display = "none";
+}
+
+function speakQuestion() {
+    const text = shuffledQuiz[currentIdx].q;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("お使いのブラウザは音声読み上げに対応していません。");
+    }
+}
+
+function toggleQuestionText() {
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.style.display = (qDisplay.style.display === "none") ? "block" : "none";
+}
+
+function selectStance(choice) {
+    const followText = document.getElementById("follow-text");
+    followText.style.display = "block";
+    
+    if (choice === 'yes') {
+        followText.innerText = "🗣️ \"Why?\"";
+    } else {
+        followText.innerText = "🗣️ \"Why not?\"";
+    }
+
+    document.getElementById("stance-area").style.display = "none";
+    document.getElementById("next-stage-btn").style.display = "inline-block";
+}
+
+function showModelAnswers() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("next-stage-btn").style.display = "none";
+    
+    const listYes = document.getElementById("yes-answers-list");
+    const listNo = document.getElementById("no-answers-list");
+    
+    listYes.innerHTML = "";
+    listNo.innerHTML = "";
+
+    data.yes.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `
+            <div class="step-label">🟢 基本表現 (3級・確実):</div> ${item.basic}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${item.adv}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        listYes.appendChild(div);
+    });
+
+    data.no.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `
+            <div class="step-label">🔴 基本表現 (3級・確実):</div> ${item.basic}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${item.adv}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        listNo.appendChild(div);
+    });
+
+    document.getElementById("answers-section").style.display = "block";
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < shuffledQuiz.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quiz-screen").style.display = "block";
+    document.getElementById("result-screen").style.display = "none";
+    initQuiz();
+}
+
+initQuiz();
+</script>
+
+</body>
+</html>
