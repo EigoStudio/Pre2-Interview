@@ -392,7 +392,7 @@ const quizData = [
             { basic: "I drink a glass of milk every morning. I also walk to school every day.", adv: "I belong to the soccer club and practice hard after school. Running every day keeps my body strong and healthy.", jp: "【基本】毎朝牛乳を1杯飲んでいます。また、毎日歩いて学校へ通っています。【準2級】サッカー部に所属して放課後熱心に練習しています。毎日走ることで体が強く健康に保たれます。" }
         ],
         no: [
-            { basic: "I don't do any special sports. I am usually very busy with my homework and school activities.", adv: "I know exercising is good for health, but I rarely have enough free time to practice sports regularly.", jp: "【基本】特別なスポーツは何もしていないからです。普段は宿題や学校の活動でとても忙しいです。【準2級】運動が健康に良いことは分かっていますが、定期的にスポーツをする十分な自由時間がめったにないからです。" }
+            { basic: "I don't do any special sports. I am usually very busy with my homework and school activities.", adv: "I rarely have enough free time to practice sports regularly. I'm usually busy with my studies.", jp: "【基本】特別なスポーツは何もしていないからです。普段は宿題や学校の活動でとても忙しいです。【準2級】定期的にスポーツをする十分な自由時間がめったにないからです。普段は勉強で忙しいです。" }
         ]
     },
     {
@@ -432,6 +432,60 @@ const quizData = [
 
 let shuffledQuiz = [];
 let currentIdx = 0;
+
+// Because + 1文目. Also, 2文目. の形式に自動変換する関数
+function formatBecauseAnswer(text) {
+    if (!text) return "";
+
+    // 1. 文中に " because " が含まれる場合 (splitして再構成)
+    // 例: "I prefer A because B." -> "Because I prefer A. Also, B."
+    if (text.includes(" because ")) {
+        let parts = text.split(" because ");
+        let mainClause = parts[0].trim();
+        let becauseClause = parts[1].trim();
+
+        let sentence1 = mainClause.endsWith(".") ? mainClause.slice(0, -1) : mainClause;
+        let sentence2 = becauseClause.charAt(0).toUpperCase() + becauseClause.slice(1);
+        if (!sentence2.endsWith(".")) sentence2 += ".";
+
+        return `Because ${sentence1.charAt(0).toLowerCase() + sentence1.slice(1)}. Also, ${sentence2}`;
+    }
+
+    // 2. 文中に ", so " が含まれる場合
+    // 例: "A, so B." -> "Because A. Also, B."
+    if (text.includes(", so ")) {
+        let parts = text.split(", so ");
+        let part1 = parts[0].trim();
+        let part2 = parts[1].trim();
+
+        let sentence1 = part1;
+        let sentence2 = part2.charAt(0).toUpperCase() + part2.slice(1);
+        if (!sentence2.endsWith(".")) sentence2 += ".";
+
+        return `Because ${sentence1.charAt(0).toLowerCase() + sentence1.slice(1)}. Also, ${sentence2}`;
+    }
+
+    // 3. すでに文頭が Because で始まっている場合
+    if (text.startsWith("Because ") || text.startsWith("because ")) {
+        return text;
+    }
+
+    // 4. ピリオドで区切られた多重文の場合、1文目に Because、2文目に Also, を補完
+    let sentences = text.split(". ").filter(s => s.length > 0);
+    if (sentences.length >= 2) {
+        let first = sentences[0].trim();
+        let second = sentences.slice(1).join(". ").trim();
+        
+        if (!second.startsWith("Also") && !second.startsWith("In addition")) {
+            second = "Also, " + second.charAt(0).toLowerCase() + second.slice(1);
+        }
+        
+        return `Because ${first.charAt(0).toLowerCase() + first.slice(1)}. ${second}`;
+    }
+
+    // 5. 単文の場合
+    return "Because " + text.charAt(0).toLowerCase() + text.slice(1);
+}
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -476,8 +530,8 @@ function renderPrintContent() {
 
         html += `<div class="print-sec-title">【模範解答：No の場合】</div>`;
         item.no.forEach((ans) => {
-            let basicEn = ans.basic.startsWith("I ") ? "Because " + ans.basic : "Because " + ans.basic.charAt(0).toLowerCase() + ans.basic.slice(1);
-            let advEn = ans.adv.startsWith("I ") ? "Because " + ans.adv : "Because " + ans.adv.charAt(0).toLowerCase() + ans.adv.slice(1);
+            let basicEn = formatBecauseAnswer(ans.basic);
+            let advEn = formatBecauseAnswer(ans.adv);
 
             html += `<div class="print-ans">
                 • <strong>Basic:</strong> ${basicEn}<br>
@@ -502,7 +556,6 @@ function loadQuestion() {
     const yesBtn = document.getElementById("btn-yes-text");
     const noBtn = document.getElementById("btn-no-text");
 
-    // 質問タイプに合わせたボタンテキストの設定
     if (data.type === "would") {
         yesBtn.innerText = "Yes, I would.";
         noBtn.innerText = "No, I wouldn't.";
@@ -596,8 +649,8 @@ function showModelAnswers() {
         const div = document.createElement("div");
         div.className = "answer-item";
 
-        let basicEn = item.basic.startsWith("I ") ? "Because " + item.basic : "Because " + item.basic.charAt(0).toLowerCase() + item.basic.slice(1);
-        let advEn = item.adv.startsWith("I ") ? "Because " + item.adv : "Because " + item.adv.charAt(0).toLowerCase() + item.adv.slice(1);
+        let basicEn = formatBecauseAnswer(item.basic);
+        let advEn = formatBecauseAnswer(item.adv);
 
         div.innerHTML = `
             <div class="step-label">🔴 基本表現 (3級・確実):</div> ${basicEn}<br>
