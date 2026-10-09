@@ -218,15 +218,15 @@
         }
 
         /* --------------------------------------------------
-           ワークシート・印刷用スタイル (Cmd+P / Ctrl+P 適用)
+           ワークシート・印刷用スタイル (統一フォーマット)
         -------------------------------------------------- */
         @media print {
             body {
-                background: none !important;
+                background: #fff !important;
                 color: #000 !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                font-family: serif, 'Kosugi Maru', sans-serif;
+                font-family: Arial, sans-serif, 'Kosugi Maru';
             }
 
             .container, #quiz-screen, #result-screen {
@@ -236,74 +236,52 @@
             .print-only {
                 display: block !important;
                 width: 100%;
-                padding: 10mm;
+                padding: 5mm 10mm;
                 box-sizing: border-box;
             }
 
             .print-title {
-                font-size: 18pt;
+                font-size: 16pt;
                 font-weight: bold;
                 text-align: center;
                 margin-bottom: 20px;
-                border-bottom: 2px solid #000;
+                border-bottom: 2px solid #333;
                 padding-bottom: 8px;
             }
 
             .print-item {
-                margin-bottom: 25px;
+                margin-bottom: 22px;
                 page-break-inside: avoid;
-                border: 1px solid #ccc;
-                padding: 12px;
-                border-radius: 8px;
+            }
+
+            .print-q-header {
+                font-size: 11pt;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 4px;
+            }
+
+            .print-q-body {
+                font-size: 11.5pt;
+                line-height: 1.4;
+                margin-bottom: 8px;
             }
 
             .worksheet-box {
-                margin: 10px 0;
-                padding: 8px;
-                border: 1px dashed #999;
-                background-color: #fafafa;
-                border-radius: 4px;
+                margin-top: 6px;
             }
 
             .worksheet-title {
                 font-size: 9.5pt;
                 font-weight: bold;
-                color: #333;
-                margin-bottom: 4px;
+                color: #444;
+                margin-bottom: 6px;
             }
 
             .write-line {
-                border-bottom: 1px solid #aaa;
-                height: 22px;
-                margin-bottom: 6px;
-            }
-
-            .print-q {
-                font-size: 13pt;
-                font-weight: bold;
-                margin-bottom: 8px;
-                border-bottom: 1px dotted #666;
-                padding-bottom: 4px;
-            }
-
-            .print-sec-title {
-                font-size: 10.5pt;
-                font-weight: bold;
-                margin-top: 6px;
+                border-bottom: 1px solid #777;
+                height: 28px;
                 margin-bottom: 4px;
-            }
-
-            .print-ans {
-                font-size: 10pt;
-                margin-left: 10px;
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-
-            .print-jp {
-                font-size: 9pt;
-                color: #444;
-                margin-top: 2px;
             }
         }
     </style>
@@ -435,76 +413,6 @@ const quizData = [
             { en: "My town is very small. There are no famous tourist places here.", jp: "私の町はとても小さいからです。ここには有名な観光地がありません。" },
             { en: "I am very busy with my school activities and homework every day.", jp: "毎日学校の活動や宿題でとても忙しいからです。" }
         ]
-    },
-    {
-        q: "Today, there are many recycling stores in Japan. Do you like buying used things?",
-        type: "do",
-        yes: [
-            { en: "Used things are very cheap. I can save a lot of money.", jp: "中古品はとても安いです。お金をたくさん節約できます。" },
-            { en: "Buying used things is good for the earth. We can reduce trash.", jp: "中古品を買うのは地球に良いです。ゴミを減らすことができます。" },
-            { en: "I can sometimes find rare comic books or games at recycling stores.", jp: "リサイクルショップで時々珍しい漫画やゲームを見つけることができるからです。" }
-        ],
-        no: [
-            { en: "I prefer brand-new things. They are very clean and beautiful.", jp: "新品のほうが好きだからです。それらはとても綺麗で美しいです。" },
-            { en: "Used things are sometimes broken or dirty. I worry about their quality.", jp: "中古品は時々壊れていたり汚れていたりするからです。品質が心配になります。" },
-            { en: "I do not go to recycling stores. I buy things at regular shops because I prefer new items.", jp: "リサイクルショップには行かないからです。私は普通のお店で物を買います。新品の方が好きだからです。" }
-        ]
-    },
-    {
-        q: "Do you like climbing mountains?",
-        type: "do",
-        yes: [
-            { en: "The view from the top of the mountain is beautiful. I can see great scenery.", jp: "山の頂上からの景色は美しい大です。素晴らしい景色が見られます。" },
-            { en: "Climbing mountains is a good exercise. It keeps my body healthy.", jp: "山登りは良い運動です。体を健康に保ってくれます。" },
-            { en: "I like to spend time in nature. The fresh air feels very good.", jp: "自然の中で過ごするのが好きです。新鮮な空気がとても気持ちいいです。" }
-        ],
-        no: [
-            { en: "Climbing mountains is too hard for me. Walking up long hills makes me tired.", jp: "山登りは私には大変すぎるからです。長い坂を登ると疲れてしまいます。" },
-            { en: "I don't like bugs or snakes. I feel scared in the mountains.", jp: "虫やヘビが好きではないからです。山の中では怖く感じます。" },
-            { en: "I prefer seaside activities. Swimming in the sea is more fun for me.", jp: "海の活動のほうが好きだからです。海で泳ぐほうが私には楽しいです。" }
-        ]
-    },
-    {
-        q: "Do you like watching news programs on TV?",
-        type: "do",
-        yes: [
-            { en: "I can learn about many important things happening in the world.", jp: "世界で起きている多くの重要な出来事について知ることができるからです。" },
-            { en: "News programs help me study social studies. It is useful for school.", jp: "ニュース番組は社会の勉強を助けてくれるからです。学校の役に立ちます。" },
-            { en: "I often watch the news with my parents. We talk about daily topics together.", jp: "よく両親と一緒にニュースを見るからです。日々のトピックについて一緒に話します。" }
-        ],
-        no: [
-            { en: "News programs are sometimes too difficult for me. I cannot understand them well.", jp: "ニュース番組は私には時々難しすぎるからです。あまりよく理解できません。" },
-            { en: "I prefer watching anime or music shows. They are more entertaining.", jp: "アニメや音楽番組を見るほうが好きだからです。そのほうが面白いです。" },
-            { en: "I usually check the latest news on my smartphone. I do not need a TV.", jp: "普段はスマートフォンで最新のニュースをチェックするからです。テレビは必要ありません。" }
-        ]
-    },
-    {
-        q: "Do you like playing video games?",
-        type: "do",
-        yes: [
-            { en: "Playing video games is very exciting. I can forget about my hard homework.", jp: "テレビゲームをするのはとてもワクワクします。大変な宿題のことを忘れることができます。" },
-            { en: "I can play online games with my friends. We can enjoy them together at home.", jp: "友達とオンラインゲームができるからです。家で一緒に楽しむことができます。" },
-            { en: "Some video games have beautiful music and stories. I love them very much.", jp: "テレビゲームには美しい音楽やストーリーがあるものもあるからです。それが大好きです。" }
-        ],
-        no: [
-            { en: "Playing video games for a long time makes my eyes tired. It is bad for my eyes.", jp: "長い間テレビゲームをすると目が疲れるからです。目に良くないです。" },
-            { en: "I prefer reading real books or playing outside. They are more fun for me.", jp: "実際の映画や本を読んだり、外で遊んだりするほうが好きだからです。そのほうが楽しいです。" },
-            { en: "I have soccer practice after school. I have no free time for games.", jp: "放課後にサッカーの練習があるからです。ゲームをする自由時間がありません。" }
-        ]
-    },
-    {
-        q: "Do you cook at home?",
-        type: "do",
-        yes: [
-            { en: "I like making fried rice or pancakes. Cooking is very fun for me.", jp: "チャーハンやホットケーキを作るのが好きです。料理は私にとってとても楽しいです。" },
-            { en: "I often help my mother prepare dinner on weekends. She enjoys my help.", jp: "週末はよく母の夕食の準備を手伝うからです。母は喜んでくれます。" },
-            { en: "I want to learn how to cook for my future. It is an important skill.", jp: "将来のために料理の方法を学びたいからです。大切なスキルです。" }
-        ],
-        no: [
-            { en: "My mother cooks delicious meals for me every day. I do not need to cook.", jp: "母が毎日美味しいご飯を作ってくれるからです。私が料理する必要はありません。" },
-            { en: "Cooking takes too much time and preparation. Cleaning up dishes is also hard.", jp: "料理は時間と準備がかかりすぎるからです。お皿の後片付けも大変です。" },
-            { en: "I do not know how to use kitchen tools safely. I am afraid of knives or fire.", jp: "台所道具を安全に使う方法を知らないからです。包丁や火が怖いです。" }
-        ]
     }
 ];
 
@@ -526,7 +434,6 @@ function initQuiz() {
     renderPrintContent();
 }
 
-/* 印刷用HTML要素の生成処理 */
 function renderPrintContent() {
     const printContent = document.getElementById("print-content");
     printContent.innerHTML = "";
@@ -535,27 +442,15 @@ function renderPrintContent() {
         const itemDiv = document.createElement("div");
         itemDiv.className = "print-item";
 
-        let html = `<div class="print-q">Q${index + 1}. ${item.q}</div>`;
-
-        html += `
+        let html = `
+        <div class="print-q-header">Q${index + 1}.</div>
+        <div class="print-q-body">${item.q}</div>
         <div class="worksheet-box">
-            <div class="worksheet-title">✏️ My Answer (自分の回答を書いてみよう)</div>
+            <div class="worksheet-title">My Answer (自分の回答を書いてみよう)</div>
+            <div class="write-line"></div>
             <div class="write-line"></div>
             <div class="write-line"></div>
         </div>`;
-
-        html += `<div class="print-sec-title">【Yes の理由案】</div>`;
-        item.yes.forEach((y, i) => {
-            html += `<div class="print-ans">(${i + 1}) ${y.en}<div class="print-jp">${y.jp}</div></div>`;
-        });
-
-        html += `<div class="print-sec-title">【No の理由案】</div>`;
-        item.no.forEach((n, i) => {
-            let correctedEn = n.en.startsWith("I ") ? "Because " + n.en : "Because " + n.en.charAt(0).toLowerCase() + n.en.slice(1);
-            let correctedJp = n.jp.endsWith("からです。") ? n.jp : n.jp.replace(/です。$/, "からです。");
-            
-            html += `<div class="print-ans">(${i + 1}) ${correctedEn}<div class="print-jp">${correctedJp}</div></div>`;
-        });
 
         itemDiv.innerHTML = html;
         printContent.appendChild(itemDiv);
