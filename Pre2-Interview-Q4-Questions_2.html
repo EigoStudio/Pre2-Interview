@@ -225,15 +225,15 @@
         }
 
         /* --------------------------------------------------
-           ワークシート・印刷用スタイル
+           ワークシート・印刷用スタイル (添付PDFスタイル対応)
         -------------------------------------------------- */
         @media print {
             body {
-                background: none !important;
+                background: #fff !important;
                 color: #000 !important;
                 padding: 0 !important;
                 margin: 0 !important;
-                font-family: serif, 'Kosugi Maru', sans-serif;
+                font-family: Arial, sans-serif, 'Kosugi Maru';
             }
 
             .container, #quiz-screen, #result-screen {
@@ -243,74 +243,52 @@
             .print-only {
                 display: block !important;
                 width: 100%;
-                padding: 10mm;
+                padding: 5mm 10mm;
                 box-sizing: border-box;
             }
 
             .print-title {
-                font-size: 18pt;
+                font-size: 16pt;
                 font-weight: bold;
                 text-align: center;
                 margin-bottom: 20px;
-                border-bottom: 2px solid #000;
+                border-bottom: 2px solid #333;
                 padding-bottom: 8px;
             }
 
             .print-item {
-                margin-bottom: 25px;
+                margin-bottom: 22px;
                 page-break-inside: avoid;
-                border: 1px solid #ccc;
-                padding: 12px;
-                border-radius: 8px;
+            }
+
+            .print-q-header {
+                font-size: 11pt;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 4px;
+            }
+
+            .print-q-body {
+                font-size: 11.5pt;
+                line-height: 1.4;
+                margin-bottom: 8px;
             }
 
             .worksheet-box {
-                margin: 10px 0;
-                padding: 8px;
-                border: 1px dashed #999;
-                background-color: #fafafa;
-                border-radius: 4px;
+                margin-top: 6px;
             }
 
             .worksheet-title {
                 font-size: 9.5pt;
                 font-weight: bold;
-                color: #333;
-                margin-bottom: 4px;
+                color: #444;
+                margin-bottom: 6px;
             }
 
             .write-line {
-                border-bottom: 1px solid #aaa;
-                height: 22px;
-                margin-bottom: 6px;
-            }
-
-            .print-q {
-                font-size: 12pt;
-                font-weight: bold;
-                margin-bottom: 8px;
-                border-bottom: 1px dotted #666;
-                padding-bottom: 4px;
-            }
-
-            .print-sec-title {
-                font-size: 10.5pt;
-                font-weight: bold;
-                margin-top: 6px;
+                border-bottom: 1px solid #777;
+                height: 28px;
                 margin-bottom: 4px;
-            }
-
-            .print-ans {
-                font-size: 10pt;
-                margin-left: 10px;
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-
-            .print-jp {
-                font-size: 9pt;
-                color: #444;
-                margin-top: 2px;
             }
         }
     </style>
@@ -451,32 +429,15 @@ function renderPrintContent() {
         const itemDiv = document.createElement("div");
         itemDiv.className = "print-item";
 
-        let html = `<div class="print-q">Q${index + 1}. [${item.category}] <br>${item.q}</div>`;
-
-        html += `
+        let html = `
+        <div class="print-q-header">Q${index + 1}. [${item.category}]</div>
+        <div class="print-q-body">${item.q}</div>
         <div class="worksheet-box">
-            <div class="worksheet-title">✏️ My Answer (自分の意見を書いてみよう)</div>
+            <div class="worksheet-title">My Answer (自分の意見を書いてみよう)</div>
+            <div class="write-line"></div>
             <div class="write-line"></div>
             <div class="write-line"></div>
         </div>`;
-
-        html += `<div class="print-sec-title">【模範解答：Yes / I agree の理由】</div>`;
-        item.yes.forEach((ans) => {
-            html += `<div class="print-ans">
-                • <strong>Basic:</strong> ${ans.basic}<br>
-                • <strong>Advanced:</strong> ${ans.adv}
-                <div class="print-jp">${ans.jp}</div>
-            </div>`;
-        });
-
-        html += `<div class="print-sec-title">【模範解答：No / I disagree の理由】</div>`;
-        item.no.forEach((ans) => {
-            html += `<div class="print-ans">
-                • <strong>Basic:</strong> ${ans.basic}<br>
-                • <strong>Advanced:</strong> ${ans.adv}
-                <div class="print-jp">${ans.jp}</div>
-            </div>`;
-        });
 
         itemDiv.innerHTML = html;
         printContent.appendChild(itemDiv);
