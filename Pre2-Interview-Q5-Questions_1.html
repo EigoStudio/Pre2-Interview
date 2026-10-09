@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検準2級 面接対策 大問5 #1</title>
+<script src="auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Andika&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --main-text: #2c3e50;
+            --box-bg: #ffffff;
+            --accent-blue: #2980b9;
+            --btn-yes: #2ecc71;
+            --btn-no: #e74c3c;
+            --btn-hover-yes: #27ae60;
+            --btn-hover-no: #c0392b;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Andika', 'Kosugi Maru', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--box-bg);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 4px solid #dee2e6;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--accent-blue);
+            padding-bottom: 12px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .icon-btn {
+            background: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            background: #e9ecef;
+        }
+
+        .question-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a252f;
+            line-height: 1.5;
+            margin: 25px 0;
+            min-height: 80px;
+            display: none;
+            padding: 15px;
+            background: #fdfefe;
+            border-radius: 12px;
+            border: 1px solid #f1f2f6;
+        }
+
+        .stance-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .stance-btn {
+            border: none;
+            border-radius: 16px;
+            padding: 15px 10px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 220px;
+        }
+
+        .btn-y { background-color: var(--btn-yes); }
+        .btn-y:hover { background-color: var(--btn-hover-yes); transform: translateY(-2px); }
+        .btn-n { background-color: var(--btn-no); }
+        .btn-n:hover { background-color: var(--btn-hover-no); transform: translateY(-2px); }
+
+        .interviewer-follow {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin: 25px 0;
+            min-height: 40px;
+            display: none;
+            font-style: italic;
+        }
+
+        .model-answers-section {
+            display: none;
+            text-align: left;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px double var(--border-color);
+        }
+
+        .model-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .answer-block {
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            border-radius: 14px;
+        }
+
+        .yes-block {
+            background-color: #e8f8f5;
+            border-left: 6px solid var(--btn-yes);
+        }
+
+        .no-block {
+            background-color: #fdebd0;
+            border-left: 6px solid var(--btn-no);
+        }
+
+        .block-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-item {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.08);
+        }
+        .answer-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+
+        .jp-sub {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
+        .nav-btn {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 45px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover { background-color: #2c3e50; }
+
+        .result-screen {
+            display: none;
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-family: Arial, sans-serif, 'Kosugi Maru';
+            }
+
+            .container, #quiz-screen, #result-screen {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+                width: 100%;
+                padding: 5mm 10mm;
+                box-sizing: border-box;
+            }
+
+            .print-title {
+                font-size: 16pt;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 2px solid #333;
+                padding-bottom: 8px;
+            }
+
+            .print-item {
+                margin-bottom: 22px;
+                page-break-inside: avoid;
+            }
+
+            .print-q-header {
+                font-size: 11pt;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 4px;
+            }
+
+            .print-q-body {
+                font-size: 11.5pt;
+                line-height: 1.4;
+                margin-bottom: 8px;
+            }
+
+            .worksheet-box {
+                margin-top: 6px;
+            }
+
+            .worksheet-title {
+                font-size: 9.5pt;
+                font-weight: bold;
+                color: #444;
+                margin-bottom: 6px;
+            }
+
+            .write-line {
+                border-bottom: 1px solid #777;
+                height: 28px;
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1>英検準2級 面接対策 大問5 #1</h1>
+        <div class="progress" id="progress">Question 1 / --</div>
+        
+        <div class="action-buttons">
+            <button class="icon-btn" onclick="speakQuestion()" title="質問を聴く">🔊</button>
+            <button class="icon-btn" onclick="toggleQuestionText()" title="質問を見る">👁️</button>
+        </div>
+
+        <div class="question-text" id="question-display">---</div>
+
+        <div class="stance-container" id="stance-area">
+            <button class="stance-btn btn-y" id="btn-yes-text" onclick="selectStance('yes')">Yes</button>
+            <button class="stance-btn btn-n" id="btn-no-text" onclick="selectStance('no')">No</button>
+        </div>
+
+        <div class="interviewer-follow" id="follow-text">---</div>
+
+        <button class="nav-btn" id="next-stage-btn" style="display: none;" onclick="showModelAnswers()">NEXT (模範解答を見る) ➔</button>
+
+        <div class="model-answers-section" id="answers-section">
+            <div class="model-title">💡 模範解答 (自分の考え・経験を答える)</div>
+            
+            <div class="answer-block yes-block">
+                <div class="block-header" style="color:#27ae60;">🟢 Yes と答えた場合 (Please tell me more. / Why?)</div>
+                <div id="yes-answers-list"></div>
+            </div>
+
+            <div class="answer-block no-block">
+                <div class="block-header" style="color:#c0392b;">🔴 No と答えた場合 (Why not? ➔ Because...)</div>
+                <div id="no-answers-list"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="nextQuestion()">次の質問へ進む ➔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <div class="model-title" style="font-size: 32px;">🎉 大問5 特訓完了！ 🎉</div>
+        <p style="font-size: 20px; line-height: 1.6;">自分の習慣や考えをハッキリ伝えられましたね！<br>この身近なテーマの表現をマスターして本番に備えましょう！</p>
+        <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="resetQuiz()">もう一度最初から解く</button>
+    </div>
+</div>
+
+<!-- ワークシート印刷用エリア -->
+<div class="print-only" id="print-area">
+    <div class="print-title">英検準2級 面接対策 大問5 #1 ワークシート</div>
+    <div id="print-content"></div>
+</div>
+
+<script>
+const quizData = [
+    {
+        category: "趣味・日常生活（読書）",
+        q: "Many people read books in their free time. Do you often read books?",
+        type: "do",
+        yes: [
+            { basic: "I usually read novels in my room before going to bed. It helps me relax.", adv: "I love reading fantasy novels every evening. Reading opens my mind and expands my imagination.", jp: "【基本】普段は寝る前に自分の部屋で小説を読みます。リラックスするのに役立ちます。【準2級】毎晩ファンタジー小説を読むのが大好きです。読書は視界を広げ、想像力を膨らませてくれます。" }
+        ],
+        no: [
+            { basic: "I prefer watching videos or listening to music in my free time.", adv: "I rarely read books because I enjoy playing video games or chatting with my friends online.", jp: "【基本】自由な時間には動画を見たり音楽を聴いたりする方が好きだからです。【準2級】ゲームをしたりネットで友達とチャットするのが好きなので、滅多に本を読みません。" }
+        ]
+    },
+    {
+        category: "学校・勉強法（英語学習）",
+        q: "Many students study English as a second language. Do you enjoy studying English?",
+        type: "do",
+        yes: [
+            { basic: "Learning new English words is interesting to me. Also, I want to talk to foreign people.", adv: "Studying English allows me to communicate with people worldwide. I also enjoy watching movies in English without subtitles.", jp: "【基本】新しい英語の単語を覚えるのが面白いからです。また、外国の人と話したいからです。【準2級】英語を勉強すると世界中の人とコミュニケーションが取れるからです。字幕なしで英語の映画を見るのも楽しいです。" }
+        ],
+        no: [
+            { basic: "Studying English grammar is difficult for me. I need to practice more.", adv: "I struggle with memorizing vocabulary and complex grammar rules. Speaking English makes me feel nervous.", jp: "【基本】英語の文法を勉強するのが私にとって難しいからです。もっと練習する必要があります。【準2級】単語や複雑な文法ルールを覚えるのに苦労しているからです。英語を話すのも緊張してしまいます。" }
+        ]
+    },
+    {
+        category: "旅行・イベント（旅行）",
+        q: "Many people enjoy traveling during their vacations. Do you like to travel?",
+        type: "do",
+        yes: [
+            { basic: "I like visiting new places with my family during summer vacation. It creates great memories.", adv: "Traveling gives me the chance to experience local cultures and try delicious traditional foods.", jp: "【基本】夏休みに家族と新しい場所を訪れるのが好きだからです。素晴らしい思い出になります。【準2級】旅行は地元の文化を体験し、美味しい伝統料理を味わう機会を与えてくれるからです。" }
+        ],
+        no: [
+            { basic: "Traveling can be very tiring for me, so I prefer staying at home.", adv: "Packing bags and long trips make me exhausted. I feel much more relaxed spending quiet days in my own room.", jp: "【基本】旅行は私にとってとても疲れることがあるので、家にいる方が好きだからです。【準2級】荷造りや長旅で疲れ切ってしまうからです。自分の部屋で静かな日を過ごす方がずっとリラックスできます。" }
+        ]
+    },
+    {
+        category: "買い物・お金の使い道（ネット通販）",
+        q: "Many people enjoy shopping online. Do you like shopping online?",
+        type: "do",
+        yes: [
+            { basic: "I can buy things anytime without going outside. There are also many choices.", adv: "Online shopping is extremely convenient because I can easily compare prices across various stores.", jp: "【基本】外出せずにいつでも物が買えるからです。また、選択肢もたくさんあります。【準2級】様々なお店の間で簡単に価格を比較できるため、ネットショッピングは非常に便利だからです。" }
+        ],
+        no: [
+            { basic: "I prefer going to real stores because I want to see products directly.", adv: "I like checking the exact size and quality of items before paying. Going out to real shops with friends is also fun.", jp: "【基本】商品を直接見たいので、実際の店舗に行く方が好きだからです。【準2級】お金を払う前に商品の正確なサイズや品質を確認したいからです。友達と実際のショップに出かけるのも楽しいです。" }
+        ]
+    },
+    {
+        category: "趣味・エンタメ（音楽鑑賞）",
+        q: "Many people listen to music when they commute or relax. Do you often listen to music?",
+        type: "do",
+        yes: [
+            { basic: "I listen to my favorite pop music on my smartphone every day. It cheers me up.", adv: "Listening to music helps me concentrate while studying and refreshes my mood after school.", jp: "【基本】毎日スマホで好きなポップミュージックを聴いているからです。元気がでます。【準2級】音楽を聴くことは勉強中の集中に役立ち、放課後の気分転換にもなります。" }
+        ],
+        no: [
+            { basic: "I prefer quiet environments, so I rarely listen to music.", adv: "I find music distracting when I want to focus or relax. I prefer spending time reading books silently.", jp: "【基本】静かな環境が好きなので、めったに音楽を聴かないからです。【準2級】集中したりリラックスしたい時には音楽が気になるからです。黙って本を読んで過ごす方が好きです。" }
+        ]
+    }
+];
+
+let shuffledQuiz = [];
+let currentIdx = 0;
+
+function formatBecauseAnswer(text) {
+    if (!text) return "";
+    if (text.startsWith("Because ") || text.startsWith("because ")) return text;
+
+    let sentences = text.split(". ").filter(s => s.length > 0);
+    if (sentences.length >= 2) {
+        let first = sentences[0].trim();
+        let second = sentences.slice(1).join(". ").trim();
+        if (!second.startsWith("Also") && !second.startsWith("In addition") && !second.startsWith("Therefore")) {
+            second = "Also, " + second.charAt(0).toLowerCase() + second.slice(1);
+        }
+        return `Because ${first.charAt(0).toLowerCase() + first.slice(1)}. ${second}`;
+    }
+    return "Because " + text.charAt(0).toLowerCase() + text.slice(1);
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initQuiz() {
+    shuffledQuiz = shuffleArray([...quizData]);
+    currentIdx = 0;
+    loadQuestion();
+    renderPrintContent();
+}
+
+function renderPrintContent() {
+    const printContent = document.getElementById("print-content");
+    printContent.innerHTML = "";
+
+    quizData.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "print-item";
+
+        let html = `
+        <div class="print-q-header">Q${index + 1}. [${item.category}]</div>
+        <div class="print-q-body">${item.q}</div>
+        <div class="worksheet-box">
+            <div class="worksheet-title">My Answer (自分の回答を書いてみよう)</div>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+        </div>`;
+
+        itemDiv.innerHTML = html;
+        printContent.appendChild(itemDiv);
+    });
+}
+
+function loadQuestion() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("progress").innerText = `Question ${currentIdx + 1} / ${shuffledQuiz.length}`;
+    
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.innerText = data.q;
+    qDisplay.style.display = "none";
+
+    const yesBtn = document.getElementById("btn-yes-text");
+    const noBtn = document.getElementById("btn-no-text");
+
+    yesBtn.innerText = "Yes, I do.";
+    noBtn.innerText = "No, I don't.";
+
+    document.getElementById("stance-area").style.display = "flex";
+    
+    const followText = document.getElementById("follow-text");
+    followText.innerText = "";
+    followText.style.display = "none";
+
+    document.getElementById("next-stage-btn").style.display = "none";
+    document.getElementById("answers-section").style.display = "none";
+}
+
+function speakQuestion() {
+    const text = shuffledQuiz[currentIdx].q;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("お使いのブラウザは音声読み上げに対応していません。");
+    }
+}
+
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+function toggleQuestionText() {
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.style.display = (qDisplay.style.display === "none") ? "block" : "none";
+}
+
+function selectStance(choice) {
+    const followText = document.getElementById("follow-text");
+    followText.style.display = "block";
+    
+    let textToSpeak = "";
+    if (choice === 'yes') {
+        followText.innerText = "🗣️ \"Please tell me more.\"";
+        textToSpeak = "Please tell me more.";
+    } else {
+        followText.innerText = "🗣️ \"Why not?\"";
+        textToSpeak = "Why not?";
+    }
+
+    setTimeout(() => { speakText(textToSpeak); }, 300);
+
+    document.getElementById("stance-area").style.display = "none";
+    document.getElementById("next-stage-btn").style.display = "inline-block";
+}
+
+function showModelAnswers() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("next-stage-btn").style.display = "none";
+    
+    const yesList = document.getElementById("yes-answers-list");
+    const noList = document.getElementById("no-answers-list");
+    
+    yesList.innerHTML = "";
+    noList.innerHTML = "";
+
+    data.yes.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `
+            <div class="step-label">🟢 基本表現 (3級・確実):</div> ${item.basic}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${item.adv}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        yesList.appendChild(div);
+    });
+
+    data.no.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+
+        let basicEn = formatBecauseAnswer(item.basic);
+        let advEn = formatBecauseAnswer(item.adv);
+
+        div.innerHTML = `
+            <div class="step-label">🔴 基本表現 (3級・確実):</div> ${basicEn}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${advEn}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        noList.appendChild(div);
+    });
+
+    document.getElementById("answers-section").style.display = "block";
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < shuffledQuiz.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quiz-screen").style.display = "block";
+    document.getElementById("result-screen").style.display = "none";
+    initQuiz();
+}
+
+initQuiz();
+</script>
+
+</body>
+</html>

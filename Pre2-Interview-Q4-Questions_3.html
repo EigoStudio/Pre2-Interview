@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検準2級 面接対策 大問4 #3</title>
+<script src="auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Andika&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --main-text: #2c3e50;
+            --box-bg: #ffffff;
+            --accent-blue: #2980b9;
+            --btn-yes: #2ecc71;
+            --btn-no: #e74c3c;
+            --btn-hover-yes: #27ae60;
+            --btn-hover-no: #c0392b;
+            --border-color: #dcdde1;
+        }
+
+        body {
+            font-family: 'Andika', 'Kosugi Maru', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--main-text);
+            margin: 0;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--box-bg);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 4px solid #dee2e6;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed var(--accent-blue);
+            padding-bottom: 12px;
+        }
+
+        .progress {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .icon-btn {
+            background: #f8f9fa;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.08);
+            background: #e9ecef;
+        }
+
+        .question-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a252f;
+            line-height: 1.5;
+            margin: 25px 0;
+            min-height: 80px;
+            display: none;
+            padding: 15px;
+            background: #fdfefe;
+            border-radius: 12px;
+            border: 1px solid #f1f2f6;
+        }
+
+        .stance-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .stance-btn {
+            border: none;
+            border-radius: 16px;
+            padding: 15px 35px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-width: 180px;
+        }
+
+        .btn-y { background-color: var(--btn-yes); }
+        .btn-y:hover { background-color: var(--btn-hover-yes); transform: translateY(-2px); }
+        .btn-n { background-color: var(--btn-no); }
+        .btn-n:hover { background-color: var(--btn-hover-no); transform: translateY(-2px); }
+
+        .interviewer-follow {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+            margin: 25px 0;
+            min-height: 40px;
+            display: none;
+            font-style: italic;
+        }
+
+        .model-answers-section {
+            display: none;
+            text-align: left;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 3px double var(--border-color);
+        }
+
+        .model-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .answer-block {
+            margin-bottom: 25px;
+            padding: 15px 20px;
+            border-radius: 14px;
+        }
+
+        .yes-block {
+            background-color: #e8f8f5;
+            border-left: 6px solid var(--btn-yes);
+        }
+
+        .no-block {
+            background-color: #fdebd0;
+            border-left: 6px solid var(--btn-no);
+        }
+
+        .block-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .answer-item {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(0,0,0,0.08);
+        }
+        .answer-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+
+        .jp-sub {
+            font-size: 15px;
+            color: #5d6d7e;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
+        .nav-btn {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 45px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover { background-color: #2c3e50; }
+
+        .result-screen {
+            display: none;
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-family: Arial, sans-serif, 'Kosugi Maru';
+            }
+
+            .container, #quiz-screen, #result-screen {
+                display: none !important;
+            }
+
+            .print-only {
+                display: block !important;
+                width: 100%;
+                padding: 5mm 10mm;
+                box-sizing: border-box;
+            }
+
+            .print-title {
+                font-size: 16pt;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 2px solid #333;
+                padding-bottom: 8px;
+            }
+
+            .print-item {
+                margin-bottom: 22px;
+                page-break-inside: avoid;
+            }
+
+            .print-q-header {
+                font-size: 11pt;
+                font-weight: bold;
+                color: #2c3e50;
+                margin-bottom: 4px;
+            }
+
+            .print-q-body {
+                font-size: 11.5pt;
+                line-height: 1.4;
+                margin-bottom: 8px;
+            }
+
+            .worksheet-box {
+                margin-top: 6px;
+            }
+
+            .worksheet-title {
+                font-size: 9.5pt;
+                font-weight: bold;
+                color: #444;
+                margin-bottom: 6px;
+            }
+
+            .write-line {
+                border-bottom: 1px solid #777;
+                height: 28px;
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="quiz-screen">
+        <h1>英検準2級 面接対策 大問4 #3 (社会問題・意見編)</h1>
+        <div class="progress" id="progress">Question 1 / --</div>
+        
+        <div class="action-buttons">
+            <button class="icon-btn" onclick="speakQuestion()" title="質問を聴く">🔊</button>
+            <button class="icon-btn" onclick="toggleQuestionText()" title="質問を見る">👁️</button>
+        </div>
+
+        <div class="question-text" id="question-display">---</div>
+
+        <div class="stance-container" id="stance-area">
+            <button class="stance-btn btn-y" id="btn-agree" onclick="selectStance('yes')">Yes, I do.</button>
+            <button class="stance-btn btn-n" id="btn-disagree" onclick="selectStance('no')">No, I don't.</button>
+        </div>
+
+        <div class="interviewer-follow" id="follow-text">---</div>
+
+        <button class="nav-btn" id="next-stage-btn" style="display: none;" onclick="showModelAnswers()">NEXT (模範解答を見る) ➔</button>
+
+        <div class="model-answers-section" id="answers-section">
+            <div class="model-title">💡 模範解答 (Why / Why not への理由回答)</div>
+            
+            <div class="answer-block yes-block">
+                <div class="block-header" style="color:#27ae60;">🟢 賛成 (Yes / I agree) の解答例</div>
+                <div id="yes-answers-list"></div>
+            </div>
+
+            <div class="answer-block no-block">
+                <div class="block-header" style="color:#c0392b;">🔴 反対 (No / I disagree) の解答例</div>
+                <div id="no-answers-list"></div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="nextQuestion()">次の質問へ進む ➔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="result-screen" id="result-screen">
+        <div class="model-title" style="font-size: 32px;">🎉 特訓完了！ 🎉</div>
+        <p style="font-size: 20px; line-height: 1.6;">社会的なテーマに対して理由（2文程度）を<br>ハッキリ答える練習を何度も繰り返しましょう！</p>
+        <button class="nav-btn" style="background-color:var(--accent-blue);" onclick="resetQuiz()">もう一度最初から解く</button>
+    </div>
+</div>
+
+<!-- ワークシート印刷用エリア -->
+<div class="print-only" id="print-area">
+    <div class="print-title">英検準2級 面接対策 大問4 #3 ワークシート</div>
+    <div id="print-content"></div>
+</div>
+
+<script>
+const quizData = [
+    {
+        category: "日常生活・食生活（自炊）",
+        q: "Many people like to cook their own meals at home. Do you think it is better to eat at home than to eat at restaurants?",
+        yes: [
+            { basic: "Because cooking at home is healthier because people can choose fresh ingredients. Also, it saves a lot of money.", adv: "Because home-cooked meals allow people to control nutrition and use fresh ingredients. It is also more economical than dining out.", jp: "【基本】家で料理をすると新鮮な食材を選べるのでより健康的なからです。また、たくさんのお金を節約できます。【準2級】手料理なら栄養バランスを調整し、新鮮な食材を使えるからです。外食するよりもずっと経済的です。" }
+        ],
+        no: [
+            { basic: "Because eating at restaurants is more convenient because people do not have to cook or wash dishes. Also, they can try various dishes.", adv: "Because dining out saves time spent on preparation and washing dishes. Customers can also enjoy professionally cooked meals.", jp: "【基本】調理や皿洗いをしなくて良いのでレストランで食べる方が便利だからです。また、さまざまな料理を試せます。【準2級】外食は準備や食器洗いの時間を省いてくれるからです。プロが作った料理を楽しむこともできます。" }
+        ]
+    },
+    {
+        category: "テクノロジー・生活（ネット通販）",
+        q: "These days, many people shop online. Do you think more people will buy everyday goods on the internet in the future?",
+        yes: [
+            { basic: "Because online shopping is fast and convenient because items are delivered to home. Also, people can compare prices easily.", adv: "Because doorstep delivery saves time and effort for busy shoppers. Online platforms also make price comparison simple.", jp: "【基本】商品が家に届くのでネットショッピングは早くて便利だからです。また、価格の比較も簡単にできます。【準2級】玄関先への配送は多忙な購買者の時間と手間を省くからです。オンライン上なら価格比較も簡単です。" }
+        ],
+        no: [
+            { basic: "Because some people want to check the quality of goods before buying them. Also, delivery fees can be expensive.", adv: "Because consumers prefer inspecting physical products before making purchases. Additional shipping costs can also be high.", jp: "【基本】買う前に商品の品質を自分で確かめたい人もいるからです。また、送料が高くなる場合もあります。【準2級】消費者は購入する前に実際の製品を検査することを好むからです。追加の送料が高くなることもあります。" }
+        ]
+    },
+    {
+        category: "教育・服装（制服）",
+        q: "Some schools require students to wear school uniforms. Do you think school uniforms are necessary for students?",
+        yes: [
+            { basic: "Because uniforms give students a sense of unity and belonging. Also, parents do not need to buy many clothes for school.", adv: "Because uniforms promote equality and a sense of community among students. They also reduce daily financial stress on parents.", jp: "【基本】制服は生徒に一体感や所属感を与えるからです。また、親は学校用の服をたくさん買わずに済みます。【準2級】制服は生徒間の平等意識とコミュニティ意識を高めるからです。親の日常的な金銭的負担も減らします。" }
+        ],
+        no: [
+            { basic: "Because uniforms prevent students from expressing their individuality. Also, high-quality uniforms are often expensive.", adv: "Because standard uniforms restrict students' freedom of self-expression. Purchasing expensive uniform sets can also be burdensome.", jp: "【基本】制服は生徒が個性を表現するのを妨げるからです。また、高品質な制服は高価であることが多いです。【準2級】標準的な制服は生徒の自己表現の自由を制限するからです。高価な制服一式を購入することは負担にもなります。" }
+        ]
+    },
+    {
+        category: "趣味・旅行（一人旅）",
+        q: "Some people like to travel alone instead of traveling with family or friends. Do you think solo travel is a good idea?",
+        yes: [
+            { basic: "Because travelers can choose their own schedules without worrying about others. Also, it builds self-confidence.", adv: "Because solo travelers have complete freedom to create their personal itineraries. Managing trips independently increases confidence.", jp: "【基本】他人に気を使わずに自分のスケジュールを選べるからです。また、自分への自信にも繋がります。【準2級】一人旅なら自分の旅程を完全に自由に組むことができるからです。主体的に旅を管理することで自信が高まります。" }
+        ],
+        no: [
+            { basic: "Because traveling alone can be dangerous, especially in unfamiliar places. Also, sharing experiences with others makes trips more fun.", adv: "Because single travelers face higher safety risks in unknown locations. Sharing memorable experiences with companions is more rewarding.", jp: "【基本】特に慣れない場所では一人旅は危険な場合があるからです。また、他の人と体験を共有する方が旅行が楽しくなります。【準2級】見知らぬ場所では単独旅行者の方が安全上のリスクが高まるからです。旅仲間と思い出を共有する方が満足感を得られます。" }
+        ]
+    },
+    {
+        category: "日常生活・環境（マイボトル）",
+        q: "These days, many people carry their own water bottles when they go out. Do you think more people will do this in the future?",
+        yes: [
+            { basic: "Because carrying reusable bottles helps reduce plastic waste. Also, it is cheaper than buying drinks at vending machines.", adv: "Because using personal drink containers effectively decreases single-use plastic pollution. It is also economical for daily use.", jp: "【基本】マイボトルを持ち歩くことはプラスチックごみの削減に役立つからです。また、自動販売機で買うより安いです。【準2級】個人の飲料容器を使うことは使い捨てプラスチック汚染を効果的に減らすからです。日常的な費用も抑えられます。" }
+        ],
+        no: [
+            { basic: "Because water bottles are heavy and inconvenient to carry around. Also, people can easily buy drinks anywhere.", adv: "Because carrying extra weight all day can be inconvenient. Commercial beverages are readily available almost everywhere.", jp: "【基本】水筒は重くて持ち歩くのが不便だからです。また、人々はどこでも簡単に飲み物を買うことができます。【準2級】一日中余分な重荷を持ち歩くのは不便だからです。市販の飲み物はどこでも手軽に入手できます。" }
+        ]
+    }
+];
+
+let shuffledQuiz = [];
+let currentIdx = 0;
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function initQuiz() {
+    shuffledQuiz = shuffleArray([...quizData]);
+    currentIdx = 0;
+    loadQuestion();
+    renderPrintContent();
+}
+
+function renderPrintContent() {
+    const printContent = document.getElementById("print-content");
+    printContent.innerHTML = "";
+
+    quizData.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "print-item";
+
+        let html = `
+        <div class="print-q-header">Q${index + 1}. [${item.category}]</div>
+        <div class="print-q-body">${item.q}</div>
+        <div class="worksheet-box">
+            <div class="worksheet-title">My Answer (自分の意見を書いてみよう)</div>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+            <div class="write-line"></div>
+        </div>`;
+
+        itemDiv.innerHTML = html;
+        printContent.appendChild(itemDiv);
+    });
+}
+
+function loadQuestion() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("progress").innerText = `Question ${currentIdx + 1} / ${shuffledQuiz.length}`;
+    
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.innerText = data.q;
+    qDisplay.style.display = "none";
+
+    const stanceArea = document.getElementById("stance-area");
+    stanceArea.style.display = "flex";
+
+    document.getElementById("btn-agree").innerText = "Yes, I do.";
+    document.getElementById("btn-disagree").innerText = "No, I don't.";
+    
+    const followText = document.getElementById("follow-text");
+    followText.innerText = "";
+    followText.style.display = "none";
+
+    document.getElementById("next-stage-btn").style.display = "none";
+    document.getElementById("answers-section").style.display = "none";
+}
+
+function speakQuestion() {
+    const text = shuffledQuiz[currentIdx].q;
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("お使いのブラウザは音声読み上げに対応していません。");
+    }
+}
+
+function toggleQuestionText() {
+    const qDisplay = document.getElementById("question-display");
+    qDisplay.style.display = (qDisplay.style.display === "none") ? "block" : "none";
+}
+
+function selectStance(choice) {
+    const followText = document.getElementById("follow-text");
+    followText.style.display = "block";
+    
+    if (choice === 'yes') {
+        followText.innerText = "🗣️ \"Why?\"";
+    } else {
+        followText.innerText = "🗣️ \"Why not?\"";
+    }
+
+    document.getElementById("stance-area").style.display = "none";
+    document.getElementById("next-stage-btn").style.display = "inline-block";
+}
+
+function showModelAnswers() {
+    const data = shuffledQuiz[currentIdx];
+    document.getElementById("next-stage-btn").style.display = "none";
+    
+    const listYes = document.getElementById("yes-answers-list");
+    const listNo = document.getElementById("no-answers-list");
+    
+    listYes.innerHTML = "";
+    listNo.innerHTML = "";
+
+    data.yes.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `
+            <div class="step-label">🟢 基本表現 (3級・確実):</div> ${item.basic}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${item.adv}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        listYes.appendChild(div);
+    });
+
+    data.no.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "answer-item";
+        div.innerHTML = `
+            <div class="step-label">🔴 基本表現 (3級・確実):</div> ${item.basic}<br>
+            <div class="step-label" style="color:#2980b9;">🔵 準2級表現 (語彙強化):</div> ${item.adv}
+            <div class="jp-sub">${item.jp}</div>
+        `;
+        listNo.appendChild(div);
+    });
+
+    document.getElementById("answers-section").style.display = "block";
+}
+
+function nextQuestion() {
+    currentIdx++;
+    if (currentIdx < shuffledQuiz.length) {
+        loadQuestion();
+    } else {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quiz-screen").style.display = "block";
+    document.getElementById("result-screen").style.display = "none";
+    initQuiz();
+}
+
+initQuiz();
+</script>
+
+</body>
+</html>
