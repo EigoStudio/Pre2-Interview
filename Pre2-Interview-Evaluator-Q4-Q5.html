@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検準2級 面接採点システム - EIKEN Evaluator</title>
+    <style>
+        :root {
+            --primary-navy: #0F2537;
+            --secondary-navy: #1C3B57;
+            --accent-gold: #C5A059;
+            --light-gold: #F4EAD3;
+            --border-color: #CBD5E1;
+            --bg-light: #F8FAFC;
+            --text-dark: #1E293B;
+            --success-green: #15803D;
+            --warning-amber: #B45309;
+            --info-blue: #0284C7;
+        }
+
+        body {
+            font-family: 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+            background-color: #E2E8F0;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: #FFFFFF;
+            border: 2px solid var(--primary-navy);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px double var(--primary-navy);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            color: var(--primary-navy);
+            margin: 0 0 5px 0;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .header .subtitle {
+            font-size: 14px;
+            color: #64748B;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-mark {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            width: 70px;
+            height: 70px;
+            border: 2px solid #B91C1C;
+            border-radius: 50%;
+            color: #B91C1C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            transform: rotate(-12deg);
+            opacity: 0.85;
+            font-family: sans-serif;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .step-badge {
+            background: var(--accent-gold);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-family: sans-serif;
+            margin-right: 8px;
+        }
+
+        .section-title {
+            background-color: var(--primary-navy);
+            color: #FFFFFF;
+            padding: 8px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .instruction-box {
+            background-color: var(--light-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-family: sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .prompt-textarea, .import-textarea {
+            width: 100%;
+            height: 170px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            box-sizing: border-box;
+            background: #F8FAFC;
+            margin-bottom: 10px;
+        }
+
+        .import-textarea {
+            height: 140px;
+            background: #FFFFFF;
+        }
+
+        .btn-group {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background-color: var(--primary-navy);
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family: serif;
+            cursor: pointer;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-navy);
+            color: #FFFFFF;
+        }
+
+        .btn-secondary {
+            background-color: #64748B;
+            color: #FFF;
+            border: none;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: sans-serif;
+        }
+
+        .q-card {
+            border: 1px solid var(--border-color);
+            background: var(--bg-light);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--secondary-navy);
+        }
+
+        .q-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--primary-navy);
+            font-size: 15px;
+        }
+
+        .input-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--secondary-navy);
+            display: block;
+            margin-bottom: 3px;
+            font-family: sans-serif;
+        }
+
+        .text-input, .textarea-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .textarea-input { height: 65px; background: #FFF; resize: vertical; }
+
+        #page-2, #page-3 { display: none; }
+
+        #page-3 {
+            border-top: 2px solid var(--primary-navy);
+            padding-top: 20px;
+        }
+
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .score-table th, .score-table td {
+            border: 1px solid var(--primary-navy);
+            padding: 8px;
+        }
+
+        .score-table th { background-color: var(--primary-navy); color: #FFF; }
+
+        .eval-card {
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #FFF;
+        }
+
+        .eval-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .eval-point-list { margin: 5px 0 10px 20px; font-size: 14px; }
+        .eval-point-list.good li { color: var(--success-green); }
+        .eval-point-list.fix li { color: var(--warning-amber); }
+        .eval-point-list.advice li { color: var(--info-blue); }
+
+        .brushup-box {
+            background-color: #F1F5F9;
+            border-left: 3px solid var(--accent-gold);
+            padding: 10px;
+            font-style: italic;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="stamp-mark">EIKEN<br>OFFICIAL<br>EVAL</div>
+    
+    <div class="header">
+        <h1>英検準2級 面接試験 評価証明書</h1>
+        <div class="subtitle">Official Grade Pre-2 Speaking Assessment Report</div>
+    </div>
+
+    <!-- PAGE 1: Prompt Copy & Paste Import -->
+    <div id="page-1">
+        <div class="section-title"><span class="step-badge">STEP 1</span> Geminiで画像解読＆プロ添削</div>
+        
+        <div class="instruction-box">
+            <strong>【使い方】</strong><br>
+            1. 下の **「プロンプトをコピー」** ボタンを押します。<br>
+            2. Gemini（チャット画面）を開き、**ワークシート画像と一緒に貼り付けて送信**します。<br>
+            3. Geminiが返してきたJSONコードをコピーして下の枠に貼り付け、**「データを読み込んで確認へ進む」** を押してください。
+        </div>
+
+        <label class="input-label">📋 専用本格採点プロンプト（ボタンで一括コピー）:</label>
+        <textarea id="prompt-box" class="prompt-textarea" readonly>あなたは英検準2級の親切で優秀なプロ英語講師です。添付のワークシート画像から【問題文】と生徒の手書き【回答英文】を正確に文字起こしし、厳密かつ実践的に添削を行ってください。
+
+【面接応答のルール】
+生徒は「Yes, I do. / No, I don't.」の後、面接官の「Why? / Why not? / Tell me more.」という促しに応じて理由を答えています。「Because...」で理由を始めるのは口頭応答として完全に正しいため、「Becauseで文を始めるな」という不適切な指摘は絶対に行わないでください。
+
+【添削・評価の最重要ルール（整合性の徹底）】
+1. score: 5点満点（5:完璧, 4:文法小ミスあり/理由1つ, 3:説明不足, 2:単語のみ）
+2. good: 生徒の回答内容の具体的に良かった点（日本語）
+3. fix: 文法・語彙の具体的な改善指導（日本語）。「動作の修飾（例: playing video games too much）」などの自然な英語表現を指導すること。
+4. brushup: 【最重要】fixで指定・指摘した改善点を「100%完全に修正・反映させた模範英文」を作成すること。fixで「〜を修正すべき」と書きながら、brushupでその間違いをそのまま残すような矛盾は絶対禁止です！難解すぎる単語は避け、英検準2級として自然で洗練された英文にしてください。
+5. level_advice: 「英検準2級なら、難しい言葉を使わなくても〇〇という簡単な表現で十分満点が狙えるよ！」といった、準2級受験者に寄り添ったワンポイントレッスン（日本語）
+
+以下のJSON配列形式のみで出力してください（マークダウンの```jsonや追加の説明文は一切出力せず、純粋なJSONのみ出力）:
+
+[
+  {
+    "q": "画像から読み取ったQ1問題文",
+    "a": "画像から読み取ったQ1の生徒の回答英文",
+    "score": 5,
+    "good": "Q1の具体的な良い点",
+    "fix": "Q1の具体的な改善指導",
+    "brushup": "fixの指摘事項が100%完璧に修正・反映された自然な模範英文",
+    "level_advice": "準2級レベルに合わせたアドバイス"
+  },
+  {
+    "q": "画像から読み取ったQ2問題文",
+    "a": "画像から読み取ったQ2の生徒の回答英文",
+    "score": 4,
+    "good": "Q2の具体的な良い点",
+    "fix": "Q2の具体的な改善指導",
+    "brushup": "fixの指摘事項が100%完璧に修正・反映された自然な模範英文",
+    "level_advice": "準2級レベルに合わせたアドバイス"
+  },
+  {
+    "q": "画像から読み取ったQ3問題文",
+    "a": "画像から読み取ったQ3の生徒の回答英文",
+    "score": 4,
+    "good": "Q3の具体的な良い点",
+    "fix": "Q3の具体的な改善指導",
+    "brushup": "fixの指摘事項が100%完璧に修正・反映された自然な模範英文",
+    "level_advice": "準2級レベルに合わせたアドバイス"
+  },
+  {
+    "q": "画像から読み取ったQ4問題文",
+    "a": "画像から読み取ったQ4の生徒の回答英文",
+    "score": 5,
+    "good": "Q4の具体的な良い点",
+    "fix": "Q4の具体的な改善指導",
+    "brushup": "fixの指摘事項が100%完璧に修正・反映された自然な模範英文",
+    "level_advice": "準2級レベルに合わせたアドバイス"
+  },
+  {
+    "q": "画像から読み取ったQ5問題文",
+    "a": "画像から読み取ったQ5の生徒の回答英文",
+    "score": 5,
+    "good": "Q5の具体的な良い点",
+    "fix": "Q5の具体的な改善指導",
+    "brushup": "fixの指摘事項が100%完璧に修正・反映された自然な模範英文",
+    "level_advice": "準2級レベルに合わせたアドバイス"
+  }
+]</textarea>
+        <div style="margin-bottom: 25px;">
+            <button type="button" class="btn-secondary" onclick="copyPrompt()">📋 プロンプトをコピーする</button>
+        </div>
+
+        <label class="input-label">📥 Geminiから返ってきた結果（JSON）をここに貼り付け:</label>
+        <textarea id="import-box" class="import-textarea" placeholder="Geminiが出力した [ { &quot;q&quot;: ... } ] をここに貼り付けます"></textarea>
+
+        <div class="btn-group">
+            <button type="button" class="btn" onclick="importData()">データを読み込んで確認・修正へ進む ➔</button>
+        </div>
+    </div>
+
+    <!-- PAGE 2: Verify & Edit Text -->
+    <div id="page-2">
+        <div class="section-title"><span class="step-badge">STEP 2</span> Geminiが解読・採点した内容の確認</div>
+        <p style="font-size: 13px; color: #64748B; font-family: sans-serif;">※Geminiが画像から読み取った文字です。誤字があれば手修正してから「成績レポート作成」を押してください。</p>
+
+        <div id="q-inputs-container"></div>
+
+        <div class="btn-group">
+            <button type="button" class="btn" onclick="runEvaluation()">公式成績レポートを作成・表示 ➔</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Final Results Report -->
+    <div id="page-3">
+        <div class="section-title"><span class="step-badge">STEP 3</span> 英検準2級 公式診断成績表</div>
+
+        <table class="score-table">
+            <thead>
+                <tr>
+                    <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>総合得点</th><th>判定</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="s1">-</td><td id="s2">-</td><td id="s3">-</td><td id="s4">-</td><td id="s5">-</td>
+                    <td id="s-total" style="font-size: 22px; font-weight: bold; color: var(--primary-navy);">- / 25</td>
+                    <td id="s-grade" style="font-weight: bold;">-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="eval-details-container"></div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <button type="button" class="btn" onclick="location.reload()">最初からやり直す</button>
+            <button type="button" style="padding: 12px 20px; font-family: sans-serif; cursor: pointer; margin-left: 10px;" onclick="window.print()">成績表を印刷 / PDF保存</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let importedItems = [];
+
+    function copyPrompt() {
+        const promptText = document.getElementById('prompt-box').value;
+        navigator.clipboard.writeText(promptText).then(() => {
+            alert('採点プロンプトをコピーしました！\nGeminiに画像と一緒に貼り付けて送信してください。');
+        }).catch(() => {
+            alert('コピーに失敗しました。直接テキストエリアからコピーしてください。');
+        });
+    }
+
+    function importData() {
+        let rawInput = document.getElementById('import-box').value.trim();
+        
+        if (!rawInput) {
+            alert('Geminiの出力結果を貼り付けてください。');
+            return;
+        }
+
+        rawInput = rawInput.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+        try {
+            const data = JSON.parse(rawInput);
+
+            if (Array.isArray(data) && data.length >= 1) {
+                importedItems = data;
+
+                const container = document.getElementById('q-inputs-container');
+                container.innerHTML = '';
+
+                data.forEach((item, idx) => {
+                    const qNum = idx + 1;
+                    const card = document.createElement('div');
+                    card.className = 'q-card';
+                    card.innerHTML = `
+                        <h4>Question ${qNum}</h4>
+                        <span class="input-label">【問題文】</span>
+                        <input type="text" id="q${qNum}-title" class="text-input" value="${escapeHtml(item.q || '')}">
+                        <span class="input-label">【生徒の回答英文】</span>
+                        <textarea id="q${qNum}-ans" class="textarea-input">${escapeHtml(item.a || '')}</textarea>
+                    `;
+                    container.appendChild(card);
+                });
+
+                document.getElementById('page-1').style.display = 'none';
+                document.getElementById('page-2').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                throw new Error("フォーマットが不正です");
+            }
+
+        } catch (e) {
+            alert('データの読み込みに失敗しました。\nGeminiの返答（JSON形式）がそのまま貼り付けられているかご確認ください。');
+        }
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function runEvaluation() {
+        const container = document.getElementById('eval-details-container');
+        container.innerHTML = '';
+
+        let totalScore = 0;
+
+        importedItems.forEach((item, idx) => {
+            const qNum = idx + 1;
+            const qTitle = document.getElementById(`q${qNum}-title`).value;
+            const qAns = document.getElementById(`q${qNum}-ans`).value;
+
+            const score = item.score !== undefined ? Number(item.score) : 4;
+            totalScore += score;
+
+            document.getElementById(`s${qNum}`).innerText = score + ' / 5';
+
+            const goodPoint = item.good || "質問の意図を正しく捉えて回答できています。";
+            const fixPoint = item.fix || "文法や語彙の選び方に注意して練習してみましょう。";
+            const brushupText = item.brushup || qAns;
+            const levelAdvice = item.level_advice || "準2級では、簡単で確実な表現を使うことが合格への近道です！";
+
+            const card = document.createElement('div');
+            card.className = 'eval-card';
+            card.innerHTML = `
+                <div class="eval-header">
+                    <span>Q${qNum}. ${escapeHtml(qTitle)}</span>
+                    <span style="color: var(--primary-navy); background: var(--light-gold); padding: 2px 8px; border: 1px solid var(--accent-gold);">評価: ${score} / 5</span>
+                </div>
+                <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;"><strong>【生徒の回答】:</strong> ${escapeHtml(qAns) || '(未入力)'}</div>
+                <div style="font-weight: bold; font-size: 13px; color: var(--success-green);">【評価された点】</div>
+                <ul class="eval-point-list good">
+                    <li>${goodPoint}</li>
+                </ul>
+                <div style="font-weight: bold; font-size: 13px; color: var(--warning-amber);">【改善・指導アドバイス】</div>
+                <ul class="eval-point-list fix">
+                    <li>${fixPoint}</li>
+                </ul>
+                <div style="font-weight: bold; font-size: 13px; color: var(--info-blue);">【💡 準2級のアドバイス】</div>
+                <ul class="eval-point-list advice">
+                    <li>${levelAdvice}</li>
+                </ul>
+                <div class="brushup-box">
+                    <strong>✨ Brush Up (模範解答):</strong><br>
+                    "${brushupText}"
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        document.getElementById('s-total').innerText = totalScore + ' / 25';
+        document.getElementById('s-grade').innerText = totalScore >= 18 ? '合格圏内 (PASSED)' : '要トレーニング';
+
+        document.getElementById('page-2').style.display = 'none';
+        document.getElementById('page-3').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
