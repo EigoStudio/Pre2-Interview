@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英検準2級 面接対策 Day 4 - Picture Describing Activity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .image-container {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt;
+            }
+
+            .print-only {
+                display: block !important;
+            }
+
+            img.print-mono {
+                filter: grayscale(100%) contrast(125%) !important;
+                -webkit-filter: grayscale(100%) contrast(125%) !important;
+                mix-blend-mode: multiply;
+            }
+
+            .page-break-before {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+
+            .avoid-break {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .print-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 16px !important;
+            }
+        }
+
+        .print-only {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-100">
+
+    <!-- Interactive Header (Screen Only) -->
+    <header class="no-print bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-blue-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-full uppercase tracking-wider">EIKEN Pre-2</span>
+                <h1 class="font-bold text-slate-800 text-base md:text-lg">Day 4: What is the person doing? (Phrasal Verbs)</h1>
+            </div>
+            <div id="progressContainer" class="hidden items-center space-x-3">
+                <div class="w-32 md:w-48 bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                    <div id="progressBar" class="bg-blue-600 h-full w-0 transition-all duration-300"></div>
+                </div>
+                <span id="progressText" class="text-xs font-semibold text-slate-500 min-w-[50px] text-right">1 / 20</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Interactive Area -->
+    <main class="no-print flex-grow flex items-center justify-center p-4 md:p-6">
+        <div class="w-full max-w-5xl">
+
+            <!-- 1. START SCREEN -->
+            <div id="startScreen" class="bg-white rounded-2xl p-6 md:p-10 shadow-lg border border-slate-100 max-w-2xl mx-auto text-center">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4">Picture Description Practice (Day 4)</h2>
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-left mb-6 space-y-3">
+                    <p class="text-base md:text-lg font-semibold text-blue-900 leading-relaxed">
+                        "You will see 20 different pictures. For each picture, tell me what the person or the people in the picture are doing."
+                    </p>
+                    <hr class="border-slate-200">
+                    <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                        💡 <span class="font-bold text-slate-700">Topic: Useful Phrasal Verbs (重要熟語・句動詞編)</span><br>
+                        英検準2級の面接（No.3・No.4描写）で頻出の句動詞（put on, turn off, look afterなど）に特化した全20問です。イラストの人物と動作に合わせて、現在進行形（is / are + 〜ing）でテンポよく声に出してみましょう！
+                    </p>
+                </div>
+
+                <button id="startBtn" onclick="startPractice()" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md hover:shadow-lg transition-all transform active:scale-95 text-base">
+                    Start Practice (OK)
+                </button>
+            </div>
+
+            <!-- 2. QUESTION SCREEN -->
+            <div id="questionScreen" class="hidden">
+                <div id="layoutBox" class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-10 transition-all duration-300">
+                    
+                    <!-- Image Card -->
+                    <div id="imageCard" class="image-container w-full max-w-md lg:max-w-lg bg-white p-4 rounded-2xl shadow-md border border-slate-200 flex flex-col items-center">
+                        <div class="relative w-full aspect-[4/5] bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center">
+                            <img id="currentImage" src="" alt="Action Picture" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/400x500/e2e8f0/475569?text=Image+Not+Found'">
+                        </div>
+                        <div id="checkBtnContainer" class="w-full mt-4">
+                            <button id="checkBtn" onclick="checkAnswer()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-95 text-base flex items-center justify-center space-x-2">
+                                <span>Check Answer</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Answer Detail Card -->
+                    <div id="answerCard" class="hidden w-full lg:flex-1 bg-white p-6 rounded-2xl shadow-md border border-slate-200 flex-col justify-between min-h-[400px] animate-fade-in">
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-md">MODEL ANSWER</span>
+                                    <span id="targetPhraseTag" class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md"></span>
+                                </div>
+                                <h3 id="mainAnswer" class="text-xl md:text-2xl font-extrabold text-slate-900 leading-snug"></h3>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center space-x-1">
+                                    <span>💬 You can also say...</span>
+                                </h4>
+                                <ul id="alsoAnswers" class="text-slate-700 font-medium text-sm md:text-base space-y-1.5 list-disc list-inside"></ul>
+                            </div>
+
+                            <div class="bg-amber-50 border border-amber-200/60 p-4 rounded-xl">
+                                <h4 class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                                    <span>💡 Expression / Grammar Tip</span>
+                                </h4>
+                                <p id="tipText" class="text-xs md:text-sm text-amber-900 leading-relaxed"></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-100">
+                            <button id="nextBtn" onclick="nextQuestion()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-95 text-base flex items-center justify-center space-x-2">
+                                <span id="nextBtnText">Next Picture</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M3 12h18"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. FINISH / REVIEW SCREEN -->
+            <div id="finishScreen" class="hidden bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-slate-100">
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-2">Great Job! Day 4 Complete!</h2>
+                    <p class="text-slate-600 text-sm md:text-base mb-6">Review all 20 target expressions or print the practice worksheet.</p>
+                    
+                    <div class="flex flex-wrap items-center justify-center gap-3">
+                        <button onclick="restartPractice()" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all text-sm">
+                            🔄 Restart Practice
+                        </button>
+                        <button onclick="window.print()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all text-sm flex items-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                            <span>Print PDF Worksheet</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cards Overview Grid -->
+                <div id="cardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-slate-100"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- PRINT-ONLY WORKSHEET LAYOUT -->
+    <div class="print-only px-8 py-6">
+        <div>
+            <div class="flex justify-between items-end border-b-2 border-black pb-3 mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold uppercase tracking-tight">英検準2級 面接対策 Day 4 Worksheet</h1>
+                    <p class="text-xs text-gray-600 mt-1">Instructions: Look at each picture and describe what the person or people are doing using appropriate phrasal verbs.</p>
+                </div>
+                <div class="text-right text-xs">
+                    <p>Name: _______________________</p>
+                    <p class="mt-1">Date: _______________</p>
+                </div>
+            </div>
+
+            <div id="printQuestionsGrid" class="print-grid"></div>
+        </div>
+
+        <div class="page-break-before pt-6">
+            <div class="border-b-2 border-black pb-3 mb-6">
+                <h1 class="text-2xl font-bold uppercase tracking-tight">Day 4 - Answer Key & Expressions</h1>
+                <p class="text-xs text-gray-600 mt-1">Model answers and alternative ways to describe each picture.</p>
+            </div>
+
+            <div id="printAnswersList" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                image: "images-Day4/1.jpg",
+                main: "A man is staring at a woman.",
+                also: ["A man is gazing at a girl in the hallway.", "He is staring at a girl with a nervous look."],
+                tip: "'stare at 〜' は『〜をじっと見つめる／ジロジロ見る』という意味です。前置詞 at を忘れずに！"
+            },
+            {
+                id: 2,
+                image: "images-Day4/2.jpg",
+                main: "A woman is hanging up the phone.",
+                also: ["A woman is ending a phone call.", "She is putting the receiver down."],
+                tip: "'hang up the phone' は『電話を切る』の定番句動詞です。"
+            },
+            {
+                id: 3,
+                image: "images-Day4/3.jpg",
+                main: "A man is cutting down a tree.",
+                also: ["A man is cutting a tree down with a saw.", "He is sawing down a tree."],
+                tip: "'cut down a tree' または 'cut a tree down' のどちらの語順でも自然です。"
+            },
+            {
+                id: 4,
+                image: "images-Day4/4.jpg",
+                main: "A boy is falling off his bicycle.",
+                also: ["A boy is falling off a bike.", "He is losing his balance on a bicycle."],
+                tip: "自転車などの乗り物から落ちる動作には前置詞 off を使い 'fall off 〜' と言います。"
+            },
+            {
+                id: 5,
+                image: "images-Day4/5.jpg",
+                main: "A girl is falling down.",
+                also: ["A girl is falling down on the street.", "She is tripping and falling down."],
+                tip: "地面や床に倒れる・転ぶ動作には 'fall down' を使います。"
+            },
+            {
+                id: 6,
+                image: "images-Day4/6.jpg",
+                main: "A woman is reaching for a book.",
+                also: ["A woman is reaching for a book on the shelf.", "She is stretching her arm to grab a book."],
+                tip: "'reach for 〜' で『〜を取ろうと手を伸ばす』という意味になります。"
+            },
+            {
+                id: 7,
+                image: "images-Day4/7.jpg",
+                main: "A man is calling out to his friend.",
+                also: ["A man is shouting to someone across the street.", "He is calling to his friend loudly."],
+                tip: "'call out to 人' は『（離れた人に）大声で呼びかける』という表現です。"
+            },
+            {
+                id: 8,
+                image: "images-Day4/8.jpg",
+                main: "A boy is running after a dog.",
+                also: ["A boy is chasing his pet dog in the park.", "He is running after a puppy."],
+                tip: "'run after 〜' は 'chase'（追いかける）の自然な口語表現です。"
+            },
+            {
+                id: 9,
+                image: "images-Day4/9.jpg",
+                main: "A girl has a sore throat.",
+                also: ["She has pain in her throat.", "A woman has a sore throat."],
+                tip: "💡【重要】体調・病気の症状（sore throat, cold, fever など）は進行形にせず、現在形 'has a sore throat' で答えます！"
+            },
+            {
+                id: 10,
+                image: "images-Day4/10.jpg",
+                main: "A woman is taking a deep breath.",
+                also: ["A woman is breathing deeply outside.", "She is inhaling fresh air in the park."],
+                tip: "'take a deep breath' で『深呼吸をする』。リラックスする動作の定番です。"
+            },
+            {
+                id: 11,
+                image: "images-Day4/11.jpg",
+                main: "A man is helping a boy with his homework.",
+                also: ["A father is helping his son study.", "He is assisting a boy with his homework."],
+                tip: "'help 人 with 〜' で『人の〜を手伝う』という頻出パターンです。"
+            },
+            {
+                id: 12,
+                image: "images-Day4/12.jpg",
+                main: "A man is taking a nap.",
+                also: ["A man is taking a nap on the sofa.", "He is having a nap on the couch."],
+                tip: "'take a nap' は『昼寝をする／仮眠をとる』という意味です。"
+            },
+            {
+                id: 13,
+                image: "images-Day4/13.jpg",
+                main: "A woman is taking it easy.",
+                also: ["A woman is taking it easy in a hammock.", "She is relaxing in a hammock."],
+                tip: "'take it easy' は『のんびり過ごす／気楽にする』を表すイディオムです。"
+            },
+            {
+                id: 14,
+                image: "images-Day4/14.jpg",
+                main: "A couple is taking a walk.",
+                also: ["Two people are taking a walk in the park.", "A man and a woman are walking together."],
+                tip: "'take a walk' や 'go for a walk' は散歩を描写する基本表現です。"
+            },
+            {
+                id: 15,
+                image: "images-Day4/15.jpg",
+                main: "A man is making a speech.",
+                also: ["A man is making a speech in front of people.", "He is giving a speech on stage."],
+                tip: "『スピーチをする』は 'make a speech' または 'give a speech' のどちらも完璧です。"
+            },
+            {
+                id: 16,
+                image: "images-Day4/16.jpg",
+                main: "A woman is cleaning the window.",
+                also: ["A woman is wiping a glass window.", "She is cleaning a room window with a cloth."],
+                tip: "'clean the window' や 'wipe the window' のように掃除する対象を明示すると自然です。"
+            },
+            {
+                id: 17,
+                image: "images-Day4/17.jpg",
+                main: "A man is putting the books in order.",
+                also: ["A man is organizing books on the bookshelf.", "He is arranging documents neatly."],
+                tip: "'put 〜 in order' で『〜を整理整頓する／順番通りに並べる』という意味になります。"
+            },
+            {
+                id: 18,
+                image: "images-Day4/18.jpg",
+                main: "A girl is borrowing a book.",
+                also: ["A girl is borrowing a book from the library.", "She is checking out a library book."],
+                tip: "図書館などで無料で借りる動作には 'borrow' を使います。"
+            },
+            {
+                id: 19,
+                image: "images-Day4/19.jpg",
+                main: "A boy is looking at the stars.",
+                also: ["A boy is looking at the stars through a telescope.", "He is watching the night sky."],
+                tip: "'look at the stars' でバッチリ伝わります！『望遠鏡を通して』を付けたいときは 'through a telescope' を添えましょう。"
+            },
+            {
+                id: 20,
+                image: "images-Day4/20.jpg",
+                main: "A woman is looking for her keys.",
+                also: ["A woman is searching her bag for her keys.", "She is looking for the keys in front of the door."],
+                tip: "鍵が複数あるイラストなので 'her keys'（複数形）が自然です！'look for 〜' で『〜を探す』を表します。"
+            }
+        ];
+
+        let currentIndex = 0;
+        let isChecked = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setupPrintLayout();
+            setupKeyboardShortcuts();
+        });
+
+        function startPractice() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('questionScreen').classList.remove('hidden');
+            document.getElementById('progressContainer').classList.remove('hidden');
+            document.getElementById('progressContainer').classList.add('flex');
+            currentIndex = 0;
+            loadQuestion(currentIndex);
+        }
+
+        function loadQuestion(index) {
+            isChecked = false;
+            const q = questions[index];
+
+            const imageCard = document.getElementById('imageCard');
+            imageCard.className = "image-container w-full max-w-md lg:max-w-lg bg-white p-4 rounded-2xl shadow-md border border-slate-200 flex flex-col items-center";
+            
+            document.getElementById('currentImage').src = q.image;
+            document.getElementById('checkBtnContainer').classList.remove('hidden');
+            document.getElementById('answerCard').classList.add('hidden');
+            document.getElementById('answerCard').classList.remove('flex');
+
+            const progressPercent = ((index + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').innerText = `${index + 1} / ${questions.length}`;
+        }
+
+        function checkAnswer() {
+            if (isChecked) return;
+            isChecked = true;
+
+            const q = questions[currentIndex];
+
+            const imageCard = document.getElementById('imageCard');
+            imageCard.className = "image-container w-full lg:w-5/12 bg-white p-4 rounded-2xl shadow-md border border-slate-200 flex flex-col items-center";
+
+            document.getElementById('targetPhraseTag').innerText = `Target: ${q.target}`;
+            document.getElementById('mainAnswer').innerText = q.main;
+            
+            const alsoList = document.getElementById('alsoAnswers');
+            alsoList.innerHTML = q.also.map(item => `<li>${item}</li>`).join('');
+            
+            document.getElementById('tipText').innerText = q.tip;
+
+            const nextBtnText = document.getElementById('nextBtnText');
+            if (currentIndex === questions.length - 1) {
+                nextBtnText.innerText = "Finish / Review All";
+            } else {
+                nextBtnText.innerText = "Next Picture";
+            }
+
+            document.getElementById('checkBtnContainer').classList.add('hidden');
+            const answerCard = document.getElementById('answerCard');
+            answerCard.classList.remove('hidden');
+            answerCard.classList.add('flex');
+        }
+
+        function nextQuestion() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                loadQuestion(currentIndex);
+            } else {
+                showFinishScreen();
+            }
+        }
+
+        function showFinishScreen() {
+            document.getElementById('questionScreen').classList.add('hidden');
+            document.getElementById('progressContainer').classList.add('hidden');
+            document.getElementById('finishScreen').classList.remove('hidden');
+
+            const cardsGrid = document.getElementById('cardsGrid');
+            cardsGrid.innerHTML = questions.map(q => `
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-400">
+                        <span>#${q.id}</span>
+                        <span class="text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded text-[10px]">${q.target}</span>
+                    </div>
+                    <div class="aspect-[4/5] bg-white rounded-lg overflow-hidden border border-slate-100">
+                        <img src="${q.image}" alt="Card ${q.id}" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/200x250/e2e8f0/475569?text=Image'">
+                    </div>
+                    <p class="font-bold text-xs text-slate-800 leading-snug">${q.main}</p>
+                </div>
+            `).join('');
+        }
+
+        function restartPractice() {
+            document.getElementById('finishScreen').classList.add('hidden');
+            startPractice();
+        }
+
+        function setupPrintLayout() {
+            const printQuestionsGrid = document.getElementById('printQuestionsGrid');
+            const printAnswersList = document.getElementById('printAnswersList');
+
+            printQuestionsGrid.innerHTML = questions.map(q => `
+                <div class="avoid-break border border-gray-300 rounded p-2 text-center flex flex-col items-center">
+                    <div class="flex justify-between items-center w-full mb-1">
+                        <span class="text-xs font-bold text-gray-500">No. ${q.id}</span>
+                        <span class="text-[9pt] font-semibold text-gray-600 border border-gray-300 px-1 rounded">${q.target}</span>
+                    </div>
+                    <div class="w-full h-44 flex items-center justify-center mb-2">
+                        <img src="${q.image}" class="print-mono max-h-full max-w-full object-contain" onerror="this.src='https://placehold.co/200x200/cccccc/000000?text=Pic+${q.id}'">
+                    </div>
+                    <div class="w-full border-t border-dashed border-gray-300 pt-1 text-left">
+                        <p class="text-[10pt] text-gray-400">Answer: _____________________________________</p>
+                    </div>
+                </div>
+            `).join('');
+
+            printAnswersList.innerHTML = questions.map(q => `
+                <div class="avoid-break border-b border-gray-200 pb-2">
+                    <p class="text-xs font-bold text-gray-800">No. ${q.id} [${q.target}]</p>
+                    <p class="text-sm font-bold text-black">${q.main}</p>
+                    <p class="text-xs text-gray-600">You can also say: ${q.also.join(' / ')}</p>
+                    <p class="text-[9pt] text-gray-500 italic">Note: ${q.tip}</p>
+                </div>
+            `).join('');
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const startScreen = document.getElementById('startScreen');
+                    const questionScreen = document.getElementById('questionScreen');
+
+                    if (!startScreen.classList.contains('hidden')) {
+                        e.preventDefault();
+                        startPractice();
+                    } else if (!questionScreen.classList.contains('hidden')) {
+                        e.preventDefault();
+                        if (!isChecked) {
+                            checkAnswer();
+                        } else {
+                            nextQuestion();
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
