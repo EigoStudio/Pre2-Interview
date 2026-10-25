@@ -28,19 +28,81 @@
     /* 画像サイズ調整用の追加スタイル */
     .img-frame { margin: 20px 0; text-align: center; }
     .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
-    .img-a { max-width: 70%; } /* Picture A は 70% 程度に */
-    .img-b { max-width: 40%; } /* Picture B は半分以下の 40% に */
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 40%; }
 
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
         body { background: white !important; padding: 0 !important; }
         .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
         header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
-        #print-area { display: block !important; color: black !important; padding: 5mm !important; }
-        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 15px !important; text-align: left !important; page-break-before: auto; }
-        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; }
-        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; font-size: 11pt; }
-        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; background: #f9f9f9; }
-        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 10px; }
+        #print-area { display: block !important; color: black !important; }
+
+        /* ページ区切り設定 */
+        .print-page {
+            page-break-after: always;
+            break-after: page;
+        }
+        .print-page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        h1.print-title {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            font-size: 16pt;
+            margin: 0 0 8px 0;
+            padding-bottom: 5px;
+        }
+        .print-header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            margin-bottom: 12px;
+        }
+        .print-section {
+            margin-bottom: 16px;
+        }
+        h2.print-sec-title {
+            border-bottom: 1.5px solid #333 !important;
+            font-size: 12pt !important;
+            margin: 12px 0 6px 0 !important;
+            text-align: left !important;
+            padding-bottom: 2px;
+        }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; line-height: 1.45; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 6px; font-size: 10.5pt; }
+        .passage-print {
+            border: 1px solid #777;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .student-q-box {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+        .ans-line {
+            min-height: 48px;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 6px;
+        }
+        .ans-block {
+            margin-left: 8px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
     }
     #print-area { display: none; }
 </style>
@@ -179,57 +241,96 @@
     </div>
 </div>
 
+<!-- 印刷用エリア -->
 <div id="print-area">
-    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
-    <p style="text-align:right;">Topic: <b>Digital Books in Libraries</b></p>
+    <!-- ページ 1: 生徒用ワークシート (大問1, 4, 5 の問題のみ) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Student Worksheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Digital Books in Libraries</b></span>
+            <span>Name: _______________________</span>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 1 Reading & Question</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"According to the passage, how can people enjoy reading library books without leaving home?"</p>
-        <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without going to the library. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
-        <span class="print-label">Answer:</span>
-        <p>By borrowing digital books from the library on the Internet.</p>
-    </div>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <div class="passage-print">
+                Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.
+            </div>
+            <p><b>Q:</b> According to the passage, how can people enjoy reading library books without leaving home?</p>
+            <div class="ans-line"></div>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 2 Picture A (Actions)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Tell me as much as you can about what the people are doing."</p>
-        <div class="ans-block">
-            <p><b>A:</b> A girl is writing something in her notebook. / <b>B:</b> A boy is returning some books.</p>
-            <p><b>C:</b> A man is reading a newspaper. / <b>D:</b> A woman is pushing a cart.</p>
-            <p><b>E:</b> A woman is reading a book to some children.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <p class="student-q-box">Do you think all textbooks will be replaced by e-books in the future?</p>
+            <p>Your Opinion: [ Yes / No ]</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <p class="student-q-box">Do you think it is a good idea that public libraries offer e-books?</p>
+            <p>Your Opinion: [ Yes / No ]</p>
+            <div class="ans-line"></div>
         </div>
     </div>
 
-    <div class="print-section">
-        <h2>No. 3 Picture B (Situation)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Now, look at the man in Picture B. Please describe the situation."</p>
-        <div class="ans-block">
-            <p>• The man cannot read his book because the children are too noisy.</p>
-            <p>• The children are very noisy, so the man cannot concentrate on his book.</p>
+    <!-- ページ 2: 講師・解答用シート (全問および解答・例文入り) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Digital Books in Libraries</b></span>
+            <span>Answer Key & Notes</span>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 4 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"Do you think all textbooks will be replaced by e-books in the future?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> Tablets are very light, so they are easy to carry to school. / We can save a lot of paper.</p>
-            <p><b>(No):</b> Looking at screens for a long time makes students' eyes tired. / Students might play games.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"According to the passage, how can people enjoy reading library books without leaving home?"</p>
+            <div class="passage-print">Nowadays, many public libraries provide digital books to their members. People can borrow them from the library on the Internet. By doing so, they can enjoy reading library books without leaving home. Also, digital books do not take up space, so libraries can offer more kinds of books.</div>
+            <span class="print-label">Answer:</span>
+            <p>By borrowing digital books from the library on the Internet.</p>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 5 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"Do you think it is a good idea that public libraries offer e-books?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> People can borrow books anytime even if the library is closed. / It saves time.</p>
-            <p><b>(No):</b> If people use e-books, they will stop visiting the library building. / <b>Some people, especially elderly people, do not know how to use digital devices.</b> / Many people still prefer paper books.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 2 Picture A (Actions)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Tell me as much as you can about what the people are doing."</p>
+            <div class="ans-block">
+                <p><b>A:</b> A girl is writing something in her notebook. / <b>B:</b> A boy is returning some books.</p>
+                <p><b>C:</b> A man is reading a newspaper. / <b>D:</b> A woman is pushing a cart.</p>
+                <p><b>E:</b> A woman is reading a book to some children.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 3 Picture B (Situation)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Now, look at the man in Picture B. Please describe the situation."</p>
+            <div class="ans-block">
+                <p>• The man cannot read his book because the children are too noisy.</p>
+                <p>• The children are very noisy, so the man cannot concentrate on his book.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you think all textbooks will be replaced by e-books in the future?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> Tablets are very light, so they are easy to carry to school. / We can save a lot of paper.</p>
+                <p><b>(No):</b> Looking at screens for a long time makes students' eyes tired. / Students might play games.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you think it is a good idea that public libraries offer e-books?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> People can borrow books anytime even if the library is closed. / It saves time.</p>
+                <p><b>(No):</b> If people use e-books, they will stop visiting the library building. / <b>Some people, especially elderly people, do not know how to use digital devices.</b> / Many people still prefer paper books.</p>
+            </div>
         </div>
     </div>
 </div>

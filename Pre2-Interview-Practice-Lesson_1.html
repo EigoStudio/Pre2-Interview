@@ -28,19 +28,82 @@
     /* 画像サイズ調整用 (Lesson 3と統一) */
     .img-frame { margin: 20px 0; text-align: center; }
     .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
-    .img-a { max-width: 70%; } /* Picture A は 70% */
-    .img-b { max-width: 40%; } /* Picture B は 40% (半分以下) */
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 40%; }
 
+    /* --- 印刷用スタイル --- */
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
         body { background: white !important; padding: 0 !important; }
         .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
         header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
-        #print-area { display: block !important; color: black !important; padding: 5mm !important; }
-        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 15px !important; text-align: left !important; page-break-before: auto; }
-        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; }
-        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; font-size: 11pt; }
-        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; background: #f9f9f9; }
-        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 10px; }
+        #print-area { display: block !important; color: black !important; }
+
+        /* ページ区切り設定 */
+        .print-page {
+            page-break-after: always;
+            break-after: page;
+        }
+        .print-page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        h1.print-title {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            font-size: 16pt;
+            margin: 0 0 8px 0;
+            padding-bottom: 5px;
+        }
+        .print-header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            margin-bottom: 12px;
+        }
+        .print-section {
+            margin-bottom: 16px;
+        }
+        h2.print-sec-title {
+            border-bottom: 1.5px solid #333 !important;
+            font-size: 12pt !important;
+            margin: 12px 0 6px 0 !important;
+            text-align: left !important;
+            padding-bottom: 2px;
+        }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; line-height: 1.45; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 6px; font-size: 10.5pt; }
+        .passage-print {
+            border: 1px solid #777;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .student-q-box {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+        .ans-line {
+            min-height: 48px;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 6px;
+        }
+        .ans-block {
+            margin-left: 8px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
     }
     #print-area { display: none; }
 </style>
@@ -179,56 +242,95 @@
     </div>
 </div>
 
+<!-- 印刷用エリア -->
 <div id="print-area">
-    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
-    <p style="text-align:right;">Topic: <b>AI at School</b></p>
+    <!-- ページ 1: 生徒用ワークシート (大問1, 4, 5 の問題のみ) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Student Worksheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>AI at School</b></span>
+            <span>Name: _______________________</span>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 1 Reading & Question</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"According to the passage, how can students save a lot of time?"</p>
-        <div class="passage-print">Today, many students use AI when they study. Students can ask AI many questions, and by doing so they can save a lot of time because they can get answers quickly. Also, AI can help them learn new things in a fun way. In this way, more students are becoming interested in using technology for their studies.</div>
-        <span class="print-label">Answer:</span>
-        <p>By asking AI many questions.</p>
-    </div>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <div class="passage-print">
+                Today, many students use AI when they study. Students can ask AI many questions, and by doing so they can save a lot of time because they can get answers quickly. Also, AI can help them learn new things in a fun way. In this way, more students are becoming interested in using technology for their studies.
+            </div>
+            <p><b>Q:</b> According to the passage, how can students save a lot of time?</p>
+            <div class="ans-line"></div>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 2 Picture A (Actions)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Tell me as much as you can about what the people are doing."</p>
-        <div class="ans-block">
-            <p><b>A:</b> A woman is using a computer. / <b>B:</b> A boy is putting some trash into the garbage can.</p>
-            <p><b>C:</b> A man is entering the classroom. / <b>D:</b> A girl is erasing the blackboard. / <b>E:</b> A man is putting a poster on the wall.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <p class="student-q-box">Do you think more schools will use AI for English lessons in the future?</p>
+            <p>Your Opinion: [ Yes, I do. / No, I don't. ]</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <p class="student-q-box">Do you want to use AI when you travel to foreign countries?</p>
+            <p>Your Opinion: [ Yes, I do. / No, I don't. ]</p>
+            <div class="ans-line"></div>
         </div>
     </div>
 
-    <div class="print-section">
-        <h2>No. 3 Picture B (Situation)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Now, look at the man in Picture B. Please describe the situation."</p>
-        <div class="ans-block">
-            <p>• He cannot open the door because he is carrying many boxes.</p>
-            <p>• He is carrying many boxes, so he cannot open the door.</p>
+    <!-- ページ 2: 講師・解答用シート (全問および解答・例文入り) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>AI at School</b></span>
+            <span>Answer Key & Notes</span>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 4 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"Do you think more schools will use AI for English lessons in the future?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> It is very convenient for students. / AI gives answers quickly.</p>
-            <p><b>(No):</b> Talking with teachers face-to-face is more important. / AI sometimes makes mistakes.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"According to the passage, how can students save a lot of time?"</p>
+            <div class="passage-print">Today, many students use AI when they study. Students can ask AI many questions, and by doing so they can save a lot of time because they can get answers quickly. Also, AI can help them learn new things in a fun way. In this way, more students are becoming interested in using technology for their studies.</div>
+            <span class="print-label">Answer:</span>
+            <p>By asking AI many questions.</p>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 5 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"Do you want to use AI when you travel to foreign countries?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> Easy to talk to local people. / Understand foreign signs quickly.</p>
-            <p><b>(No):</b> Want to speak with own words. / Study English harder without AI.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 2 Picture A (Actions)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Tell me as much as you can about what the people are doing."</p>
+            <div class="ans-block">
+                <p><b>A:</b> A woman is using a computer. / <b>B:</b> A boy is putting some trash into the garbage can.</p>
+                <p><b>C:</b> A man is entering the classroom. / <b>D:</b> A girl is erasing the blackboard. / <b>E:</b> A man is putting a poster on the wall.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 3 Picture B (Situation)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Now, look at the man in Picture B. Please describe the situation."</p>
+            <div class="ans-block">
+                <p>• He cannot open the door because he is carrying many boxes.</p>
+                <p>• He is carrying many boxes, so he cannot open the door.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you think more schools will use AI for English lessons in the future?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> It is very convenient for students. / AI gives answers quickly.</p>
+                <p><b>(No):</b> Talking with teachers face-to-face is more important. / AI sometimes makes mistakes.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you want to use AI when you travel to foreign countries?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> Easy to talk to local people. / Understand foreign signs quickly.</p>
+                <p><b>(No):</b> Want to speak with own words. / Study English harder without AI.</p>
+            </div>
         </div>
     </div>
 </div>

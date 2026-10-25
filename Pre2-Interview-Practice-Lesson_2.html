@@ -28,19 +28,82 @@
     /* 画像サイズ調整用 (Lesson 3と統一) */
     .img-frame { margin: 20px 0; text-align: center; }
     .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
-    .img-a { max-width: 70%; } /* Picture A は 70% */
-    .img-b { max-width: 40%; } /* Picture B は 40% (半分以下) */
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 40%; }
 
+    /* --- 印刷用スタイル --- */
     @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
         body { background: white !important; padding: 0 !important; }
         .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
         header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
-        #print-area { display: block !important; color: black !important; padding: 5mm !important; }
-        h2 { border-bottom: 2px solid black !important; font-size: 13pt !important; margin-top: 15px !important; text-align: left !important; page-break-before: auto; }
-        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; }
-        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 8px; font-size: 11pt; }
-        .passage-print { font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin: 8px 0; background: #f9f9f9; }
-        .ans-block { margin-left: 10px; border-left: 2px solid #eee; padding-left: 10px; margin-bottom: 10px; }
+        #print-area { display: block !important; color: black !important; }
+
+        /* ページ区切り設定 */
+        .print-page {
+            page-break-after: always;
+            break-after: page;
+        }
+        .print-page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        h1.print-title {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            font-size: 16pt;
+            margin: 0 0 8px 0;
+            padding-bottom: 5px;
+        }
+        .print-header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            margin-bottom: 12px;
+        }
+        .print-section {
+            margin-bottom: 16px;
+        }
+        h2.print-sec-title {
+            border-bottom: 1.5px solid #333 !important;
+            font-size: 12pt !important;
+            margin: 12px 0 6px 0 !important;
+            text-align: left !important;
+            padding-bottom: 2px;
+        }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; line-height: 1.45; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 6px; font-size: 10.5pt; }
+        .passage-print {
+            border: 1px solid #777;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .student-q-box {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+        .ans-line {
+            min-height: 48px;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 6px;
+        }
+        .ans-block {
+            margin-left: 8px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
     }
     #print-area { display: none; }
 </style>
@@ -145,7 +208,7 @@
 
         <div id="ans5-y" class="hint-area">
             <strong>Hint:</strong> save money / environment / reduce waste<br>
-            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
             <div id="ex5-y" style="display:none" class="example-box">
                 1. I can save a lot of money by buying used things.<br>
                 2. It is good for the environment because we can reduce waste.<br>
@@ -154,7 +217,7 @@
         </div>
         <div id="ans5-n" class="hint-area">
             <strong>Hint:</strong> prefer new / cleaner / easier to use<br>
-            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
             <div id="ex5-n" style="display:none" class="example-box">
                 1. I prefer new things because they are cleaner.<br>
                 2. Sometimes used clothes have some problems or damage.<br>
@@ -178,58 +241,95 @@
     </div>
 </div>
 
+<!-- 印刷用エリア -->
 <div id="print-area">
-    <h1 style="text-align:center; border-bottom: 3px solid #000;">英検準2級 Interview Practice (Instructor's Sheet)</h1>
-    <p style="text-align:right;">Topic: <b>Eco-Friendly School Life</b></p>
+    <!-- ページ 1: 生徒用ワークシート (大問1, 4, 5 の問題のみ) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Student Worksheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Eco-Friendly School Life</b></span>
+            <span>Name: _______________________</span>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 1 Reading & Question</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Please read the passage silently for 20 seconds. ... Now, please read it aloud."<br>
-           "According to the passage, why do students think tablets are very good for the environment?"</p>
-        <div class="passage-print">Now, many schools in Japan use tablets in class. These tablets allow students to read textbooks and do homework without using any paper. <b>Students can save a lot of paper by using digital tools, so they think tablets are very good for the environment.</b> In the future, technology will be more important for eco-friendly school life.</div>
-        <span class="print-label">Answer:</span>
-        <p>Because they can save a lot of paper by using digital tools.</p>
-    </div>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <div class="passage-print">
+                Now, many schools in Japan use tablets in class. These tablets allow students to read textbooks and do homework without using any paper. Students can save a lot of paper by using digital tools, so they think tablets are very good for the environment. In the future, technology will be more important for eco-friendly school life.
+            </div>
+            <p><b>Q:</b> According to the passage, why do students think tablets are very good for the environment?</p>
+            <div class="ans-line"></div>
+        </div>
 
-    <div class="print-section">
-        <h2>No. 2 Picture A (Actions)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing."</p>
-        <span class="print-label">Sample Answers:</span>
-        <div class="ans-block">
-            <p><b>A:</b> A girl is separating the trash. / <b>B:</b> A boy is planting some flowers.</p>
-            <p><b>C:</b> A woman is picking up some cans. / <b>D:</b> A man is making a poster. / <b>E:</b> A boy is sweeping the ground.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <p class="student-q-box">These days, some schools have events like eco-bag making or flea markets. <br>Do you think these events are good for students?</p>
+            <p>Your Opinion: [ Yes, I do. / No, I don't. ]</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <p class="student-q-box">Do you often buy second-hand things like books or clothes?</p>
+            <p>Your Opinion: [ Yes, I do. / No, I don't. ]</p>
+            <div class="ans-line"></div>
         </div>
     </div>
 
-    <div class="print-section">
-        <h2>No. 3 Picture B (Situation)</h2>
-        <span class="print-label">Instruction:</span>
-        <p>"Now, look at the woman in Picture B. Please describe the situation."</p>
-        <div class="ans-block">
-            <p>• The woman cannot carry the box because it is too heavy.</p>
-            <p>• The box is very heavy, so the woman cannot carry it.</p>
+    <!-- ページ 2: 講師・解答用シート (全問および解答・例文入り) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Eco-Friendly School Life</b></span>
+            <span>Answer Key & Notes</span>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 4 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"These days, some schools have events like eco-bag making or flea markets. Do you think these events are good for students?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> Students can learn the importance of reusing things. / Making bags is fun.</p>
-            <p><b>(No):</b> Students are very busy with their studies. / It is difficult to find time.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"According to the passage, why do students think tablets are very good for the environment?"</p>
+            <div class="passage-print">Now, many schools in Japan use tablets in class. These tablets allow students to read textbooks and do homework without using any paper. Students can save a lot of paper by using digital tools, so they think tablets are very good for the environment. In the future, technology will be more important for eco-friendly school life.</div>
+            <span class="print-label">Answer:</span>
+            <p>Because they can save a lot of paper by using digital tools.</p>
         </div>
-    </div>
 
-    <div class="print-section">
-        <h2>No. 5 Your Opinion</h2>
-        <span class="print-label">Question:</span>
-        <p>"Do you often buy second-hand things like books or clothes?"</p>
-        <div class="ans-block">
-            <p><b>(Yes):</b> Save a lot of money. / Good for the environment to reduce waste.</p>
-            <p><b>(No):</b> Prefer new things because they are cleaner. / Used clothes might have damage.</p>
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 2 Picture A (Actions)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Tell me as much as you can about what the people are doing."</p>
+            <div class="ans-block">
+                <p><b>A:</b> A girl is separating the trash. / <b>B:</b> A boy is planting some flowers.</p>
+                <p><b>C:</b> A woman is picking up some cans. / <b>D:</b> A man is making a poster. / <b>E:</b> A boy is sweeping the ground.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 3 Picture B (Situation)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Now, look at the woman in Picture B. Please describe the situation."</p>
+            <div class="ans-block">
+                <p>• The woman cannot carry the box because it is too heavy.</p>
+                <p>• The box is very heavy, so the woman cannot carry it.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"These days, some schools have events like eco-bag making or flea markets. Do you think these events are good for students?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> Students can learn the importance of reusing things. / Making bags is fun.</p>
+                <p><b>(No):</b> Students are very busy with their studies. / It is difficult to find time.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you often buy second-hand things like books or clothes?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> Save a lot of money. / Good for the environment to reduce waste.</p>
+                <p><b>(No):</b> Prefer new things because they are cleaner. / Used clothes might have damage.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -273,7 +373,6 @@
         { q: "「花を植える」", a: "plant flowers", options: ["plant flowers", "pick flowers", "watch flowers", "wash flowers"] },
         { q: "「拾い上げる」", a: "pick up", options: ["pick up", "put up", "look up", "clean up"] },
         { q: "「重い」", a: "heavy", options: ["heavy", "light", "small", "old"] },
-        // --- ここから No.1 修正連動 ---
         { q: "「〜を可能にする」", a: "allow", options: ["allow", "stop", "keep", "forget"] },
         { q: "「紙を節約する」", a: "save paper", options: ["save paper", "make paper", "buy paper", "throw paper"] },
         { q: "「デジタルツール」", a: "digital tools", options: ["digital tools", "paper books", "old systems", "handwriting"] },

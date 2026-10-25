@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice Lesson 6</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #e67e22; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #fdf6ec; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #f39c12; }
+    .audio-btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #b95d09; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid var(--accent); }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #fbeee6; border: 1px solid var(--accent); border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    
+    /* 画像サイズ設定 */
+    .img-frame { margin: 20px 0; text-align: center; }
+    .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 45%; }
+
+    /* --- 印刷用スタイル --- */
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; }
+
+        /* ページ区切り設定 */
+        .print-page {
+            page-break-after: always;
+            break-after: page;
+        }
+        .print-page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        h1.print-title {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            font-size: 16pt;
+            margin: 0 0 8px 0;
+            padding-bottom: 5px;
+        }
+        .print-header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            margin-bottom: 12px;
+        }
+        .print-section {
+            margin-bottom: 16px;
+        }
+        h2.print-sec-title {
+            border-bottom: 1.5px solid #333 !important;
+            font-size: 12pt !important;
+            margin: 12px 0 6px 0 !important;
+            text-align: left !important;
+            padding-bottom: 2px;
+        }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; line-height: 1.45; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 6px; font-size: 10.5pt; }
+        .passage-print {
+            border: 1px solid #777;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .student-q-box {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+        .ans-line {
+            min-height: 48px;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 6px;
+        }
+        .ans-block {
+            margin-left: 8px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+    }
+    #print-area { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice Lesson 6</h1>
+        <div class="sub-title">Topic: Healthy Fast Food</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            These days, many people lead busy lives and do not have enough time to cook. Recently, however, stores and restaurants are offering convenient meals with lots of fresh vegetables. By doing so, they help busy people eat healthy food quickly and easily. In the future, more people will probably choose these meals to save time and stay healthy.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, how do stores and restaurants help busy people eat healthy food quickly and easily?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#e67e22; text-align:center; margin:10px;">Q: According to the passage, how do stores and restaurants help busy people eat healthy food quickly and easily?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: By offering convenient meals with lots of fresh vegetables.</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Lesson_6/PictureA.jpg" alt="Picture A" class="quiz-img img-a">
+        </div>
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans A</button><br>サラダを食べる</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2b')">Ans B</button><br>スマホで注文する</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2c')">Ans C</button><br>野菜を切る</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2d')">Ans D</button><br>袋を受け取る</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2e')">Ans E</button><br>ジュースを飲む</div>
+        </div>
+        <div id="ans2a" class="hint-area"><b>A:</b> A woman is eating a salad.</div>
+        <div id="ans2b" class="hint-area"><b>B:</b> A man is ordering food with his smartphone.</div>
+        <div id="ans2c" class="hint-area"><b>C:</b> A clerk is cutting some vegetables.</div>
+        <div id="ans2d" class="hint-area"><b>D:</b> A boy is receiving a paper bag.</div>
+        <div id="ans2e" class="hint-area"><b>E:</b> A girl is drinking a glass of juice.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        <button class="audio-btn" onclick="speak('Now, look at the man in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Lesson_6/PictureB.jpg" alt="Picture B" class="quiz-img img-b">
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#e67e22;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+        <div id="hint3" class="hint-area" style="text-align:center;"><strong>Keywords:</strong> deliver / food / bicycle / flat tire / cannot</div>
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1:</strong> He cannot deliver the food because his bicycle has a flat tire.</p>
+            <p><strong>Pattern 2:</strong> His bicycle has a flat tire, so he cannot deliver the food.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('These days, many people use food delivery services like Uber Eats. Do you think using these services is a good idea?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <div id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22; margin:15px; line-height:1.6;">These days, many people use food delivery services. <br>Do you think using these services is a good idea?</div>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No</button>
+        </div>
+
+        <div id="ans4-y" class="hint-area">
+            <strong>Hint:</strong> save time / rainy days / various dishes<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
+            <div id="ex4-y" style="display:none" class="example-box">
+                1. People can save a lot of time on busy days because they do not have to cook.<br>
+                2. It is very convenient when the weather is bad or on rainy days.<br>
+                3. People can easily enjoy various kinds of restaurant food at home.
+            </div>
+        </div>
+        <div id="ans4-n" class="hint-area">
+            <strong>Hint:</strong> expensive / delivery fee / unhealthy<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
+            <div id="ex4-n" style="display:none" class="example-box">
+                1. Delivery food is often more expensive than eating at restaurants or cooking.<br>
+                2. People might eat too much fast food, which is not good for their health.<br>
+                3. Cooking at home is healthier and helps people save money.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you often cook meals for yourself or your family?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#e67e22;">Q: Do you often cook meals for yourself or your family?</p>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes (I do)</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No (I don't)</button>
+        </div>
+
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> fun to cook / healthy / save money<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <div id="ex5-y" style="display:none" class="example-box">
+                1. Cooking is fun, and I like trying new dishes on weekends.<br>
+                2. I can choose fresh vegetables and make healthy meals for my family.<br>
+                3. It helps me save money compared to buying lunch outside.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> busy with study / difficult / family cooks<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <div id="ex5-n" style="display:none" class="example-box">
+                1. I am very busy with school and club activities, so I don't have enough time.<br>
+                2. My parents usually prepare delicious meals for me every day.<br>
+                3. Cooking is difficult for me, so I often buy convenient food at stores.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review (15 Questions)</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<!-- 印刷用エリア -->
+<div id="print-area">
+    <!-- ページ 1: 生徒用ワークシート (大問1, 4, 5 の問題のみ) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Student Worksheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Healthy Fast Food</b></span>
+            <span>Name: _______________________</span>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <div class="passage-print">
+                These days, many people lead busy lives and do not have enough time to cook. Recently, however, stores and restaurants are offering convenient meals with lots of fresh vegetables. By doing so, they help busy people eat healthy food quickly and easily. In the future, more people will probably choose these meals to save time and stay healthy.
+            </div>
+            <p><b>Q:</b> According to the passage, how do stores and restaurants help busy people eat healthy food quickly and easily?</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <p class="student-q-box">These days, many people use food delivery services. Do you think using these services is a good idea?</p>
+            <p>Your Opinion: [ Yes / No ]</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <p class="student-q-box">Do you often cook meals for yourself or your family?</p>
+            <p>Your Opinion: [ Yes (I do) / No (I don't) ]</p>
+            <div class="ans-line"></div>
+        </div>
+    </div>
+
+    <!-- ページ 2: 講師・解答用シート (全問および解答・例文入り) -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Healthy Fast Food</b></span>
+            <span>Answer Key & Notes</span>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"According to the passage, how do stores and restaurants help busy people eat healthy food quickly and easily?"</p>
+            <div class="passage-print">These days, many people lead busy lives and do not have enough time to cook. Recently, however, stores and restaurants are offering convenient meals with lots of fresh vegetables. By doing so, they help busy people eat healthy food quickly and easily. In the future, more people will probably choose these meals to save time and stay healthy.</div>
+            <span class="print-label">Answer:</span>
+            <p>By offering convenient meals with lots of fresh vegetables.</p>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 2 Picture A (Actions)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Tell me as much as you can about what the people are doing."</p>
+            <div class="ans-block">
+                <p><b>A:</b> A woman is eating a salad.</p>
+                <p><b>B:</b> A man is ordering food with his smartphone.</p>
+                <p><b>C:</b> A clerk is cutting some vegetables.</p>
+                <p><b>D:</b> A boy is receiving a paper bag.</p>
+                <p><b>E:</b> A girl is drinking a glass of juice.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 3 Picture B (Situation)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Now, look at the man in Picture B. Please describe the situation."</p>
+            <div class="ans-block">
+                <p>• He cannot deliver the food because his bicycle has a flat tire.</p>
+                <p>• His bicycle has a flat tire, so he cannot deliver the food.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"These days, many people use food delivery services. Do you think using these services is a good idea?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> People can save a lot of time on busy days because they do not have to cook. / It is very convenient when the weather is bad or on rainy days.</p>
+                <p><b>(No):</b> Delivery food is often more expensive than eating at restaurants or cooking. / Cooking at home is healthier and helps people save money.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you often cook meals for yourself or your family?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> Cooking is fun, and I like trying new dishes on weekends. / I can choose fresh vegetables and make healthy meals for my family.</p>
+                <p><b>(No):</b> I am very busy with school and club activities, so I don't have enough time. / My parents usually prepare delicious meals for me every day.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        setTimeout(() => {
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = "en-US"; uttr.rate = 0.85;
+            window.speechSynthesis.speak(uttr);
+        }, 50);
+    }
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+        else { document.getElementById('nextBtn').style.visibility = 'visible'; }
+        window.speechSynthesis.cancel();
+    }
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    function showFeedback(id) {
+        const currentSection = document.getElementById(`step${step}`);
+        currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    const quizData = [
+        { q: "「〜を提供する」", a: "offer", options: ["offer", "order", "open", "operate"] },
+        { q: "「便利な食事」", a: "convenient meals", options: ["convenient meals", "crowded meals", "heavy meals", "cold meals"] },
+        { q: "「時間を節約する」", a: "save time", options: ["save time", "waste time", "spend time", "lose time"] },
+        { q: "「健康を保つ」", a: "stay healthy", options: ["stay healthy", "stay hungry", "stay busy", "stay angry"] },
+        { q: "「〜を受け取る」", a: "receive", options: ["receive", "repeat", "repair", "refuse"] },
+        { q: "「配達する」", a: "deliver", options: ["deliver", "destroy", "decide", "discover"] },
+        { q: "「パンクしたタイヤ」", a: "flat tire", options: ["flat tire", "round tire", "fast tire", "big tire"] },
+        { q: "「〜と比べて」", a: "compared to", options: ["compared to", "belong to", "listen to", "talk to"] },
+        { q: "「新鮮な野菜」", a: "fresh vegetables", options: ["fresh vegetables", "hot vegetables", "sweet vegetables", "dry vegetables"] },
+        { q: "「さまざまな」", a: "various", options: ["various", "valuable", "visible", "violent"] },
+        { q: "「食事を準備する」", a: "prepare meals", options: ["prepare meals", "paint meals", "plant meals", "pass meals"] },
+        { q: "「〜を好む」", a: "prefer", options: ["prefer", "protect", "prevent", "provide"] },
+        { q: "「おそらく、たぶん」", a: "probably", options: ["probably", "suddenly", "recently", "finally"] },
+        { q: "「激しく雨が降っている」", a: "raining heavily", options: ["raining heavily", "shining brightly", "snowing slowly", "blowing softly"] },
+        { q: "「安全に」", a: "safely", options: ["safely", "sadly", "simply", "softly"] }
+    ];
+
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { document.getElementById('quiz-feedback').innerText = ""; currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
