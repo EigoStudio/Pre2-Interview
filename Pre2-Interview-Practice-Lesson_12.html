@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英検準2級 Interview Practice Lesson 12</title>
+<style>
+    :root { --primary: #2c3e50; --accent: #008080; --bg: #f4f7f6; --card: #ffffff; }
+    body { font-family: "Hiragino Maru Gothic ProN", sans-serif; background: var(--bg); color: var(--primary); padding: 10px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 25px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    header { text-align: center; margin-bottom: 20px; }
+    h1 { color: var(--primary); font-size: 1.6rem; margin-bottom: 5px; }
+    .sub-title { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .passage-box { background: #e0f2f1; padding: 20px; border-radius: 12px; font-size: 1.25rem; margin: 15px 0; border: 1px solid #80cbc4; }
+    .audio-btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 50px; cursor: pointer; margin: 10px 0; font-weight: bold; width: 100%; box-shadow: 0 3px 0 #004d40; }
+    .hint-area { background: #fff9c4; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid #f1c40f; }
+    .example-box { margin-top: 10px; padding: 10px; background: #fff; border-radius: 5px; font-size: 0.95rem; border-left: 3px solid var(--accent); }
+    .btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: 30px; cursor: pointer; font-weight: bold; margin: 5px 0; width: 100%; }
+    .btn-small { width: auto; padding: 5px 15px; font-size: 0.9rem; background: #95a5a6; }
+    .btn-yesno { width: 48%; display: inline-block; }
+    .btn-yes { background: #2ecc71; } .btn-no { background: #e74c3c; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+    .option-btn { padding: 10px; background: #e0f2f1; border: 1px solid var(--accent); border-radius: 8px; cursor: pointer; text-align: center; font-weight: bold; }
+    .nav-buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 2px solid #eee; padding-top: 20px; }
+    
+    /* 画像サイズ設定 */
+    .img-frame { margin: 20px 0; text-align: center; }
+    .quiz-img { height: auto; border: 2px solid #ccc; border-radius: 10px; }
+    .img-a { max-width: 70%; }
+    .img-b { max-width: 45%; }
+
+    /* --- 印刷用スタイル --- */
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 12mm 15mm;
+        }
+        body { background: white !important; padding: 0 !important; }
+        .container { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; }
+        header, .section, .nav-buttons, button, .btn-small, .audio-btn { display: none !important; }
+        #print-area { display: block !important; color: black !important; }
+
+        .print-page {
+            page-break-after: always;
+            break-after: page;
+        }
+        .print-page:last-child {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+
+        h1.print-title {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            font-size: 16pt;
+            margin: 0 0 8px 0;
+            padding-bottom: 5px;
+        }
+        .print-header-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            margin-bottom: 12px;
+        }
+        .print-section {
+            margin-bottom: 16px;
+        }
+        h2.print-sec-title {
+            border-bottom: 1.5px solid #333 !important;
+            font-size: 12pt !important;
+            margin: 12px 0 6px 0 !important;
+            text-align: left !important;
+            padding-bottom: 2px;
+        }
+        p, li { font-size: 10.5pt !important; margin: 3px 0 !important; line-height: 1.45; }
+        .print-label { font-weight: bold; text-decoration: underline; display: block; margin-top: 6px; font-size: 10.5pt; }
+        .passage-print {
+            border: 1px solid #777;
+            padding: 10px 12px;
+            margin: 6px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            line-height: 1.5;
+            border-radius: 4px;
+        }
+        .student-q-box {
+            border-left: 3px solid #000;
+            padding-left: 10px;
+            margin: 6px 0;
+            font-weight: bold;
+        }
+        .ans-line {
+            min-height: 48px;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 6px;
+        }
+        .ans-block {
+            margin-left: 8px;
+            border-left: 2px solid #ccc;
+            padding-left: 10px;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+    }
+    #print-area { display: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>英検準2級 Interview Practice Lesson 12</h1>
+        <div class="sub-title">Topic: Using Social Media</div>
+    </header>
+
+    <div id="step1" class="section active">
+        <h2>No. 1: Reading & Question</h2>
+        <div class="passage-box">
+            Today, social media has become a popular tool for communication around the world. People can easily send messages and share photos with friends who live far away. By doing so, they can stay connected with each other and feel closer even when they cannot meet in person. Also, social media helps people make new friends who have the same hobbies. In the future, social media will continue to play an important role in our daily communication.
+        </div>
+        <button class="audio-btn" onclick="speak('According to the passage, how can people stay connected with each other and feel closer even when they cannot meet in person?')">🔊 Question No.1 を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q1-text')">質問文を表示</button>
+        <div id="q1-text" style="display:none; font-weight:bold; color:#008080; text-align:center; margin:10px;">Q: According to the passage, how can people stay connected with each other and feel closer even when they cannot meet in person?</div>
+        <button class="btn" onclick="toggleDisplay('ans1')">正解を確認</button>
+        <div id="ans1" class="hint-area"><strong>Answer: By sending messages and sharing photos with friends who live far away (on social media).</strong></div>
+    </div>
+
+    <div id="step2" class="section">
+        <h2>No. 2: Picture A (Actions)</h2>
+        <button class="audio-btn" onclick="speak('Now, please look at the people in Picture A. They are doing different things. Tell me as much as you can about what they are doing.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Lesson_12/PictureA.jpg" alt="Picture A" class="quiz-img img-a">
+        </div>
+        <div style="display: flex; justify-content: space-around; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 0.85rem; color: #666;">
+            <div><button class="btn btn-small" onclick="showFeedback('ans2a')">Ans A</button><br>自撮りをしている</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2b')">Ans B</button><br>メッセージを送る</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2c')">Ans C</button><br>ビデオ通話をする</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2d')">Ans D</button><br>料理の写真を撮る</div>
+            <div><button class="btn btn-small" onclick="showFeedback('ans2e')">Ans E</button><br>画面を見せ合う</div>
+        </div>
+        <div id="ans2a" class="hint-area"><b>A:</b> Two girls are taking a selfie together.</div>
+        <div id="ans2b" class="hint-area"><b>B:</b> A boy is sending a message on his smartphone.</div>
+        <div id="ans2c" class="hint-area"><b>C:</b> A woman is having a video call on her laptop.</div>
+        <div id="ans2d" class="hint-area"><b>D:</b> A man is taking a picture of his lunch.</div>
+        <div id="ans2e" class="hint-area"><b>E:</b> A girl is showing her smartphone screen to her friend.</div>
+    </div>
+
+    <div id="step3" class="section">
+        <h2>No. 3: Picture B (Situation)</h2>
+        <button class="audio-btn" onclick="speak('Now, look at the girl in Picture B. Please describe the situation.')">🔊 面接官の指示を聞く</button>
+        <div class="img-frame">
+            <img src="images-Lesson_12/PictureB.jpg" alt="Picture B" class="quiz-img img-b">
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-small" style="background:#f1c40f; color:#000;" onclick="toggleDisplay('hint3')">💡 Keywords</button>
+            <button class="btn btn-small" style="background:#008080;" onclick="toggleDisplay('ans3')">✅ Ans</button>
+        </div>
+        <div id="hint3" class="hint-area" style="text-align:center;"><strong>Keywords:</strong> send / message / no Wi-Fi / internet / cannot</div>
+        <div id="ans3" class="hint-area">
+            <p><strong>Pattern 1:</strong> She cannot send a message because there is no Internet connection.</p>
+            <p><strong>Pattern 2:</strong> Her smartphone has no signal, so she cannot post her photo online.</p>
+        </div>
+    </div>
+
+    <div id="step4" class="section">
+        <h2>No. 4: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('These days, many young people use social media to communicate with their friends. Do you think using social media is a good way to communicate?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q4-text')">質問文を表示</button>
+        <div id="q4-text" style="display:none; text-align:center; font-weight:bold; color:#008080; margin:15px; line-height:1.6;">
+            These days, many young people use social media to communicate with their friends. <br>Do you think using social media is a good way to communicate?
+        </div>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans4-y')">Yes</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans4-n')">No</button>
+        </div>
+
+        <div id="ans4-y" class="hint-area">
+            <strong>Hint:</strong> talk anytime / distant friends / share information<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-y')">例文を見る</button>
+            <div id="ex4-y" style="display:none" class="example-box">
+                1. People can easily talk with friends who live far away anytime they want.<br>
+                2. It is a great way to share useful information and fun photos quickly.<br>
+                3. Students can make new friends around the world who have the same interests.
+            </div>
+        </div>
+        <div id="ans4-n" class="hint-area">
+            <strong>Hint:</strong> misunderstanding / face-to-face / waste time<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex4-n')">例文を見る</button>
+            <div id="ex4-n" style="display:none" class="example-box">
+                1. Text messages do not show feelings well, so misunderstandings sometimes happen.<br>
+                2. Talking face-to-face is much better for building strong friendships.<br>
+                3. Some young people spend too much time on social media instead of studying.
+            </div>
+        </div>
+    </div>
+
+    <div id="step5" class="section">
+        <h2>No. 5: Your Opinion</h2>
+        <button class="audio-btn" onclick="speak('Do you often share photos or videos with your friends or family online?')">🔊 質問を聞く</button>
+        <button class="btn btn-small" onclick="toggleDisplay('q5-text')">質問文を表示</button>
+        <p id="q5-text" style="display:none; text-align:center; font-weight:bold; color:#008080;">Q: Do you often share photos or videos with your friends or family online?</p>
+        
+        <div style="text-align:center;">
+            <button class="btn btn-yes btn-yesno" onclick="showFeedback('ans5-y')">Yes (I do)</button> 
+            <button class="btn btn-no btn-yesno" onclick="showFeedback('ans5-n')">No (I don't)</button>
+        </div>
+
+        <div id="ans5-y" class="hint-area">
+            <strong>Hint:</strong> memories / grandparents / fun to talk<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-y')">例文を見る</button>
+            <div id="ex5-y" style="display:none" class="example-box">
+                1. I like sharing photos of trips and events with my grandparents who live far away.<br>
+                2. Looking at photos together helps us talk more and enjoy good memories.<br>
+                3. It is very easy and free to send pictures to many friends at once.
+            </div>
+        </div>
+        <div id="ans5-n" class="hint-area">
+            <strong>Hint:</strong> privacy / careful / meet in person<br>
+            <button class="btn btn-small" style="background:#fff; color:#000; margin-top:5px;" onclick="toggleDisplay('ex5-n')">例文を見る</button>
+            <div id="ex5-n" style="display:none" class="example-box">
+                1. I am careful about my privacy, so I do not like putting my photos on the Internet.<br>
+                2. I prefer showing photos directly on my phone when I meet my friends in person.<br>
+                3. I do not take many pictures because I want to enjoy the moment with my own eyes.
+            </div>
+        </div>
+    </div>
+
+    <div id="step6" class="section">
+        <h2>Step 6: Vocabulary Review (15 Questions)</h2>
+        <div id="quiz-container">
+            <p id="quiz-question" style="font-weight:bold; text-align:center; font-size:1.2rem;"></p>
+            <div class="quiz-options" id="quiz-options"></div>
+            <p id="quiz-feedback" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="btn" id="backBtn" onclick="moveStep(-1)" style="width:100px; visibility:hidden; background:#95a5a6">Back</button>
+        <button class="btn" id="nextBtn" onclick="moveStep(1)" style="width:100px;">Next</button>
+    </div>
+</div>
+
+<!-- 印刷用エリア -->
+<div id="print-area">
+    <!-- ページ 1: 生徒用ワークシート -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Student Worksheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Using Social Media</b></span>
+            <span>Name: _______________________</span>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <div class="passage-print">
+                Today, social media has become a popular tool for communication around the world. People can easily send messages and share photos with friends who live far away. By doing so, they can stay connected with each other and feel closer even when they cannot meet in person. Also, social media helps people make new friends who have the same hobbies. In the future, social media will continue to play an important role in our daily communication.
+            </div>
+            <p><b>Q:</b> According to the passage, how can people stay connected with each other and feel closer even when they cannot meet in person?</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <p class="student-q-box">These days, many young people use social media to communicate with their friends. Do you think using social media is a good way to communicate?</p>
+            <p>Your Opinion: [ Yes / No ]</p>
+            <div class="ans-line"></div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <p class="student-q-box">Do you often share photos or videos with your friends or family online?</p>
+            <p>Your Opinion: [ Yes (I do) / No (I don't) ]</p>
+            <div class="ans-line"></div>
+        </div>
+    </div>
+
+    <!-- ページ 2: 講師・解答用シート -->
+    <div class="print-page">
+        <h1 class="print-title">英検準2級 Interview Practice (Instructor's Sheet)</h1>
+        <div class="print-header-meta">
+            <span>Topic: <b>Using Social Media</b></span>
+            <span>Answer Key & Notes</span>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 1 Reading & Question</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"According to the passage, how can people stay connected with each other and feel closer even when they cannot meet in person?"</p>
+            <div class="passage-print">Today, social media has become a popular tool for communication around the world. People can easily send messages and share photos with friends who live far away. By doing so, they can stay connected with each other and feel closer even when they cannot meet in person. Also, social media helps people make new friends who have the same hobbies. In the future, social media will continue to play an important role in our daily communication.</div>
+            <span class="print-label">Answer:</span>
+            <p>By sending messages and sharing photos with friends who live far away.</p>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 2 Picture A (Actions)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Tell me as much as you can about what the people are doing."</p>
+            <div class="ans-block">
+                <p><b>A:</b> Two girls are taking a selfie together.</p>
+                <p><b>B:</b> A boy is sending a message on his smartphone.</p>
+                <p><b>C:</b> A woman is having a video call on her laptop.</p>
+                <p><b>D:</b> A man is taking a picture of his lunch.</p>
+                <p><b>E:</b> A girl is showing her smartphone screen to her friend.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 3 Picture B (Situation)</h2>
+            <span class="print-label">Instruction:</span>
+            <p>"Now, look at the girl in Picture B. Please describe the situation."</p>
+            <div class="ans-block">
+                <p>• She cannot send a message because there is no Internet connection.</p>
+                <p>• Her smartphone has no signal, so she cannot post her photo online.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 4 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"These days, many young people use social media to communicate with their friends. Do you think using social media is a good way to communicate?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> People can easily talk with friends who live far away anytime. / It is a great way to share useful information quickly.</p>
+                <p><b>(No):</b> Text messages do not show feelings well, so misunderstandings happen. / Talking face-to-face is better for strong friendships.</p>
+            </div>
+        </div>
+
+        <div class="print-section">
+            <h2 class="print-sec-title">No. 5 Your Opinion</h2>
+            <span class="print-label">Question:</span>
+            <p>"Do you often share photos or videos with your friends or family online?"</p>
+            <div class="ans-block">
+                <p><b>(Yes):</b> I like sharing photos of trips with my grandparents who live far away. / It is easy and free to send pictures.</p>
+                <p><b>(No):</b> I am careful about my privacy, so I do not put photos on the Internet. / I prefer showing photos in person.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let step = 1;
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        setTimeout(() => {
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = "en-US"; uttr.rate = 0.85;
+            window.speechSynthesis.speak(uttr);
+        }, 50);
+    }
+    function moveStep(n) {
+        document.getElementById(`step${step}`).classList.remove('active');
+        step += n;
+        document.getElementById(`step${step}`).classList.add('active');
+        document.getElementById('backBtn').style.visibility = (step === 1) ? 'hidden' : 'visible';
+        if(step === 6) { document.getElementById('nextBtn').style.visibility = 'hidden'; startQuiz(); }
+        else { document.getElementById('nextBtn').style.visibility = 'visible'; }
+        window.speechSynthesis.cancel();
+    }
+    function toggleDisplay(id) {
+        const el = document.getElementById(id);
+        el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+    function showFeedback(id) {
+        const currentSection = document.getElementById(`step${step}`);
+        currentSection.querySelectorAll('.hint-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    const quizData = [
+        { q: "「写真を共有する」", a: "share photos", options: ["share photos", "delete photos", "sell photos", "print photos"] },
+        { q: "「遠くに住んでいる」", a: "live far away", options: ["live far away", "live next door", "stay indoors", "walk alone"] },
+        { q: "「つながりを保つ」", a: "stay connected", options: ["stay connected", "stay hungry", "get lost", "fall asleep"] },
+        { q: "「お互いに」", a: "each other", options: ["each other", "by oneself", "all together", "one by one"] },
+        { q: "「直接会う、対面で会う」", a: "meet in person", options: ["meet in person", "talk on the phone", "send a letter", "watch on TV"] },
+        { q: "「〜し続ける」", a: "continue to", options: ["continue to", "stop to", "forget to", "refuse to"] },
+        { q: "「重要な役割を果たす」", a: "play an important role", options: ["play an important role", "make a big mistake", "take a long rest", "have a bad cold"] },
+        { q: "「自撮りをする」", a: "take a selfie", options: ["take a selfie", "draw a map", "write a diary", "read a magazine"] },
+        { q: "「ビデオ通話をする」", a: "have a video call", options: ["have a video call", "take a bus", "buy a ticket", "clean a screen"] },
+        { q: "「インターネット接続」", a: "Internet connection", options: ["Internet connection", "train station", "traffic signal", "weather forecast"] },
+        { q: "「誤解」", a: "misunderstanding", options: ["misunderstanding", "celebration", "invitation", "transportation"] },
+        { q: "「対面で、面と向かって」", a: "face-to-face", options: ["face-to-face", "side-by-side", "step-by-step", "day-by-day"] },
+        { q: "「友情」", a: "friendship", options: ["friendship", "leadership", "membership", "scholarship"] },
+        { q: "「同時に、一度に」", a: "at once", options: ["at once", "at last", "at least", "at first"] },
+        { q: "「〜に気をつける、注意深い」", a: "be careful about", options: ["be careful about", "be famous for", "be late for", "be tired of"] }
+    ];
+
+    let currentIdx = 0; let score = 0;
+    function startQuiz() {
+        if(currentIdx >= quizData.length) {
+            document.getElementById('quiz-container').innerHTML = `<h3 style='text-align:center;'>Score: ${score}/15</h3><button class='btn' onclick='location.reload()'>Reset</button>`;
+            return;
+        }
+        const q = quizData[currentIdx];
+        document.getElementById('quiz-question').innerText = `Q${currentIdx+1}: ${q.q}`;
+        const container = document.getElementById('quiz-options'); container.innerHTML = '';
+        [...q.options].sort(()=>Math.random()-0.5).forEach(opt => {
+            const b = document.createElement('div'); b.className = 'option-btn'; b.innerText = opt;
+            b.onclick = () => {
+                if(opt === q.a) { score++; document.getElementById('quiz-feedback').innerText = "Correct! ✨"; speak(opt); }
+                else { document.getElementById('quiz-feedback').innerText = "Oops! " + q.a; }
+                setTimeout(() => { document.getElementById('quiz-feedback').innerText = ""; currentIdx++; startQuiz(); }, 1200);
+            };
+            container.appendChild(b);
+        });
+    }
+</script>
+</body>
+</html>
